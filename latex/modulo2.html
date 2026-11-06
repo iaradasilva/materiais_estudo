@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de LaTeX - Módulo 2</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color, #4CAF50);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">📄 <span>Curso de LaTeX</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Aulas</a></li>
+                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="course-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">VISÃO GERAL DO CURSO</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html">O que é o LaTeX?</a></li>
+                    <li><a href="overleaf.html">Guia do Overleaf</a></li>
+                    <li><a href="leapspace.html">LeapSpace</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">MÓDULOS</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="modulo1.html">01. Estrutura Básica</a></li>
+                    <li><a href="modulo2.html" class="active">02. Formatação de Texto</a></li>
+                    <li><a href="modulo3.html">03. Fórmulas Matemáticas</a></li>
+                    <li><a href="modulo4.html">04. Imagens e Tabelas</a></li>
+                    <li><a href="modulo5.html">05. Referências e BibTeX</a></li>
+                    <li><a href="modulo6.html">06. Projeto Completo</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
+                <div class="team-container">
+                    <div class="team-card">
+                        <div class="team-info">
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
+                                <span class="team-name">Dra. Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="card-container">
+                <span class="badge badge-green">MÓDULO 2 • FORMATAÇÃO</span>
+                <h1>Formatação de Texto e Listas</h1>
+                <p>Neste módulo você aprenderá a aplicar os estilos de texto mais comuns e a criar listas organizadas de forma simples no LaTeX.</p>
+
+                <h2>1. Estilos de Fonte</h2>
+                <p>No LaTeX, aplicamos estilos no texto utilizando comandos específicos:</p>
+                <pre><code>\textbf{Este texto estará em negrito.}
+\textit{Este texto estará em itálico.}
+\underline{Este texto estará sublinhado.}
+\texttt{Texto em estilo código (monoespaçado).}</code></pre>
+
+                <h2>2. Tamanho dos Textos</h2>
+                <p>Você pode alterar o tamanho das fontes usando comandos declarativos:</p>
+                <pre><code>{\small Texto pequeno}
+{\large Texto grande}
+{\Huge Texto muito grande}</code></pre>
+
+                <h2>3. Criando Listas</h2>
+                <p>Existem dois tipos principais de ambientes para listas:</p>
+
+                <h3>Listas Não Ordenadas (Marcadores)</h3>
+                <pre><code>\begin{itemize}
+  \item Primeiro item
+  \item Segundo item
+  \item Terceiro item
+\end{itemize}</code></pre>
+
+                <h3>Listas Ordenadas (Numeradas)</h3>
+                <pre><code>\begin{enumerate}
+  \item Passo um
+  \item Passo dois
+  \item Passo três
+\end{enumerate}</code></pre>
+
+                <div class="lesson-footer">
+                    <a href="modulo1.html">&larr; Módulo Anterior</a>
+                    <a href="modulo3.html">Próximo Módulo &rarr;</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
