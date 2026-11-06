@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Cursos & Acadêmica</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .grid-courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .course-card {
+            background: var(--card-bg, #ffffff);
+            border: 1px solid var(--border-color, #e0e0e0);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .badge-status {
+            align-self: flex-start;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .badge-active { background: #e8f5e9; color: #2e7d32; }
+        .badge-soon { background: #fff3e0; color: #e65100; }
+        .btn-course {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: var(--accent-green, #4CAF50);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">🎓 <span>Academia de Conhecimento</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Cursos</a></li>
+                <li><a href="https://github.com/iaradasilva" target="_blank">GitHub</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="content-area" style="max-width: 1000px; margin: 40px auto; padding: 0 20px;">
+        <div class="card-container">
+            <h1>Plataforma de Capacitação Científica e Tecnológica</h1>
+            <p>Espaço voltado ao aprendizado prático de ferramentas fundamentais para a escrita acadêmica, ciência de dados e desenvolvimento.</p>
+
+            <div class="grid-courses">
+                
+                <!-- CARTOON CURSO LATEX -->
+                <div class="course-card">
+                    <div>
+                        <span class="badge-status badge-active">DISPONÍVEL</span>
+                        <h3>📄 Editoração Científica com LaTeX</h3>
+                        <p>Aprenda a estruturar documentos acadêmicos, equações, tabelas, figuras e referências automatizadas no Overleaf.</p>
+                    </div>
+                    <a href="latex/index.html" class="btn-course">Acessar Curso &rarr;</a>
+                </div>
+
+                <!-- CARTOON CURSO FUTURO 1 -->
+                <div class="course-card">
+                    <div>
+                        <span class="badge-status badge-soon">EM BREVE</span>
+                        <h3>🐍 Python para Análise de Dados</h3>
+                        <p>Introdução ao processamento de dados, automação de tarefas e geração de gráficos para trabalhos científicos.</p>
+                    </div>
+                    <a href="#" class="btn-course" style="opacity: 0.6; pointer-events: none;">Aguarde</a>
+                </div>
+
+                <!-- CARTOON CURSO FUTURO 2 -->
+                <div class="course-card">
+                    <div>
+                        <span class="badge-status badge-soon">EM BREVE</span>
+                        <h3>🐙 Git e GitHub para Pesquisadores</h3>
+                        <p>Versionamento de código, colaboração e publicação de páginas científicas via GitHub Pages.</p>
+                    </div>
+                    <a href="#" class="btn-course" style="opacity: 0.6; pointer-events: none;">Aguarde</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
