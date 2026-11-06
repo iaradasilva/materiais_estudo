@@ -19,7 +19,7 @@
             border: 2px solid var(--primary-color, #4CAF50);
         }
 
-        /* Grade com 3 Caixas por Linha no Desktop */
+        /* Grade de 3 Caixas Lado a Lado */
         .portal-grid-courses {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -84,7 +84,6 @@
             pointer-events: none;
         }
 
-        /* Responsividade para telas menores */
         @media (max-width: 900px) {
             .portal-grid-courses {
                 grid-template-columns: repeat(2, 1fr);
@@ -103,7 +102,7 @@
         <div class="nav-container">
             <a href="index.html" class="logo">📚 <span>Material de Estudo</span></a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Materiais</a></li>
+                <li><a href="index.html" class="active">Página Inicial</a></li>
                 <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
                 <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
             </ul>
@@ -114,20 +113,9 @@
         
         <aside class="sidebar">
             <div class="sidebar-section">
-                <h3 class="sidebar-title">VISÃO GERAL DO PORTAL</h3>
+                <h3 class="sidebar-title">PORTAL</h3>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html" class="active">Página Inicial</a></li>
-                    <li><a href="latex/overleaf.html">Guia do Overleaf</a></li>
-                    <li><a href="latex/leapspace.html">LeapSpace</a></li>
-                </ul>
-            </div>
-            
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">GUIAS DISPONÍVEIS</h3>
-                <ul class="sidebar-menu">
-                    <li><a href="latex/index.html">📄 Editoração em LaTeX</a></li>
-                    <li><a href="#" style="opacity: 0.6; pointer-events: none;">🏥 Análise de Dados em Saúde</a></li>
-                    <li><a href="#" style="opacity: 0.6; pointer-events: none;">📊 Introdução ao R</a></li>
+                    <li><a href="index.html" class="active">Início</a></li>
                 </ul>
             </div>
 
@@ -151,15 +139,15 @@
             <div class="card-container">
                 <span class="badge badge-green">REPOSITÓRIO • MATERIAL DE APOIO ACADÊMICO</span>
                 <h1>Plataforma de Materiais de Estudo</h1>
-                <p>Boas-vindas! Este portal reúne guias práticos, tutorias e materiais abertos desenvolvidos para apoiar estudantes e pesquisadores na escrita científica, análise estatística e ferramentas computacionais.</p>
+                <p>Boas-vindas! Este portal reúne guias práticos, tutoriais e materiais abertos desenvolvidos para apoiar estudantes e pesquisadores na escrita científica, análise estatística e ferramentas computacionais.</p>
                 
                 <div class="callout callout-tip">
                     💡 <strong>Como utilizar:</strong> Escolha abaixo a trilha de estudo desejada para acessar os módulos explicativos, códigos-fonte, exemplos e orientações passo a passo.
                 </div>
 
-                <h2>Guias e Trilhas de Aprendizado</h2>
+                <h2>Trilhas de Aprendizado</h2>
 
-                <!-- GRADE DE 3 CAIXAS LADO A LADO -->
+                <!-- GRADE DE 3 CAIXAS -->
                 <div class="portal-grid-courses">
                     
                     <!-- MATERIAL 1: LATEX -->
