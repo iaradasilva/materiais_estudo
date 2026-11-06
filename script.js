@@ -1,21 +1,24 @@
 // Função chamada ao clicar no botão de alternar tema
 function toggleTheme() {
-    const body = document.body;
+    const html = document.documentElement;
     const themeBtn = document.getElementById('theme-toggle');
     
-    // Alterna a classe 'dark-mode' no <body>
-    body.classList.toggle('dark-mode');
+    // Verifica qual é o tema atual (o padrão do seu CSS é escuro)
+    const currentTheme = html.getAttribute('data-theme');
     
-    // Verifica se a classe está ativa e atualiza o botão e o localStorage
-    if (body.classList.contains('dark-mode')) {
+    if (currentTheme === 'light') {
+        // Mudar para escuro (remover o data-theme="light")
+        html.removeAttribute('data-theme');
         localStorage.setItem('theme', 'dark');
         if (themeBtn) {
-            themeBtn.textContent = '🌙 Modo Escuro';
+            themeBtn.textContent = '☀️ Modo Claro';
         }
     } else {
+        // Mudar para claro (definir data-theme="light")
+        html.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
         if (themeBtn) {
-            themeBtn.textContent = '☀️ Modo Claro';
+            themeBtn.textContent = '🌙 Modo Escuro';
         }
     }
 }
@@ -25,13 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     const themeBtn = document.getElementById('theme-toggle');
 
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
         if (themeBtn) {
             themeBtn.textContent = '🌙 Modo Escuro';
         }
     } else {
-        document.body.classList.remove('dark-mode');
+        document.documentElement.removeAttribute('data-theme');
         if (themeBtn) {
             themeBtn.textContent = '☀️ Modo Claro';
         }
