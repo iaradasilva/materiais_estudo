@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de LaTeX - Guia do Overleaf</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color, #4CAF50);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">📄 <span>Curso de LaTeX</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Aulas</a></li>
+                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="course-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">VISÃO GERAL DO CURSO</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html">O que é o LaTeX?</a></li>
+                    <li><a href="overleaf.html" class="active">Guia do Overleaf</a></li>
+                    <li><a href="leapspace.html">LeapSpace</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">MÓDULOS</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="modulo1.html">01. Estrutura Básica</a></li>
+                    <li><a href="modulo2.html">02. Formatação de Texto</a></li>
+                    <li><a href="modulo3.html">03. Fórmulas Matemáticas</a></li>
+                    <li><a href="modulo4.html">04. Imagens e Tabelas</a></li>
+                    <li><a href="modulo5.html">05. Referências e BibTeX</a></li>
+                    <li><a href="modulo6.html">06. Projeto Completo</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
+                <div class="team-container">
+                    <div class="team-card">
+                        <div class="team-info">
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
+                                <span class="team-name">Dra. Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="card-container">
+                <span class="badge badge-green">FERRAMENTAS • EM NUVEM</span>
+                <h1>Guia Prático do Overleaf</h1>
+                <p>O Overleaf é um editor de LaTeX baseado na nuvem que permite criar, editar e compilar documentos em tempo real direto no seu navegador sem a necessidade de instalar programas locais no computador.</p>
+
+                <div class="callout callout-tip">
+                    💡 <strong>Vantagem Principal:</strong> Como os documentos ficam salvos em nuvem, você pode acessar seus trabalhos científicos de qualquer lugar e colaborar simultaneamente com outros pesquisadores.
+                </div>
+
+                <h2>1. Como Criar uma Conta Gratuita</h2>
+                <p>Para começar a usar a plataforma:</p>
+                <ol>
+                    <li>Acesse o site oficial do <a href="https://www.overleaf.com" target="_blank">Overleaf</a>.</li>
+                    <li>Clique no botão <strong>Register</strong> no canto superior direito.</li>
+                    <li>Você pode se cadastrar usando seu e-mail institucional, conta do Google ou ORCID.</li>
+                </ol>
+
+                <h2>2. Modelos Acadêmicos Prontos (UTFPR)</h2>
+                <p>Para facilitar a escrita de trabalhos acadêmicos, TCCs, dissertações e artigos no padrão institucional, utilize os modelos oficiais disponíveis:</p>
+                
+                <div class="callout callout-info">
+                    🎓 <strong>Modelos TeX/LaTeX - UTFPR:</strong><br>
+                    Acesse o repositório institucional com modelos preparados para uso direto no Overleaf:<br>
+                    <a href="http://paginapessoal.utfpr.edu.br/lelima/modelos-tex-latex" target="_blank" style="color: var(--accent-green, #47A853); font-weight: 700; text-decoration: underline;">
+                        👉 Modelos TeX-LaTeX — Páginas Pessoais - UTFPR
+                    </a>
+                </div>
+
+                <h2>3. Conhecendo a Interface do Editor</h2>
+                <p>A área de trabalho do Overleaf divide-se em três partes principais:</p>
+                <ul>
+                    <li><strong>Painel de Arquivos (Esquerda):</strong> Onde ficam armazenados os arquivos do seu projeto (como o <code>main.tex</code>, imagens em <code>.png</code>/<code>.jpg</code> e bases bibliográficas <code>.bib</code>).</li>
+                    <li><strong>Editor de Código (Centro):</strong> Onde você escreve seu texto e os comandos em LaTeX.</li>
+                    <li><strong>Painel de Visualização PDF (Direita):</strong> Mostra o resultado do seu trabalho formatado após a compilação.</li>
+                </ul>
+
+                <h2>4. Como Compilar seu Documento</h2>
+                <p>Sempre que fizer alterações no texto, clique no botão verde <strong>Recompile</strong> no topo do painel da direita (ou aperte a atalho <code>Ctrl + Enter</code>) para atualizar o PDF em tempo real.</p>
+
+                <div class="lesson-footer">
+                    <a href="index.html">&larr; O que é o LaTeX?</a>
+                    <a href="leapspace.html">LeapSpace &rarr;</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
