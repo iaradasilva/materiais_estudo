@@ -19,68 +19,68 @@
             border: 2px solid var(--primary-color, #4CAF50);
         }
 
-        /* Força a exibição em 2 colunas no desktop/tablet e 1 no celular */
-        .skills-grid {
-            display: grid !important;
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 15px !important;
-            margin-top: 15px !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
+        /* Grade dos Cursos Centralizados no Meio do Card Principal */
+        .portal-grid-courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
         }
 
-        .skill-card {
-            background-color: rgba(76, 175, 80, 0.08);
-            border-left: 4px solid #4CAF50;
-            padding: 16px;
-            border-radius: 6px;
-            box-sizing: border-box;
+        .portal-card-item {
+            background-color: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+            border-left: 4px solid var(--accent-green, #4CAF50);
+            border-radius: 8px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .skill-card-disabled {
-            background-color: rgba(158, 158, 158, 0.08);
-            border-left: 4px solid #9e9e9e;
+        .portal-card-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
-        .skill-card h4 {
-            margin: 0 0 6px 0;
-            color: #2e7d32;
+
+        .portal-card-disabled {
+            border-left-color: #888888;
+            opacity: 0.85;
         }
-        .skill-card-disabled h4 {
-            color: #616161;
+
+        .portal-card-item h3 {
+            margin: 10px 0 8px 0;
+            font-size: 1.15rem;
         }
-        .skill-card p {
-            margin: 0 0 12px 0;
-            font-size: 0.9em;
+
+        .portal-card-item p {
+            font-size: 0.9rem;
             line-height: 1.4;
+            margin-bottom: 15px;
+            color: var(--text-muted, #ccc);
         }
-        .btn-portal-card {
+
+        .btn-card-access {
             display: inline-block;
-            align-self: flex-start;
-            background-color: #4CAF50;
-            color: #ffffff;
-            font-size: 0.85em;
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 4px;
+            text-align: center;
+            background-color: var(--accent-green, #4CAF50);
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 8px 14px;
+            border-radius: 5px;
             text-decoration: none;
             transition: opacity 0.2s;
         }
-        .btn-portal-card:hover {
+        .btn-card-access:hover {
             opacity: 0.9;
         }
-        .btn-portal-disabled {
-            background-color: #bdbdbd;
-            color: #ffffff;
+
+        .btn-card-disabled {
+            background-color: #555555;
+            color: #aaaaaa !important;
             cursor: not-allowed;
             pointer-events: none;
-        }
-
-        @media (max-width: 550px) {
-            .skills-grid {
-                grid-template-columns: 1fr !important;
-            }
         }
     </style>
 </head>
@@ -91,53 +91,4 @@
             <a href="index.html" class="logo">🎓 <span>Portal de Cursos</span></a>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Cursos</a></li>
-                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
-                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
-            </ul>
-        </div>
-    </header>
-
-    <div class="course-layout">
-        
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">VISÃO GERAL DO PORTAL</h3>
-                <ul class="sidebar-menu">
-                    <li><a href="index.html" class="active">Página Inicial</a></li>
-                    <li><a href="overleaf.html">Guia do Overleaf</a></li>
-                    <li><a href="leapspace.html">LeapSpace</a></li>
-                </ul>
-            </div>
-            
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">CURSOS DISPONÍVEIS</h3>
-                <ul class="sidebar-menu">
-                    <li><a href="latex/index.html">📄 Editoração em LaTeX</a></li>
-                    <li><a href="#" style="opacity: 0.6; pointer-events: none;">🐍 Python (Em breve)</a></li>
-                    <li><a href="#" style="opacity: 0.6; pointer-events: none;">🐙 Git/GitHub (Em breve)</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
-                <div class="team-container">
-                    <div class="team-card">
-                        <div class="team-info">
-                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
-                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
-                                <span class="team-name">Dra. Iara da Silva</span>
-                            </a>
-                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <main class="content-area">
-            <div class="card-container">
-                <span class="badge badge-green">PORTAL • CAPACITAÇÃO ACADÊMICA</span>
-                <h1>Plataforma de Capacitação Científica</h1>
-                <p>Boas-vindas ao portal de treinamentos! Este espaço foi desenvolvido para oferecer capacitação prática e acessível em ferramentas essenciais para a escrita científica, análise de dados e publicação acadêmica.</p>
-                
-                <div class="callout callout-
+                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a>
