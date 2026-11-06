@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de LaTeX - Módulo 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color, #4CAF50);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">📄 <span>Curso de LaTeX</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Aulas</a></li>
+                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="course-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">VISÃO GERAL DO CURSO</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html">O que é o LaTeX?</a></li>
+                    <li><a href="overleaf.html">Guia do Overleaf</a></li>
+                    <li><a href="leapspace.html">LeapSpace</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">MÓDULOS</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="modulo1.html" class="active">01. Estrutura Básica</a></li>
+                    <li><a href="modulo2.html">02. Formatação de Texto</a></li>
+                    <li><a href="modulo3.html">03. Fórmulas Matemáticas</a></li>
+                    <li><a href="modulo4.html">04. Imagens e Tabelas</a></li>
+                    <li><a href="modulo5.html">05. Referências e BibTeX</a></li>
+                    <li><a href="modulo6.html">06. Projeto Completo</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
+                <div class="team-container">
+                    <div class="team-card">
+                        <div class="team-info">
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
+                                <span class="team-name">Dra. Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="card-container">
+                <span class="badge badge-green">MÓDULO 1 • SINTAXE</span>
+                <h1>Estrutura Básica de um Documento</h1>
+                <p>Todo documento em LaTeX divide-se em duas partes principais: o <strong>preâmbulo</strong> (configurações e pacotes) e o <strong>corpo do documento</strong> (conteúdo visível).</p>
+
+                <h2>Exemplo Mínimo Funcional</h2>
+                <pre><code>\documentclass[12pt, a4paper]{article}
+
+% Preâmbulo (pacotes e configurações)
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+
+\title{Meu Primeiro Documento}
+\author{Nome do Aluno}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introdução}
+Este é o meu primeiro documento criado em LaTeX durante o curso na universidade!
+
+\end{document}</code></pre>
+
+                <div class="callout callout-info">
+                    ℹ️ <strong>Atenção:</strong> Todo o texto do seu documento precisa estar obrigatoriamente dentro do ambiente <code>\begin{document}</code> e <code>\end{document}</code>.
+                </div>
+
+                <div class="lesson-footer">
+                    <a href="leapspace.html">&larr; LeapSpace</a>
+                    <a href="modulo2.html">Próximo Módulo &rarr;</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
