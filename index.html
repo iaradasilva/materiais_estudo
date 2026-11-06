@@ -18,54 +18,45 @@
             object-fit: cover;
             border: 2px solid var(--primary-color, #4CAF50);
         }
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-        .course-card-item {
-            background: var(--bg-card, #ffffff);
+        .portal-course-box {
             border: 1px solid var(--border-color, #e0e0e0);
             border-radius: 8px;
-            padding: 24px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: var(--bg-card, #ffffff);
             display: flex;
             flex-direction: column;
+            gap: 12px;
+        }
+        .portal-course-header {
+            display: flex;
             justify-content: space-between;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        .course-card-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        .portal-course-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            border: none;
+            padding: 0;
         }
-        .course-card-item h3 {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        .course-card-item p {
-            font-size: 0.95rem;
-            color: var(--text-muted, #666);
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-        .btn-access {
+        .btn-portal {
             display: inline-block;
-            text-align: center;
             background-color: var(--accent-green, #4CAF50);
             color: #ffffff;
             font-weight: 700;
-            padding: 10px 16px;
+            padding: 10px 18px;
             border-radius: 6px;
             text-decoration: none;
-            transition: opacity 0.2s;
+            transition: background-color 0.2s ease, opacity 0.2s ease;
         }
-        .btn-access:hover {
+        .btn-portal:hover {
             opacity: 0.9;
         }
-        .btn-disabled {
-            background-color: var(--border-color, #cccccc);
-            color: var(--text-muted, #666666);
+        .btn-portal-disabled {
+            background-color: #cccccc;
+            color: #666666;
             cursor: not-allowed;
             pointer-events: none;
         }
@@ -88,15 +79,25 @@
         
         <aside class="sidebar">
             <div class="sidebar-section">
-                <h3 class="sidebar-title">NAVEGAÇÃO DO PORTAL</h3>
+                <h3 class="sidebar-title">VISÃO GERAL DO PORTAL</h3>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html" class="active">Todos os Cursos</a></li>
+                    <li><a href="index.html" class="active">Página Inicial</a></li>
+                    <li><a href="overleaf.html">Guia do Overleaf</a></li>
                     <li><a href="leapspace.html">LeapSpace</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">CURSOS DISPONÍVEIS</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="latex/index.html">📄 Editoração em LaTeX</a></li>
+                    <li><a href="#" style="opacity: 0.6; pointer-events: none;">🐍 Python (Em breve)</a></li>
+                    <li><a href="#" style="opacity: 0.6; pointer-events: none;">🐙 Git/GitHub (Em breve)</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
-                <h3 class="sidebar-title">INSTRUTORA</h3>
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
                 <div class="team-container">
                     <div class="team-card">
                         <div class="team-info">
@@ -113,55 +114,9 @@
 
         <main class="content-area">
             <div class="card-container">
-                <span class="badge badge-green">PLATAFORMA DE CAPACITAÇÃO</span>
-                <h1>Cursos e Treinamentos Acadêmicos</h1>
-                <p>Boas-vindas ao portal de capacitação! Aqui você encontra materiais práticos desenvolvidos para apoiar a escrita de pesquisas, automação de dados e ferramentas científicas.</p>
-
-                <div class="callout callout-tip">
-                    💡 <strong>Como funciona:</strong> Selecione abaixo o treinamento desejado para acessar os módulos de ensino, guias de configuração e exercícios práticos.
-                </div>
-
-                <h2>Cursos Disponíveis</h2>
+                <span class="badge badge-green">PORTAL • PLATAFORMA DE ENSINO</span>
+                <h1>Plataforma de Capacitação Científica</h1>
+                <p>Boas-vindas ao portal unificado de cursos! Aqui você encontra trilhas de aprendizado práticas voltadas à editoração científica, ferramentas computacionais e metodologias de pesquisa.</p>
                 
-                <div class="courses-grid">
-                    
-                    <!-- CARTÃO DO CURSO DE LATEX -->
-                    <div class="course-card-item">
-                        <div>
-                            <span class="badge badge-green">DISPONÍVEL</span>
-                            <h3>📄 Editoração Científica em LaTeX</h3>
-                            <p>Aprenda a criar artigos, trabalhos acadêmicos, tabelas, equações e gerenciar bibliografias com o Overleaf.</p>
-                        </div>
-                        <a href="latex/index.html" class="btn-access">Acessar Curso &rarr;</a>
-                    </div>
-
-                    <!-- CARTÃO CURSO FUTURO 1 -->
-                    <div class="course-card-item">
-                        <div>
-                            <span class="badge" style="background-color: #fff3e0; color: #e65100;">EM BREVE</span>
-                            <h3>🐍 Python para Ciência de Dados</h3>
-                            <p>Automação de análise de dados, tratamento de tabelas e geração de gráficos científicos.</p>
-                        </div>
-                        <a href="#" class="btn-access btn-disabled">Em Breve</a>
-                    </div>
-
-                    <!-- CARTÃO CURSO FUTURO 2 -->
-                    <div class="course-card-item">
-                        <div>
-                            <span class="badge" style="background-color: #fff3e0; color: #e65100;">EM BREVE</span>
-                            <h3>🐙 Git e GitHub Acadêmico</h3>
-                            <p>Controle de versão de documentos, colaboração em equipe e hospedagem de projetos no GitHub Pages.</p>
-                        </div>
-                        <a href="#" class="btn-access btn-disabled">Em Breve</a>
-                    </div>
-
-                </div>
-
-            </div>
-        </main>
-
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                <div class="callout callout-tip">
+                    💡 <strong>Como utilizar:</strong> Escolha abaixo a disciplina que deseja estudar
