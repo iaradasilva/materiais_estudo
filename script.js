@@ -1,24 +1,27 @@
-// Função para alternar o tema
 function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    const body = document.body;
+    const themeBtn = document.getElementById('theme-toggle');
     
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateButtonText(newTheme);
-}
-
-// Atualiza o texto/ícone do botão
-function updateButtonText(theme) {
-    const btn = document.getElementById('theme-toggle');
-    if (btn) {
-        btn.innerHTML = theme === 'light' ? '🌙 Modo Escuro' : '☀️ Modo Claro';
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        if (themeBtn) themeBtn.textContent = '🌙 Modo Escuro';
+    } else {
+        localStorage.setItem('theme', 'light');
+        if (themeBtn) themeBtn.textContent = '☀️ Modo Claro';
     }
 }
 
-// Aplica o tema salvo assim que a página carrega
 document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme') || 'dark'; // Tema padrão: escuro
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateButtonText(savedTheme);
+    const savedTheme = localStorage.getItem('theme');
+    const themeBtn = document.getElementById('theme-toggle');
+
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        if (themeBtn) themeBtn.textContent = '🌙 Modo Escuro';
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (themeBtn) themeBtn.textContent = '☀️ Modo Claro';
+    }
 });
