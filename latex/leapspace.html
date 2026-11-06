@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de LaTeX - LeapSpace</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color, #4CAF50);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">📄 <span>Curso de LaTeX</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Aulas</a></li>
+                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="course-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">VISÃO GERAL DO CURSO</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html">O que é o LaTeX?</a></li>
+                    <li><a href="overleaf.html">Guia do Overleaf</a></li>
+                    <li><a href="leapspace.html" class="active">LeapSpace</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">MÓDULOS</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="modulo1.html">01. Estrutura Básica</a></li>
+                    <li><a href="modulo2.html">02. Formatação de Texto</a></li>
+                    <li><a href="modulo3.html">03. Fórmulas Matemáticas</a></li>
+                    <li><a href="modulo4.html">04. Imagens e Tabelas</a></li>
+                    <li><a href="modulo5.html">05. Referências e BibTeX</a></li>
+                    <li><a href="modulo6.html">06. Projeto Completo</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
+                <div class="team-container">
+                    <div class="team-card">
+                        <div class="team-info">
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
+                                <span class="team-name">Dra. Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="card-container">
+                <span class="badge badge-green">FERRAMENTAS • PESQUISA</span>
+                <h1>Plataforma LeapSpace™</h1>
+                
+                <p>O <strong>LeapSpace™</strong> é um espaço de trabalho assistido por IA voltado à pesquisa, projetado para ajudar os pesquisadores a trabalhar com mais agilidade, aprofundar análises e alcançar mais resultados em um ambiente seguro.</p>
+
+                <p>Criado em colaboração com a comunidade científica, a plataforma combina IA responsável e indicadores de confiança com uma ampla coleção de textos integrais e resumos revisados por pares, sem viés editorial.</p>
+
+                <div class="callout callout-tip">
+                    💡 <strong>Conheça a plataforma:</strong> Para saber mais detalhes e explorar todos os recursos, acesse a página oficial do <a href="https://www.elsevier.com/pt-br/products/leapspace" target="_blank" rel="noopener noreferrer">LeapSpace™ na Elsevier</a>.
+                </div>
+
+                <h2>1. Principais Diferenciais da Plataforma</h2>
+                <ul>
+                    <li><strong>IA Responsável:</strong> Indicadores de confiança e respostas baseadas rigorosamente em literatura científica verificada.</li>
+                    <li><strong>Conteúdo Revisado por Pares:</strong> Acesso a uma vasta coleção de artigos integrais e resumos de alta qualidade editorial.</li>
+                    <li><strong>Ambiente Seguro:</strong> Ferramenta desenvolvida para proteger os dados da pesquisa e a propriedade intelectual do pesquisador.</li>
+                    <li><strong>Agilidade na Análise:</strong> Otimização do tempo de leitura e síntese de dados para acelerar a fundamentação teórica de artigos e relatórios.</li>
+                </ul>
+
+                <h2>2. Aplicação na Escrita Acadêmica em LaTeX</h2>
+                <p>Ao combinar o <strong>LeapSpace™</strong> com o <strong>Overleaf</strong>, os pesquisadores conseguem refinar suas pesquisas bibliográficas e estruturar a fundamentação teórica do documento com muito mais rapidez e precisão, importando referências confiáveis diretamente para o ambiente do LaTeX.</p>
+
+                <div class="lesson-footer">
+                    <a href="overleaf.html">&larr; Guia do Overleaf</a>
+                    <a href="modulo1.html">01. Estrutura Básica &rarr;</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
