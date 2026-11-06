@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de LaTeX - Módulo 6</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color, #4CAF50);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">📄 <span>Curso de LaTeX</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Aulas</a></li>
+                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="course-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">VISÃO GERAL DO CURSO</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html">O que é o LaTeX?</a></li>
+                    <li><a href="overleaf.html">Guia do Overleaf</a></li>
+                    <li><a href="leapspace.html">LeapSpace</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">MÓDULOS</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="modulo1.html">01. Estrutura Básica</a></li>
+                    <li><a href="modulo2.html">02. Formatação de Texto</a></li>
+                    <li><a href="modulo3.html">03. Fórmulas Matemáticas</a></li>
+                    <li><a href="modulo4.html">04. Imagens e Tabelas</a></li>
+                    <li><a href="modulo5.html">05. Referências e BibTeX</a></li>
+                    <li><a href="modulo6.html" class="active">06. Projeto Completo</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
+                <div class="team-container">
+                    <div class="team-card">
+                        <div class="team-info">
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
+                                <span class="team-name">Dra. Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="card-container">
+                <span class="badge badge-green">MÓDULO 6 • PROJETO MODULAR</span>
+                <h1>Criando um Trabalho com Múltiplos Arquivos (.tex)</h1>
+                <p>Em trabalhos acadêmicos longos, é uma boa prática criar um arquivo <code>.tex</code> separado para cada seção (Introdução, Metodologia, Resultados, Conclusão) e importá-los no arquivo principal <code>main.tex</code> através do comando <code>\input{}</code>.</p>
+
+                <div class="callout callout-warning">
+                    ⚠️ <strong>REGRA DE OURO:</strong> Apenas o arquivo <code>main.tex</code> possui <code>\documentclass</code>, preâmbulo e o bloco <code>\begin{document}...\end{document}</code>. Os arquivos das seções contêm <strong>apenas o texto</strong>, começando direto com <code>\section{...}</code>.
+                </div>
+
+                <h2>Passo 1: Como criar os novos arquivos no Overleaf</h2>
+                <ol>
+                    <li>No painel esquerdo do Overleaf, clique no ícone de <strong>Novo Arquivo</strong> (folha com sinal de <code>+</code>).</li>
+                    <li>Crie 4 arquivos com os nomes exatos:
+                        <ul>
+                            <li><code>introducao.tex</code></li>
+                            <li><code>metodologia.tex</code></li>
+                            <li><code>resultados.tex</code></li>
+                            <li><code>conclusao.tex</code></li>
+                        </ul>
+                    </li>
+                    <li>Crie também o arquivo <code>referencias.bib</code> para as citações bibliográficas.</li>
+                </ol>
+
+                <h2>Passo 2: Conteúdo de cada arquivo secundário</h2>
+                <p>Abra cada arquivo recém-criado e cole apenas o seu respetivo bloco de texto:</p>
+
+                <p><strong>Ficheiro: <code>introducao.tex</code></strong></p>
+                <pre><code>\section{Introdução}
+Esta é a introdução do documento. Apresente o contexto do seu trabalho e os seus objetivos. 
+
+Por exemplo: segundo Lamport \cite{lamport1994latex}, o uso do LaTeX facilita a escrita técnica. Outro clássico da área é o trabalho de Knuth \cite{knuth1984texbook}.</code></pre>
+
+                <p><strong>Ficheiro: <code>metodologia.tex</code></strong></p>
+                <pre><code>\section{Metodologia}
+Descreva nesta seção os materiais, métodos, procedimentos ou ferramentas computacionais utilizadas para a realização da pesquisa.</code></pre>
+
+                <p><strong>Ficheiro: <code>resultados.tex</code></strong></p>
+                <pre><code>\section{Resultados e Discussão}
+Apresente aqui os dados obtidos durante a pesquisa. Você pode incluir tabelas, gráficos, figuras ou equações para ilustrar os resultados.</code></pre>
+
+                <p><strong>Ficheiro: <code>conclusao.tex</code></strong></p>
+                <pre><code>\section{Conclusão}
+Sintetize as principais conclusões alcançadas, verifique se os objetivos foram atingidos e sugira trabalhos futuros.</code></pre>
+
+                <p><strong>Ficheiro: <code>referencias.bib</code></strong></p>
+                <pre><code>@book{lamport1994latex,
+  author    = {Leslie Lamport},
+  title     = {LaTeX: A Document Preparation System},
+  year      = {1994},
+  publisher = {Addison-Wesley}
+}
+
+@book{knuth1984texbook,
+  author    = {Donald E. Knuth},
+  title     = {The TeXbook},
+  year      = {1984},
+  publisher = {Addison-Wesley}
+}</code></pre>
+
+                <h2>Passo 3: Conectar tudo no arquivo principal (<code>main.tex</code>)</h2>
+                <p>Agora, abra o seu arquivo <code>main.tex</code> e use o comando <code>\input{nome-do-arquivo}</code> para chamar cada uma das páginas organizadamente:</p>
+
+                <pre><code>\documentclass[12pt, a4paper]{article}
+
+% --- PACOTES BÁSICOS ---
+\usepackage[utf8]{inputenc}    % Suporte para acentuação
+\usepackage[brazil]{babel}     % Tradução automática para português
+\usepackage[margin=2.5cm]{geometry} % Margens da página
+\usepackage{cite}              % Suporte a citações
+
+% --- METADADOS DA CAPA ---
+\title{\textbf{Título do Seu Trabalho: Subtítulo Explicativo}}
+\author{Seu Nome Completo}
+\date{\today}
+
+\begin{document}
+
+% --- 1. CAPA ---
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+% --- 2. RESUMO ---
+\pagenumbering{arabic}
+\begin{abstract}
+Este é o resumo do trabalho. Apresente aqui brevemente o objetivo da pesquisa, a metodologia empregada e os principais resultados obtidos.
+
+\vspace{0.5cm}
+\noindent \textbf{Palavras-chave:} LaTeX, Overleaf, Estrutura Modular, Multi-arquivos.
+\end{abstract}
+
+\newpage
+
+% --- 3. INCLUSÃO DAS SEÇÕES (ARQUIVOS .TEX SEPARADOS) ---
+\input{introducao}
+\input{metodologia}
+\input{resultados}
+\input{conclusao}
+
+% --- 4. REFERÊNCIAS BIBLIOGRÁFICAS ---
+\bibliographystyle{plain}
+\bibliography{referencias}
+
+\end{document}</code></pre>
+
+                <div class="callout callout-tip">
+                    💡 <strong>Como o <code>\input{}</code> funciona:</strong> Na hora da compilação, o LaTeX pega o texto de cada arquivo secundário e "cola" exatamente onde o comando <code>\input{}</code> foi colocado. Isso evita erros e deixa seu projeto muito mais limpo!
+                </div>
+
+                <div class="lesson-footer">
+                    <a href="modulo5.html">&larr; Módulo 5 (Referências)</a>
+                    <a href="index.html">Voltar ao Início &rarr;</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
