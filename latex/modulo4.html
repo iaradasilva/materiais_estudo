@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de LaTeX - Módulo 4</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color, #4CAF50);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">📄 <span>Curso de LaTeX</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Aulas</a></li>
+                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="course-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">VISÃO GERAL DO CURSO</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html">O que é o LaTeX?</a></li>
+                    <li><a href="overleaf.html">Guia do Overleaf</a></li>
+                    <li><a href="leapspace.html">LeapSpace</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">MÓDULOS</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="modulo1.html">01. Estrutura Básica</a></li>
+                    <li><a href="modulo2.html">02. Formatação de Texto</a></li>
+                    <li><a href="modulo3.html">03. Fórmulas Matemáticas</a></li>
+                    <li><a href="modulo4.html" class="active">04. Imagens e Tabelas</a></li>
+                    <li><a href="modulo5.html">05. Referências e BibTeX</a></li>
+                    <li><a href="modulo6.html">06. Projeto Completo</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
+                <div class="team-container">
+                    <div class="team-card">
+                        <div class="team-info">
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
+                                <span class="team-name">Dra. Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="card-container">
+                <span class="badge badge-green">MÓDULO 4 • ELEMENTOS VISUAIS</span>
+                <h1>Imagens e Tabelas</h1>
+                <p>Nesta aula você aprenderá a inserir figuras externas e a construir tabelas formatadas no seu documento LaTeX.</p>
+
+                <h2>1. Inserindo Imagens</h2>
+                <p>Para trabalhar com imagens, inclua o pacote <code>graphicx</code> no preâmbulo:</p>
+                <pre><code>\usepackage{graphicx}</code></pre>
+
+                <p>Use o ambiente <code>figure</code> para inserir a imagem com centralização, legenda e rótulo de referência:</p>
+                <pre><code>\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{nome_da_imagem.png}
+  \caption{Legenda explicativa da figura.}
+  \label{fig:minha_figura}
+\end{figure}</code></pre>
+
+                <h2>2. Criando Tabelas</h2>
+                <p>As tabelas são construídas usando o ambiente <code>tabular</code> dentro de um ambiente flutuante <code>table</code>:</p>
+                <pre><code>\begin{table}[htbp]
+  \centering
+  \caption{Exemplo de tabela de dados.}
+  \label{tab:meus_dados}
+  \begin{tabular}{|c|l|r|}
+    \hline
+    \textbf{ID} & \textbf{Nome} & \textbf{Valor (R\$)} \\
+    \hline
+    1 & Item A & 150,00 \\
+    2 & Item B & 230,50 \\
+    \hline
+  \end{tabular}
+\end{table}</code></pre>
+
+                <div class="callout callout-info">
+                    ℹ️ <strong>Explicação das colunas:</strong> Na definição <code>{|c|l|r|}</code>, <code>c</code> alinha ao centro, <code>l</code> à esquerda e <code>r</code> à direita. A barra vertical <code>|</code> cria as linhas de grade verticais.
+                </div>
+
+                <div class="lesson-footer">
+                    <a href="modulo3.html">&larr; Módulo Anterior</a>
+                    <a href="modulo5.html">Próximo Módulo &rarr;</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
