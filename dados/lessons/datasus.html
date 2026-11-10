@@ -14,32 +14,35 @@
 
 <p>Para automatizar o download de microdados do DATASUS diretamente no R (como SIM, SINASC, SIH e SIA), utilize o pacote <code>microdatasus</code>:</p>
 
-<pre><code># Instalação do pacote microdatasus via GitHub
-if (!require("remotes")) install.packages("remotes")
-remotes::install_github("rfsaldanha/microdatasus")
+<pre><code># 1. Instalar o pacote microdatasus do GitHub (caso não tenha)
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("rsuassuna/microdatasus")
 
-# Carregar a biblioteca
+# 2. Carregar o pacote
 library(microdatasus)
 
-# Exemplo: Fazer o download dos dados do Sistema de Informação sobre Mortalidade (SIM)
+# 3. Exemplo: Baixar dados do Sistema de Informações sobre Mortalidade (SIM)
 dados_sim <- fetch_datasus(
-  year_start = 2022, 
-  year_end = 2022, 
+  year = 2022, 
   uf = "SP", 
   information_system = "SIM-DO"
 )
 
-# Processar e limpar as variáveis
-dados_limpos <- process_sim(dados_sim)
+# 4. Processar e limpar os dados
+dados_sim_limpos <- process_sim(dados_sim)
 
-# Visualizar as primeiras linhas
-head(dados_limpos)</code></pre>
+# 5. Salvar localmente em TXT/CSV
+write.csv(dados_sim_limpos, "data/dados_datasus_sim.txt", row.names = FALSE)
+cat("Dados do DATASUS baixados com sucesso!")
+</code></pre>
 
 <div class="callout callout-tip">
-    💡 <strong>Dica de Pesquisa:</strong> O pacote <code>microdatasus</code> padroniza automaticamente os rótulos de variáveis e dados categóricos, facilitando a aplicação direta de modelos estatísticos.
+    📂 <strong>Acesso Direto ao Arquivo TXT:</strong><br>
+    Você também pode ler um arquivo pré-processado diretamente do repositório utilizando:
+    <pre style="margin-top: 0.5rem; background: transparent; border: none; padding: 0;"><code>dados <- read.csv("https://raw.githubusercontent.com/iaradasilva/curso_dados/main/data/pacientes.txt")</code></pre>
 </div>
 
 <div class="lesson-footer">
-    <a href="index.html?page=instalacao">&larr; O que é o software r</a>
-    <a href="index.html?page=lesson1">02. Análise exploratória &rarr;</a>
+    <a href="course.html?page=instalacao">← Anterior: Instalação</a>
+    <a href="course.html?page=lesson1">Próximo: Análise exploratória →</a>
 </div>
