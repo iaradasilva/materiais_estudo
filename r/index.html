@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução ao R | Projeto O3 MOVER</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-green, #10B981);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bar de Navegação Superior -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">📊 <span>INTRODUÇÃO AO R PARA ANÁLISE DE DADOS</span></a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Página Inicial</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Estrutura Principal -->
+    <div class="course-layout">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html?page=instalacao" id="link-instalacao">00. Instalação do R e RStudio</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">MÓDULOS</div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html?page=lesson1" id="link-lesson1">01. Tipos de Dados e Estruturas</a></li>
+                    <li><a href="index.html?page=lesson2" id="link-lesson2">02. Manipulação com dplyr</a></li>
+                    <li><a href="index.html?page=lesson3" id="link-lesson3">03. Estatística Descritiva</a></li>
+                    <li><a href="index.html?page=lesson4" id="link-lesson4">04. Visualização com ggplot2</a></li>
+                </ul>
+            </div>
+
+            <!-- Equipe do Curso -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">EQUIPE DO CURSO</div>
+                <div class="team-container">
+                    <div class="team-card">
+                        <div class="team-info">
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Iara da Silva" class="team-avatar">
+                                <span class="team-name">Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Docente / Pesquisadora</span>
+                            <span class="team-institution">Projeto O3 MOVER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Área Principal -->
+        <main class="content-area">
+            <div class="card-container" id="lesson-content">
+                <!-- Conteúdo Base de Backup -->
+                <span class="badge badge-green">MÓDULO 00 • PRIMEIROS PASSOS</span>
+                <h1>Instalação do R e RStudio</h1>
+                <p>Nesta primeira lição, vamos aprender como instalar o ambiente de linguagem R e a IDE RStudio para iniciar a análise e manipulação de dados.</p>
+                
+                <h2>1. Download do R (Linguagem)</h2>
+                <p>Acesse o site oficial do CRAN (Comprehensive R Archive Network) e baixe a versão compatível com o seu sistema operacional:</p>
+                <ul>
+                    <li><a href="https://cran.r-project.org/" target="_blank">Download do R no CRAN ↗</a></li>
+                </ul>
+
+                <h2>2. Download do RStudio (Interface)</h2>
+                <p>O RStudio é a interface gráfica (IDE) recomendada para trabalhar com R de forma produtiva:</p>
+                <ul>
+                    <li><a href="https://posit.co/download/rstudio-desktop/" target="_blank">Download do RStudio Desktop ↗</a></li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    💡 <strong>Ordem recomendada:</strong> Instale primeiro a linguagem R e, em seguida, o RStudio.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script de Tema Global -->
+    <script src="../script.js"></script>
+
+    <!-- Script de Carregamento Dinâmico -->
+    <script>
+        async function loadLesson() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page');
+            
+            if (!page || page === 'instalacao') {
+                const linkInstalacao = document.getElementById('link-instalacao');
+                if (linkInstalacao) linkInstalacao.classList.add('active');
+                return;
+            }
+
+            document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById(`link-${page}`);
+            if (activeLink) activeLink.classList.add('active');
+
+            const contentDiv = document.getElementById('lesson-content');
+
+            try {
+                const response = await fetch(`./lessons/${page}.html`);
+                if (response.ok) {
+                    contentDiv.innerHTML = await response.text();
+                } else {
+                    contentDiv.innerHTML = `
+                        <span class="badge badge-green">EM BREVE</span>
+                        <h1>⚠️ Módulo em Construção</h1>
+                        <p>Esta lição (<code>r/lessons/${page}.html</code>) está sendo preparada para o material de estudo.</p>
+                    `;
+                }
+            } catch (err) {
+                console.log('Mantendo conteúdo base.');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadLesson);
+    </script>
+</body>
+</html>
