@@ -3,157 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso de LaTeX - Introdução</title>
+    <title>Curso de Estatística | Projeto O3 MOVER</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .team-info-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .team-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary-color, #4CAF50);
-        }
-
-        /* Força a exibição em 2 colunas no desktop/tablet e 1 no celular */
-        .skills-grid {
-            display: grid !important;
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 15px !important;
-            margin-top: 15px !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
-        }
-
-        .skill-card {
-            background-color: rgba(76, 175, 80, 0.08);
-            border-left: 4px solid #4CAF50;
-            padding: 14px 16px;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
-        .skill-card h4 {
-            margin: 0 0 6px 0;
-            color: #2e7d32;
-        }
-        .skill-card p {
-            margin: 0;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 550px) {
-            .skills-grid {
-                grid-template-columns: 1fr !important; /* 1 coluna no celular para não espremer o texto */
-            }
-        }
-    </style>
 </head>
 <body>
 
-    <header class="navbar">
+    <!-- Bar de Navegação Superior -->
+    <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">📄 <span>Curso de LaTeX</span></a>
+            <a href="index.html" class="logo">📊 <span>ANÁLISE DE DADOS E MODELAGEM ESTATÍSTICA APLICADA À SAÚDE</span> CURSO PROJETO O3 MOVER</a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Aulas</a></li>
-                <li><a href="https://github.com/iaradasilva/curso_latex" target="_blank">GitHub</a></li>
-                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
+                <li><a href="https://github.com/iaradasilva/curso_dados" target="_blank">GitHub ↗</a></li>
             </ul>
         </div>
-    </header>
+    </nav>
 
+    <!-- Estrutura Principal -->
     <div class="course-layout">
-        
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-section">
-                <h3 class="sidebar-title">VISÃO GERAL DO CURSO</h3>
+                <div class="sidebar-title">Visão geral do curso</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html" class="active">O que é o LaTeX?</a></li>
-                    <li><a href="overleaf.html">Guia do Overleaf</a></li>
-                    <li><a href="leapspace.html">LeapSpace</a></li>
-                </ul>
-            </div>
-            
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">MÓDULOS</h3>
-                <ul class="sidebar-menu">
-                    <li><a href="modulo1.html">01. Estrutura Básica</a></li>
-                    <li><a href="modulo2.html">02. Formatação de Texto</a></li>
-                    <li><a href="modulo3.html">03. Fórmulas Matemáticas</a></li>
-                    <li><a href="modulo4.html">04. Imagens e Tabelas</a></li>
-                    <li><a href="modulo5.html">05. Referências e BibTeX</a></li>
-                    <li><a href="modulo6.html">06. Projeto Completo</a></li>
+                    <li><a href="course.html?page=instalacao" id="link-instalacao">O que é o software r</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
-                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
+                <div class="sidebar-title">Módulos</div>
+                <ul class="sidebar-menu">
+                    <li><a href="course.html?page=datasus" id="link-datasus">01. Download dados datasus</a></li>
+                    <li><a href="course.html?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
+                    <li><a href="course.html?page=lesson2" id="link-lesson2">03. Estatística descritiva</a></li>
+                    <li><a href="course.html?page=lesson3" id="link-lesson3">04. Visualização dos dados</a></li>
+                    <li><a href="course.html?page=lesson4" id="link-lesson4">05. Dados de contagem</a></li>
+                    <li><a href="course.html?page=lesson5" id="link-lesson5">06. Modelos de regressão</a></li>
+                </ul>
+            </div>
+
+            <!-- Equipe do Curso -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Equipe do Curso</div>
                 <div class="team-container">
                     <div class="team-card">
+                        <img src="https://github.com/iaradasilva.png" alt="Iara da Silva" class="team-avatar">
                         <div class="team-info">
-                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
-                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
-                                <span class="team-name">Dra. Iara da Silva</span>
-                            </a>
-                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                            <span class="team-name">Iara da Silva</span>
+                            <span class="team-role">Docente / Pesquisadora</span>
+                            <span class="team-institution">Projeto O3 MOVER</span>
                         </div>
                     </div>
                 </div>
             </div>
         </aside>
 
+        <!-- Área Principal -->
         <main class="content-area">
-            <div class="card-container">
-                <span class="badge badge-green">INÍCIO • BOAS-VINDAS</span>
-                <h1>O que é o LaTeX?</h1>
-                <p>O LaTeX é um sistema de preparação de documentos muito utilizado pela comunidade científica e acadêmica para a publicação de artigos, dissertações, teses e livros.</p>
-                
-                <div class="callout callout-tip">
-                    💡 <strong>Por que usar LaTeX?</strong> Ao contrário dos editores tradicionais, no LaTeX você foca na estrutura lógica do conteúdo, e o sistema cuida da tipografia de forma profissional.
-                </div>
-
-                <h2>Objetivo do Curso</h2>
-                <p>Este curso tem como objetivo capacitar estudantes e pesquisadores a dominarem o LaTeX de forma prática e descomplicada, aprendendo a criar documentos acadêmicos padronizados e prontos para publicação.</p>
-
-                <h2>O que você vai sair sabendo fazer:</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <h4>⚡ Formatação Rápida</h4>
-                        <p>Escrever e formatar textos acadêmicos completos em poucos minutos.</p>
-                    </div>
-                    <div class="skill-card">
-                        <h4>📐 Fórmulas Matemáticas</h4>
-                        <p>Renderizar equações simples e complexas com alinhamento perfeito.</p>
-                    </div>
-                    <div class="skill-card">
-                        <h4>📊 Imagens e Tabelas</h4>
-                        <p>Inserir figuras, criar tabelas e organizá-las automaticamente no texto.</p>
-                    </div>
-                    <div class="skill-card">
-                        <h4>📚 Gestão de Bibliografia</h4>
-                        <p>Gerenciar referências com BibTeX e citar autores sem trabalho manual.</p>
-                    </div>
-                </div>
-
-                <h2 style="margin-top: 30px;">Como começar?</h2>
-                <p>Recomendamos a utilização de plataformas em nuvem para evitar a necessidade de instalação local de editores no início:</p>
-                <ul>
-                    <li><strong>Overleaf:</strong> Editor online gratuito com compilação em tempo real. Veja o nosso guia dedicado no menu ao lado.</li>
-                    <li><strong>Instalação Local (Opcional):</strong> MiKTeX ou TeX Live + VS Code / TeXstudio.</li>
-                </ul>
-
-                <div class="lesson-footer">
-                    <span></span>
-                    <a href="overleaf.html">Guia do Overleaf &rarr;</a>
-                </div>
+            <div class="card-container" id="lesson-content">
+                <p>Carregando aula...</p>
             </div>
         </main>
-
     </div>
 
-    <script src="script.js"></script>
+    <!-- Script de Carregamento Dinâmico -->
+    <script>
+        async function loadLesson() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page') || 'datasus';
+            
+            // Destacar item selecionado na sidebar
+            document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById(`link-${page}`);
+            if(activeLink) activeLink.classList.add('active');
+
+            const contentDiv = document.getElementById('lesson-content');
+
+            try {
+                const response = await fetch(`lessons/${page}.html`);
+                if (response.ok) {
+                    contentDiv.innerHTML = await response.text();
+                } else {
+                    contentDiv.innerHTML = `
+                        <span class="badge badge-blue">Em Breve</span>
+                        <h1>⚠️ Conteúdo em Construção</h1>
+                        <p>Esta lição está sendo preparada para o curso.</p>
+                        <div class="callout callout-info">
+                            💡 Volte em breve para conferir o material completo!
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                contentDiv.innerHTML = '<h1>Erro ao carregar o conteúdo.</h1>';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadLesson);
+    </script>
 </body>
 </html>
