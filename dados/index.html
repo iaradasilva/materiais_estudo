@@ -3,20 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso de Estatística | Projeto O3 MOVER</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Análise de Dados em Saúde | Projeto O3 MOVER</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-green, #4CAF50);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Bar de Navegação Superior -->
-    <nav class="navbar">
+    <!-- Barra de Navegação Superior Padronizada -->
+    <header class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">📊 <span>ANÁLISE DE DADOS E MODELAGEM ESTATÍSTICA APLICADA À SAÚDE</span> CURSO PROJETO O3 MOVER</a>
+            <a href="../index.html" class="logo">🏥 <span>Análise de Dados em Saúde</span></a>
             <ul class="nav-links">
-                <li><a href="https://github.com/iaradasilva/curso_dados" target="_blank">GitHub ↗</a></li>
+                <li><a href="../index.html">Página Inicial</a></li>
+                <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
             </ul>
         </div>
-    </nav>
+    </header>
 
     <!-- Estrutura Principal -->
     <div class="course-layout">
@@ -25,32 +40,33 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">Visão geral do curso</div>
                 <ul class="sidebar-menu">
-                    <li><a href="course.html?page=instalacao" id="link-instalacao">O que é o software r</a></li>
+                    <li><a href="index.html?page=instalacao" id="link-instalacao">O que é o software R</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
                 <div class="sidebar-title">Módulos</div>
                 <ul class="sidebar-menu">
-                    <li><a href="course.html?page=datasus" id="link-datasus">01. Download dados datasus</a></li>
-                    <li><a href="course.html?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
-                    <li><a href="course.html?page=lesson2" id="link-lesson2">03. Estatística descritiva</a></li>
-                    <li><a href="course.html?page=lesson3" id="link-lesson3">04. Visualização dos dados</a></li>
-                    <li><a href="course.html?page=lesson4" id="link-lesson4">05. Dados de contagem</a></li>
-                    <li><a href="course.html?page=lesson5" id="link-lesson5">06. Modelos de regressão</a></li>
+                    <li><a href="index.html?page=datasus" id="link-datasus">01. Download dados datasus</a></li>
+                    <li><a href="index.html?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
+                    <li><a href="index.html?page=lesson2" id="link-lesson2">03. Estatística descritiva</a></li>
+                    <li><a href="index.html?page=lesson3" id="link-lesson3">04. Visualização dos dados</a></li>
+                    <li><a href="index.html?page=lesson4" id="link-lesson4">05. Dados de contagem</a></li>
+                    <li><a href="index.html?page=lesson5" id="link-lesson5">06. Modelos de regressão</a></li>
                 </ul>
             </div>
 
             <!-- Equipe do Curso -->
             <div class="sidebar-section">
-                <div class="sidebar-title">Equipe do Curso</div>
+                <div class="sidebar-title">Responsável</div>
                 <div class="team-container">
                     <div class="team-card">
-                        <img src="https://github.com/iaradasilva.png" alt="Iara da Silva" class="team-avatar">
                         <div class="team-info">
-                            <span class="team-name">Iara da Silva</span>
-                            <span class="team-role">Docente / Pesquisadora</span>
-                            <span class="team-institution">Projeto O3 MOVER</span>
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
+                                <span class="team-name">Dra. Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
                         </div>
                     </div>
                 </div>
@@ -65,7 +81,10 @@
         </main>
     </div>
 
-    <!-- Script de Carregamento Dinâmico -->
+    <!-- Script de Tema Global -->
+    <script src="../script.js"></script>
+
+    <!-- Script de Carregamento Dinâmico de Lições -->
     <script>
         async function loadLesson() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -84,10 +103,10 @@
                     contentDiv.innerHTML = await response.text();
                 } else {
                     contentDiv.innerHTML = `
-                        <span class="badge badge-blue">Em Breve</span>
+                        <span class="badge badge-green">Em Breve</span>
                         <h1>⚠️ Conteúdo em Construção</h1>
-                        <p>Esta lição está sendo preparada para o curso.</p>
-                        <div class="callout callout-info">
+                        <p>Esta lição está sendo preparada para o material de estudo.</p>
+                        <div class="callout callout-tip">
                             💡 Volte em breve para conferir o material completo!
                         </div>
                     `;
