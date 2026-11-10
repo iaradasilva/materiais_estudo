@@ -1,30 +1,30 @@
 /* ==========================================
-   VARIAVEIS DE CORES (TEMA ESCURO - PADRÃO)
+   VARIÁVEIS DE CORES (TEMA ESCURO - PADRÃO)
    ========================================== */
 :root {
-    --bg-main: #0E131F;
-    --bg-card: #182030;
-    --bg-sidebar: #0B0E17;
+    --bg-main: #0B0F17;
+    --bg-card: #131B29;
+    --bg-sidebar: #0B0F17;
     --text-primary: #F3F4F6;
     --text-secondary: #9CA3AF;
     --text-muted: #6B7280;
     
-    --accent-green: #47A853;
-    --accent-green-glow: rgba(71, 168, 83, 0.18);
-    --accent-green-hover: #3B9144;
+    --accent-green: #10B981;
+    --accent-green-glow: rgba(16, 185, 129, 0.15);
+    --accent-green-hover: #059669;
     
-    --border-color: #242E42;
-    --code-bg: #111724;
-    --code-border: #2D3A52;
-    --code-text: #E5E7EB;
+    --border-color: #1F2937;
+    --code-bg: #1A2332;
+    --code-border: #2D3748;
+    --code-text: #A7F3D0;
     
-    --navbar-bg: rgba(11, 14, 23, 0.90);
+    --navbar-bg: rgba(11, 15, 23, 0.85);
     --btn-toggle-bg: #1E293B;
     --btn-toggle-text: #F3F4F6;
 }
 
 /* ==========================================
-   VARIAVEIS DE CORES (TEMA CLARO / OFF-WHITE)
+   VARIÁVEIS DE CORES (TEMA CLARO / OFF-WHITE)
    ========================================== */
 [data-theme="light"] {
     --bg-main: #F4F6F8;
@@ -35,16 +35,16 @@
     --text-secondary: #475569;
     --text-muted: #64748B;
     
-    --accent-green: #47A853;
-    --accent-green-glow: rgba(71, 168, 83, 0.12);
-    --accent-green-hover: #35803E;
+    --accent-green: #10B981;
+    --accent-green-glow: rgba(16, 185, 129, 0.12);
+    --accent-green-hover: #059669;
     
     --border-color: #E2E8F0;
     --code-bg: #0F172A;
     --code-border: #1E293B;
     --code-text: #E2E8F0;
     
-    --navbar-bg: #0E131F;
+    --navbar-bg: #0B0F17;
     --btn-toggle-bg: #FFFFFF;
     --btn-toggle-text: #1E293B;
 }
@@ -95,9 +95,7 @@ body {
     letter-spacing: -0.02em;
 }
 
-.logo span { 
-    color: #FFFFFF; 
-}
+.logo span { color: #FFFFFF; }
 
 .nav-links {
     display: flex;
@@ -145,12 +143,12 @@ body {
     min-height: calc(100vh - 65px);
 }
 
-/* Sidebar */
+/* Sidebar Estilizada */
 .sidebar {
     width: 290px;
     background-color: var(--bg-sidebar);
     border-right: 1px solid var(--border-color);
-    padding: 2.5rem 1.2rem 2.5rem 1.2rem;
+    padding: 2.5rem 1.2rem 2.5rem 0;
     flex-shrink: 0;
     transition: background-color 0.3s ease;
 }
@@ -161,11 +159,12 @@ body {
 
 .sidebar-title {
     font-size: 0.72rem;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
     margin-bottom: 0.8rem;
+    padding-left: 0.8rem;
 }
 
 .sidebar-menu {
@@ -184,29 +183,28 @@ body {
     font-size: 0.88rem;
     border-radius: 6px;
     transition: all 0.2s;
-    font-weight: 500;
     border-left: 3px solid transparent;
 }
 
 .sidebar-menu a:hover {
-    color: var(--accent-green);
-    background-color: var(--accent-green-glow);
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.03);
 }
 
 .sidebar-menu a.active {
-    color: var(--text-primary);
-    background-color: var(--bg-card);
+    color: var(--accent-green);
+    background-color: var(--accent-green-glow);
     border-left: 3px solid var(--accent-green);
-    font-weight: 700;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    font-weight: 600;
 }
 
-/* Equipe do Curso */
+/* Equipe do Curso (Mini-Cards) */
 .team-container {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     margin-top: 0.5rem;
+    padding-left: 0.8rem;
 }
 
 .team-card {
@@ -221,8 +219,18 @@ body {
 }
 
 .team-card:hover {
+    background-color: var(--accent-green-glow);
     border-color: var(--accent-green);
     transform: translateY(-1px);
+}
+
+.team-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-green);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .team-info {
@@ -241,8 +249,14 @@ body {
 .team-role {
     font-size: 0.73rem;
     color: var(--accent-green);
-    font-weight: 600;
-    margin-top: 0.2rem;
+    font-weight: 500;
+    margin-top: 0.15rem;
+}
+
+.team-institution {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 0.1rem;
 }
 
 /* Área de Conteúdo Central */
@@ -258,7 +272,7 @@ body {
     padding: 3.5rem;
     max-width: 920px;
     margin: 0 auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     transition: background-color 0.3s ease;
 }
 
@@ -277,8 +291,16 @@ body {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
-    border-bottom: 2px solid var(--bg-main);
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
+}
+
+.card-container h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 1.8rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
 }
 
 .card-container p {
@@ -287,8 +309,7 @@ body {
     font-size: 1.02rem;
 }
 
-.card-container ul, 
-.card-container ol {
+.card-container ul, .card-container ol {
     margin-left: 1.5rem;
     margin-bottom: 1.8rem;
     color: var(--text-secondary);
@@ -298,7 +319,7 @@ body {
     margin-bottom: 0.6rem;
 }
 
-/* Callouts */
+/* Callouts / Avisos Especiais */
 .callout {
     padding: 1.2rem;
     border-radius: 10px;
@@ -314,7 +335,7 @@ body {
 }
 
 .callout-tip {
-    background: rgba(71, 168, 83, 0.12);
+    background: rgba(16, 185, 129, 0.1);
     border-color: var(--accent-green);
     color: var(--text-primary);
 }
@@ -325,11 +346,11 @@ body {
     color: var(--text-primary);
 }
 
-/* Blocos de Código */
+/* Blocos de Código e Tags */
 code {
     background-color: var(--code-bg);
     border: 1px solid var(--code-border);
-    color: #9EEFA9;
+    color: var(--code-text);
     padding: 0.2rem 0.45rem;
     border-radius: 6px;
     font-family: 'Fira Code', Consolas, Monaco, monospace;
@@ -352,24 +373,22 @@ pre code {
     color: var(--code-text);
 }
 
-/* Badges */
+/* Badges / Selos de Aula */
 .badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
     font-size: 0.75rem;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
 }
 
-.badge-green { 
-    background: var(--accent-green-glow); 
-    color: var(--accent-green); 
-}
+.badge-green { background: var(--accent-green-glow); color: var(--accent-green); }
+.badge-blue { background: rgba(59, 130, 246, 0.15); color: #60A5FA; }
 
-/* Rodapé */
+/* Rodapé da Aula */
 .lesson-footer {
     display: flex;
     justify-content: space-between;
@@ -379,13 +398,13 @@ pre code {
 }
 
 .lesson-footer a {
-    color: var(--accent-green);
+    color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 600;
     transition: color 0.2s;
 }
 
 .lesson-footer a:hover {
-    color: var(--text-primary);
+    color: var(--accent-green);
 }
