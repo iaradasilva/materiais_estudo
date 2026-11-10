@@ -1,0 +1,40 @@
+<span class="badge badge-green">Módulo 01 • Análise exploratória</span>
+
+<h1>Análise Exploratória de Dados</h1>
+
+<p>A <strong>Análise Exploratória de Dados</strong> é a primeira etapa crítica de qualquer projeto de Ciência de Dados. Seu objetivo principal é entender a estrutura dos dados, identificar padrões e detectar anomalias antes de aplicar qualquer modelo estatístico.</p>
+
+<div class="callout callout-tip">
+    💡 <strong>Dica de Estudo:</strong> Você pode acompanhar o código desta lição executando o notebook diretamente no Google Colab.
+</div>
+
+<h2>O que vamos aprender?</h2>
+
+<ul>
+    <li>Entender as medidas de tendência central: <code>Média</code>, <code>Mediana</code> e <code>Moda</code>.</li>
+    <li>Calcular dispersão usando <code>Variância</code> e <code>Desvio Padrão</code>.</li>
+    <li>Visualizar distribuições de frequência com Histogramas e Boxplots.</li>
+</ul>
+
+<h2>Exemplo Prático em r</h2>
+
+<p>Abaixo está o código base para carregar um conjunto de dados e gerar um resumo estatístico rápido:</p>
+
+<pre><code>import pandas as pd
+import numpy as np
+
+# Carregar conjunto de dados
+df = pd.read_csv("datasets/vendas.csv")
+
+# Resumo estatístico completo
+print(df.describe())
+</code></pre>
+
+<div class="callout callout-warning">
+    ⚠️ <strong>Atenção com Outliers:</strong> A Média é altamente sensível a valores extremos. Quando seu dataset tiver discrepâncias grandes, prefira utilizar a <strong>Mediana</strong>.
+</div>
+
+<div class="lesson-footer">
+    <a href="course.html?page=instalacao">← Anterior: Instalação</a>
+    <a href="course.html?page=lesson2">Próximo: Medidas de Dispersão →</a>
+</div>
