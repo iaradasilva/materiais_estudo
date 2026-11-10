@@ -16,16 +16,16 @@
             height: 36px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-green, #4CAF50);
+            border: 2px solid var(--accent-green, #10B981);
         }
     </style>
 </head>
 <body>
 
-    <!-- Barra de Navegação Superior Padronizada -->
+    <!-- Bar de Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">🏥 <span>Análise de Dados em Saúde</span></a>
+            <a href="../index.html" class="logo">📊 <span>ANÁLISE DE DADOS E MODELAGEM ESTATÍSTICA APLICADA À SAÚDE</span></a>
             <ul class="nav-links">
                 <li><a href="../index.html">Página Inicial</a></li>
                 <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
@@ -35,17 +35,18 @@
 
     <!-- Estrutura Principal -->
     <div class="course-layout">
+        
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-section">
-                <div class="sidebar-title">Visão geral do curso</div>
+                <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html?page=instalacao" id="link-instalacao">O que é o software R</a></li>
+                    <li><a href="index.html?page=instalacao" id="link-instalacao">O que é o software r</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
-                <div class="sidebar-title">Módulos</div>
+                <div class="sidebar-title">MÓDULOS</div>
                 <ul class="sidebar-menu">
                     <li><a href="index.html?page=datasus" id="link-datasus">01. Download dados datasus</a></li>
                     <li><a href="index.html?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
@@ -58,15 +59,16 @@
 
             <!-- Equipe do Curso -->
             <div class="sidebar-section">
-                <div class="sidebar-title">Responsável</div>
+                <div class="sidebar-title">EQUIPE DO CURSO</div>
                 <div class="team-container">
                     <div class="team-card">
                         <div class="team-info">
                             <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
-                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
-                                <span class="team-name">Dra. Iara da Silva</span>
+                                <img src="https://github.com/iaradasilva.png" alt="Iara da Silva" class="team-avatar">
+                                <span class="team-name">Iara da Silva</span>
                             </a>
-                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                            <span class="team-role">Docente / Pesquisadora</span>
+                            <span class="team-institution">Projeto O3 MOVER</span>
                         </div>
                     </div>
                 </div>
@@ -81,10 +83,10 @@
         </main>
     </div>
 
-    <!-- Script de Tema Global -->
+    <!-- Script de Tema Global (na Raiz) -->
     <script src="../script.js"></script>
 
-    <!-- Script de Carregamento Dinâmico de Lições -->
+    <!-- Script de Carregamento Dinâmico das Lições -->
     <script>
         async function loadLesson() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -103,7 +105,7 @@
                     contentDiv.innerHTML = await response.text();
                 } else {
                     contentDiv.innerHTML = `
-                        <span class="badge badge-green">Em Breve</span>
+                        <span class="badge badge-green">EM BREVE</span>
                         <h1>⚠️ Conteúdo em Construção</h1>
                         <p>Esta lição está sendo preparada para o material de estudo.</p>
                         <div class="callout callout-tip">
