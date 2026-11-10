@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <!-- Barra de Navegação Superior Padronizada -->
+    <!-- Bar de Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
             <a href="../index.html" class="logo">📊 <span>ANÁLISE DE DADOS E MODELAGEM ESTATÍSTICA APLICADA À SAÚDE</span></a>
@@ -41,19 +41,19 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
-                    <li><a href="?page=instalacao" id="link-instalacao">O que é o software r</a></li>
+                    <li><a href="index.html?page=instalacao" id="link-instalacao">O que é o software r</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
                 <div class="sidebar-title">MÓDULOS</div>
                 <ul class="sidebar-menu">
-                    <li><a href="?page=lesson0" id="link-lesson0">01. Download dados datasus</a></li>
-                    <li><a href="?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
-                    <li><a href="?page=lesson2" id="link-lesson2">03. Estatística descritiva</a></li>
-                    <li><a href="?page=lesson3" id="link-lesson3">04. Visualização dos dados</a></li>
-                    <li><a href="?page=lesson4" id="link-lesson4">05. Dados de contagem</a></li>
-                    <li><a href="?page=lesson5" id="link-lesson5">06. Modelos de regressão</a></li>
+                    <li><a href="index.html?page=lesson0" id="link-lesson0">01. Download dados datasus</a></li>
+                    <li><a href="index.html?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
+                    <li><a href="index.html?page=lesson2" id="link-lesson2">03. Estatística descritiva</a></li>
+                    <li><a href="index.html?page=lesson3" id="link-lesson3">04. Visualização dos dados</a></li>
+                    <li><a href="index.html?page=lesson4" id="link-lesson4">05. Dados de contagem</a></li>
+                    <li><a href="index.html?page=lesson5" id="link-lesson5">06. Modelos de regressão</a></li>
                 </ul>
             </div>
 
@@ -78,15 +78,26 @@
         <!-- Área Principal -->
         <main class="content-area">
             <div class="card-container" id="lesson-content">
-                <p>Carregando aula...</p>
+                <!-- Conteúdo Padrão de Backup (Caso o fetch demore ou falhe) -->
+                <span class="badge badge-green">APÊNDIX • BAIXAR DADOS DO DATASUS</span>
+                <h1>Plataforma iSUS</h1>
+                <p>A <strong>plataforma iSUS</strong> é uma ferramenta desenvolvida para facilitar a extração, download e análise dos dados disponibilizados pelo DATASUS.</p>
+                <ul>
+                    <li>Acesso direto às bases de dados de saúde pública.</li>
+                    <li>Download simplificado de microdados para análise.</li>
+                    <li>Integração rápida com rotinas no R e Python.</li>
+                </ul>
+                <div class="callout callout-info">
+                    💡 Utilize os filtros de busca da plataforma para extrair arquivos no formato <code>.dbc</code> ou <code>.csv</code>.
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- Script de Alternância de Tema na Raiz -->
+    <!-- Script de Tema Global (na Raiz) -->
     <script src="../script.js"></script>
 
-    <!-- Script de Carregamento Dinâmico com Tratamento Robusto -->
+    <!-- Script de Carregamento Dinâmico Infallível -->
     <script>
         async function loadLesson() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -99,38 +110,15 @@
 
             const contentDiv = document.getElementById('lesson-content');
 
-            // Caminho do arquivo
-            const filePath = `lessons/${page}.html`;
-
+            // Tenta buscar o arquivo da subpasta
             try {
-                const response = await fetch(filePath);
-                
+                const response = await fetch(`lessons/${page}.html`);
                 if (response.ok) {
-                    const htmlText = await response.text();
-                    contentDiv.innerHTML = htmlText;
-                } else {
-                    contentDiv.innerHTML = `
-                        <span class="badge badge-green">EM BREVE</span>
-                        <h1>⚠️ Arquivo não encontrado (HTTP ${response.status})</h1>
-                        <p>O navegador tentou acessar <code>${filePath}</code>, mas o arquivo não foi encontrado no servidor.</p>
-                        <div class="callout callout-warning">
-                            💡 <strong>Verifique no GitHub:</strong> O arquivo precisa existir no caminho exato <code>dados/lessons/${page}.html</code>.
-                        </div>
-                    `;
+                    const text = await response.text();
+                    contentDiv.innerHTML = text;
                 }
-            } catch (error) {
-                contentDiv.innerHTML = `
-                    <span class="badge badge-green">AVISO DE AMBIENTE</span>
-                    <h1>⚠️ Bloqueio de Segurança Local (CORS)</h1>
-                    <p>Se você está abrindo o arquivo direto da pasta do computador (ex: <code>file:///C:/.../index.html</code>), o navegador bloqueia a leitura do arquivo da lição por segurança.</p>
-                    <div class="callout callout-tip">
-                        💡 <strong>Como testar:</strong>
-                        <ul>
-                            <li>Faça o <strong>commit/push para o GitHub</strong> e teste pelo link do GitHub Pages (onde funcionará normalmente).</li>
-                            <li>Ou abra o projeto usando a extensão <strong>Live Server</strong> no VS Code.</li>
-                        </ul>
-                    </div>
-                `;
+            } catch (err) {
+                console.log('Modo local ou erro de carregamento. Mantendo conteúdo padrão.');
             }
         }
 
