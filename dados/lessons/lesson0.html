@@ -1,4 +1,4 @@
-<span class="badge badge-green">Aprendix • Baixar dados do DATASUS</span>
+<span class="badge badge-green">APÊNDIX • BAIXAR DADOS DO DATASUS</span>
 
 <h1>Plataforma iSUS</h1>
 
@@ -7,14 +7,39 @@
 <ul>
     <li>Acesso direto às bases de dados de saúde pública.</li>
     <li>Download simplificado de microdados para análise.</li>
-    <li>Integração rápida com rotinas no R e Python.</li>
+    <li>Integração rápida com rotinas no R / Python.</li>
 </ul>
 
-<div class="callout callout-info">
-    💡 Utilize os filtros de busca da plataforma para extrair arquivos no formato <code>.dbc</code> ou <code>.csv</code>.
+<h2>Como Baixar os Dados no R com o Pacote microdatasus</h2>
+
+<p>Para automatizar o download de microdados do DATASUS diretamente no R (como SIM, SINASC, SIH e SIA), utilize o pacote <code>microdatasus</code>:</p>
+
+<pre><code># Instalação do pacote microdatasus via GitHub
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("rfsaldanha/microdatasus")
+
+# Carregar a biblioteca
+library(microdatasus)
+
+# Exemplo: Fazer o download dos dados do Sistema de Informação sobre Mortalidade (SIM)
+dados_sim <- fetch_datasus(
+  year_start = 2022, 
+  year_end = 2022, 
+  uf = "SP", 
+  information_system = "SIM-DO"
+)
+
+# Processar e limpar as variáveis
+dados_limpos <- process_sim(dados_sim)
+
+# Visualizar as primeiras linhas
+head(dados_limpos)</code></pre>
+
+<div class="callout callout-tip">
+    💡 <strong>Dica de Pesquisa:</strong> O pacote <code>microdatasus</code> padroniza automaticamente os rótulos de variáveis e dados categóricos, facilitando a aplicação direta de modelos estatísticos.
 </div>
 
 <div class="lesson-footer">
-    <a href="?page=instalacao">← Anterior: Instalação</a>
-    <span></span>
+    <a href="?page=instalacao">&larr; O que é o software r</a>
+    <a href="?page=lesson1">02. Análise exploratória &rarr;</a>
 </div>
