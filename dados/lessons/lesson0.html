@@ -2,17 +2,21 @@
 
 <h1>Plataforma iSUS</h1>
 
-<p>A <strong>plataforma iSUS</strong> é uma ferramenta desenvolvida para facilitar a extração, download e análise dos dados disponibilizados pelo DATASUS.</p>
+<p>A <strong>plataforma iSUS</strong> é uma ferramenta desenvolvida para facilitar a extração, download e análise dos dados disponibilizados pelo DATASUS (Sistema Único de Saúde).</p>
 
 <ul>
-    <li>Acesso direto às bases de dados de saúde pública.</li>
-    <li>Download simplificado de microdados para análise.</li>
-    <li>Integração rápida com rotinas no R / Python.</li>
+    <li>Acesso direto às bases de dados de saúde pública do Brasil.</li>
+    <li>Download simplificado de microdados epidemiológicos para análise.</li>
+    <li>Integração rápida e automatizada com rotinas em R e Python.</li>
 </ul>
+
+<div class="callout callout-info">
+    💡 <strong>Dica de Extração:</strong> Utilize os filtros de busca da plataforma para extrair arquivos nos formatos nativos ou converta para <code>.csv</code>/<code>.parquet</code> para análises estatísticas em larga escala.
+</div>
 
 <h2>Como Baixar os Dados no R com o Pacote microdatasus</h2>
 
-<p>Para automatizar o download de microdados do DATASUS diretamente no R (como SIM, SINASC, SIH e SIA), utilize o pacote <code>microdatasus</code>:</p>
+<p>Para automatizar a extração dos microdados do DATASUS (como SIM, SINASC, SIH e SIA) diretamente no ambiente do R, utilizamos o pacote <code>microdatasus</code>:</p>
 
 <pre><code># Instalação do pacote microdatasus via GitHub
 if (!require("remotes")) install.packages("remotes")
@@ -21,7 +25,7 @@ remotes::install_github("rfsaldanha/microdatasus")
 # Carregar a biblioteca
 library(microdatasus)
 
-# Exemplo: Fazer o download dos dados do Sistema de Informação sobre Mortalidade (SIM)
+# Exemplo: Download dos dados do Sistema de Informação sobre Mortalidade (SIM)
 dados_sim <- fetch_datasus(
   year_start = 2022, 
   year_end = 2022, 
@@ -29,17 +33,17 @@ dados_sim <- fetch_datasus(
   information_system = "SIM-DO"
 )
 
-# Processar e limpar as variáveis
+# Processar e pré-limpar as variáveis
 dados_limpos <- process_sim(dados_sim)
 
-# Visualizar as primeiras linhas
+# Visualizar a estrutura das primeiras linhas
 head(dados_limpos)</code></pre>
 
 <div class="callout callout-tip">
-    💡 <strong>Dica de Pesquisa:</strong> O pacote <code>microdatasus</code> padroniza automaticamente os rótulos de variáveis e dados categóricos, facilitando a aplicação direta de modelos estatísticos.
+    💡 <strong>Tratamento Automático:</strong> O pacote <code>microdatasus</code> padroniza automaticamente os rótulos de variáveis e dados categóricos, poupando tempo na fase de limpeza dos dados epidemiológicos.
 </div>
 
 <div class="lesson-footer">
-    <a href="?page=instalacao">&larr; O que é o software r</a>
+    <a href="?page=instalacao">&larr; O que é o software R</a>
     <a href="?page=lesson1">02. Análise exploratória &rarr;</a>
 </div>
