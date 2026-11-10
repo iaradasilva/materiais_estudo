@@ -41,17 +41,17 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
-                    <li><a href="?page=instalacao" id="link-instalacao">00. Instalação do R e RStudio</a></li>
+                    <li><a href="index.html?page=instalacao" id="link-instalacao">00. Instalação do R e RStudio</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
                 <div class="sidebar-title">MÓDULOS</div>
                 <ul class="sidebar-menu">
-                    <li><a href="?page=lesson1" id="link-lesson1">01. Tipos de Dados e Estruturas</a></li>
-                    <li><a href="?page=lesson2" id="link-lesson2">02. Manipulação com dplyr</a></li>
-                    <li><a href="?page=lesson3" id="link-lesson3">03. Gráficos com ggplot2</a></li>
-                    <li><a href="?page=lesson4" id="link-lesson4">04. Importação e Exportação</a></li>
+                    <li><a href="index.html?page=lesson1" id="link-lesson1">01. Tipos de Dados e Estruturas</a></li>
+                    <li><a href="index.html?page=lesson2" id="link-lesson2">02. Manipulação com dplyr</a></li>
+                    <li><a href="index.html?page=lesson3" id="link-lesson3">03. Gráficos com ggplot2</a></li>
+                    <li><a href="index.html?page=lesson4" id="link-lesson4">04. Importação e Exportação</a></li>
                 </ul>
             </div>
 
@@ -76,7 +76,7 @@
         <!-- Área Principal -->
         <main class="content-area">
             <div class="card-container" id="lesson-content">
-                <!-- Conteúdo Base / Padrão -->
+                <!-- Conteúdo Base de Backup -->
                 <span class="badge badge-green">MÓDULO 00 • PRIMEIROS PASSOS</span>
                 <h1>Instalação do R e RStudio</h1>
                 <p>Nesta primeira lição, vamos aprender como instalar o ambiente de linguagem R e a IDE RStudio para iniciar a análise e manipulação de dados.</p>
@@ -103,12 +103,19 @@
     <!-- Script de Tema Global -->
     <script src="../script.js"></script>
 
-    <!-- Script de Carregamento Dinâmico das Lições -->
+    <!-- Script de Carregamento Dinâmico Robusto -->
     <script>
         async function loadLesson() {
             const urlParams = new URLSearchParams(window.location.search);
-            const page = urlParams.get('page') || 'instalacao';
+            const page = urlParams.get('page');
             
+            // Se for o acesso inicial sem parâmetro ?page=, mantém o conteúdo base
+            if (!page || page === 'instalacao') {
+                const linkInstalacao = document.getElementById('link-instalacao');
+                if (linkInstalacao) linkInstalacao.classList.add('active');
+                return;
+            }
+
             // Destacar item selecionado na sidebar
             document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
             const activeLink = document.getElementById(`link-${page}`);
@@ -121,9 +128,18 @@
                 if (response.ok) {
                     const text = await response.text();
                     contentDiv.innerHTML = text;
+                } else {
+                    contentDiv.innerHTML = `
+                        <span class="badge badge-green">EM BREVE</span>
+                        <h1>⚠️ Módulo em Construção</h1>
+                        <p>Esta lição (<code>r/lessons/${page}.html</code>) está sendo preparada para o material de estudo.</p>
+                        <div class="callout callout-tip">
+                            💡 Volte em breve para conferir o material completo!
+                        </div>
+                    `;
                 }
             } catch (err) {
-                console.log('Exibindo conteúdo base de instalação.');
+                console.log('Exibindo conteúdo base.');
             }
         }
 
