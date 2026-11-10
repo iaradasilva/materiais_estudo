@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Material de Estudo - Capacitação Acadêmica</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Introdução ao R | Projeto O3 MOVER</title>
+    <link rel="stylesheet" href="../styles.css">
     <style>
         .team-info-header {
             display: flex;
@@ -16,174 +16,118 @@
             height: 36px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--primary-color, #4CAF50);
-        }
-
-        .portal-grid-courses {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 25px;
-        }
-
-        .portal-card-item {
-            background-color: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-            border-left: 4px solid var(--accent-green, #4CAF50);
-            border-radius: 8px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .portal-card-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .portal-card-disabled {
-            border-left-color: #888888;
-            opacity: 0.85;
-        }
-
-        .portal-card-item h3 {
-            margin: 10px 0 8px 0;
-            font-size: 1.1rem;
-            line-height: 1.3;
-        }
-
-        .portal-card-item p {
-            font-size: 0.88rem;
-            line-height: 1.45;
-            margin-bottom: 15px;
-            color: var(--text-muted, #ccc);
-        }
-
-        .btn-card-access {
-            display: inline-block;
-            text-align: center;
-            background-color: var(--accent-green, #4CAF50);
-            color: #ffffff !important;
-            font-weight: 700;
-            font-size: 0.85rem;
-            padding: 8px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .btn-card-access:hover {
-            opacity: 0.9;
-        }
-
-        .btn-card-disabled {
-            background-color: #555555;
-            color: #aaaaaa !important;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        @media (max-width: 900px) {
-            .portal-grid-courses {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 600px) {
-            .portal-grid-courses {
-                grid-template-columns: 1fr;
-            }
+            border: 2px solid var(--accent-green, #10B981);
         }
     </style>
 </head>
 <body>
 
+    <!-- Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">📚 <span>Material de Estudo</span></a>
+            <a href="../index.html" class="logo">📊 <span>INTRODUÇÃO AO R PARA ANÁLISE DE DADOS</span></a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Página Inicial</a></li>
+                <li><a href="../index.html">Página Inicial</a></li>
                 <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
             </ul>
         </div>
     </header>
 
+    <!-- Estrutura Principal -->
     <div class="course-layout">
         
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-section">
-                <h3 class="sidebar-title">PORTAL</h3>
+                <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="?page=instalacao" id="link-instalacao">00. Instalação do R e RStudio</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
-                <h3 class="sidebar-title">RESPONSÁVEL</h3>
+                <div class="sidebar-title">MÓDULOS</div>
+                <ul class="sidebar-menu">
+                    <li><a href="?page=lesson1" id="link-lesson1">01. Tipos de Dados e Estruturas</a></li>
+                    <li><a href="?page=lesson2" id="link-lesson2">02. Manipulação com dplyr</a></li>
+                    <li><a href="?page=lesson3" id="link-lesson3">03. Gráficos com ggplot2</a></li>
+                    <li><a href="?page=lesson4" id="link-lesson4">04. Importação e Exportação</a></li>
+                </ul>
+            </div>
+
+            <!-- Equipe do Curso -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">EQUIPE DO CURSO</div>
                 <div class="team-container">
                     <div class="team-card">
                         <div class="team-info">
                             <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
-                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
-                                <span class="team-name">Dra. Iara da Silva</span>
+                                <img src="https://github.com/iaradasilva.png" alt="Iara da Silva" class="team-avatar">
+                                <span class="team-name">Iara da Silva</span>
                             </a>
-                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                            <span class="team-role">Docente / Pesquisadora</span>
+                            <span class="team-institution">Projeto O3 MOVER</span>
                         </div>
                     </div>
                 </div>
             </div>
         </aside>
 
+        <!-- Área Principal -->
         <main class="content-area">
-            <div class="card-container">
-                <span class="badge badge-green">REPOSITÓRIO • MATERIAL DE APOIO ACADÊMICO</span>
-                <h1>Plataforma de Materiais de Estudo</h1>
-                <p>Boas-vindas! Este portal reúne guias práticos, tutoriais e materiais abertos desenvolvidos para apoiar estudantes e pesquisadores na escrita científica, análise estatística e ferramentas computacionais.</p>
+            <div class="card-container" id="lesson-content">
+                <!-- Conteúdo Base / Padrão -->
+                <span class="badge badge-green">MÓDULO 00 • PRIMEIROS PASSOS</span>
+                <h1>Instalação do R e RStudio</h1>
+                <p>Nesta primeira lição, vamos aprender como instalar o ambiente de linguagem R e a IDE RStudio para iniciar a análise e manipulação de dados.</p>
                 
+                <h2>1. Download do R (Linguagem)</h2>
+                <p>Acesse o site oficial do CRAN (Comprehensive R Archive Network) e baixe a versão compatível com o seu sistema operacional:</p>
+                <ul>
+                    <li><a href="https://cran.r-project.org/" target="_blank">Download do R no CRAN ↗</a></li>
+                </ul>
+
+                <h2>2. Download do RStudio (Interface)</h2>
+                <p>O RStudio é a interface gráfica (IDE) recomendada para trabalhar com R de forma produtiva:</p>
+                <ul>
+                    <li><a href="https://posit.co/download/rstudio-desktop/" target="_blank">Download do RStudio Desktop ↗</a></li>
+                </ul>
+
                 <div class="callout callout-tip">
-                    💡 <strong>Como utilizar:</strong> Escolha abaixo a trilha de estudo desejada para acessar os módulos explicativos, códigos-fonte, exemplos e orientações passo a passo.
+                    💡 <strong>Ordem recomendada:</strong> Instale primeiro a linguagem R e, em seguida, o RStudio.
                 </div>
-
-                <h2>Trilhas de Aprendizado</h2>
-
-                <div class="portal-grid-courses">
-                    
-                    <!-- MATERIAL 1: LATEX -->
-                    <div class="portal-card-item">
-                        <div>
-                            <span class="badge badge-green">DISPONÍVEL</span>
-                            <h3>📄 Editoração Científica em LaTeX</h3>
-                            <p>Guia completo para estruturação de artigos, fórmulas matemáticas, tabelas e bibliografias no Overleaf.</p>
-                        </div>
-                        <a href="latex/index.html" class="btn-card-access">Acessar Guia &rarr;</a>
-                    </div>
-
-                    <!-- MATERIAL 2: ANÁLISE DE DADOS EM SAÚDE (LINK CORRIGIDO PARA /dados/) -->
-                    <div class="portal-card-item">
-                        <div>
-                            <span class="badge badge-green">DISPONÍVEL</span>
-                            <h3>🏥 Análise de Dados em Saúde</h3>
-                            <p>Material sobre processamento de dados epidemiológicos, indicadores de saúde e relatórios biomédicos.</p>
-                        </div>
-                        <a href="dados/index.html" class="btn-card-access">Acessar Guia &rarr;</a>
-                    </div>
-
-                    <!-- MATERIAL 3: INTRODUÇÃO AO R -->
-                    <div class="portal-card-item portal-card-disabled">
-                        <div>
-                            <span class="badge" style="background: rgba(255, 152, 0, 0.2); color: #ff9800;">EM BREVE</span>
-                            <h3>📊 Introdução ao R</h3>
-                            <p>Introdução à linguagem R para análise estatística descritiva, manipulação de dados e gráficos com ggplot2.</p>
-                        </div>
-                        <a href="#" class="btn-card-access btn-card-disabled">Em Breve</a>
-                    </div>
-
-                </div>
-
             </div>
         </main>
-
     </div>
 
-    <script src="script.js"></script>
+    <!-- Script de Tema Global -->
+    <script src="../script.js"></script>
+
+    <!-- Script de Carregamento Dinâmico das Lições -->
+    <script>
+        async function loadLesson() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page') || 'instalacao';
+            
+            // Destacar item selecionado na sidebar
+            document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById(`link-${page}`);
+            if (activeLink) activeLink.classList.add('active');
+
+            const contentDiv = document.getElementById('lesson-content');
+
+            try {
+                const response = await fetch(`./lessons/${page}.html`);
+                if (response.ok) {
+                    const text = await response.text();
+                    contentDiv.innerHTML = text;
+                }
+            } catch (err) {
+                console.log('Exibindo conteúdo base de instalação.');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadLesson);
+    </script>
 </body>
 </html>
