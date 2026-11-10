@@ -1,0 +1,48 @@
+<span class="badge badge-green">APÊNDIX • BAIXAR DADOS DO DATASUS</span>
+
+<h1>Plataforma iSUS</h1>
+
+<p>A <strong>plataforma iSUS</strong> é uma ferramenta desenvolvida para facilitar a extração, download e análise dos dados disponibilizados pelo DATASUS...</p>
+
+<ul>
+    <li>Acesso direto às bases de dados de saúde pública.</li>
+    <li>Download simplificado de microdados para análise.</li>
+    <li>Integração rápida com rotinas no R / Python.</li>
+</ul>
+
+<h2>Como Baixar os Dados no R com o Pacote microdatasus</h2>
+
+<p>Para automatizar o download de microdados do DATASUS diretamente no R (como SIM, SINASC, SIH e SIA), utilize o pacote <code>microdatasus</code>:</p>
+
+<pre><code># 1. Instalar o pacote microdatasus do GitHub (caso não tenha)
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("rsuassuna/microdatasus")
+
+# 2. Carregar o pacote
+library(microdatasus)
+
+# 3. Exemplo: Baixar dados do Sistema de Informações sobre Mortalidade (SIM)
+dados_sim <- fetch_datasus(
+  year = 2022, 
+  uf = "SP", 
+  information_system = "SIM-DO"
+)
+
+# 4. Processar e limpar os dados
+dados_sim_limpos <- process_sim(dados_sim)
+
+# 5. Salvar localmente em TXT/CSV
+write.csv(dados_sim_limpos, "data/dados_datasus_sim.txt", row.names = FALSE)
+cat("Dados do DATASUS baixados com sucesso!")
+</code></pre>
+
+<div class="callout callout-tip">
+    📂 <strong>Acesso Direto ao Arquivo TXT:</strong><br>
+    Você também pode ler um arquivo pré-processado diretamente do repositório utilizando:
+    <pre style="margin-top: 0.5rem; background: transparent; border: none; padding: 0;"><code>dados <- read.csv("https://raw.githubusercontent.com/iaradasilva/curso_dados/main/data/pacientes.txt")</code></pre>
+</div>
+
+<div class="lesson-footer">
+    <a href="course.html?page=instalacao">← Anterior: Instalação</a>
+    <a href="course.html?page=lesson1">Próximo: Análise exploratória →</a>
+</div>
