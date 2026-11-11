@@ -38,22 +38,25 @@
     <!-- Estrutura Principal -->
     <div class="course-layout">
         
-        <!-- Sidebar -->
+        <!-- Sidebar com os ficheiros reais do teu repositório -->
         <aside class="sidebar">
             <div class="sidebar-section">
                 <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html?page=instalacao" id="link-instalacao">00. Introdução ao Overleaf & LaTeX</a></li>
+                    <li><a href="index.html?page=overleaf" id="link-overleaf">00. Introdução ao Overleaf</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
                 <div class="sidebar-title">MÓDULOS</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html?page=lesson1" id="link-lesson1">01. Estrutura do Documento</a></li>
-                    <li><a href="index.html?page=lesson2" id="link-lesson2">02. Fórmulas e Equações</a></li>
-                    <li><a href="index.html?page=lesson3" id="link-lesson3">03. Tabelas e Imagens</a></li>
-                    <li><a href="index.html?page=lesson4" id="link-lesson4">04. Gestão de Bibliografia (BibTeX)</a></li>
+                    <li><a href="index.html?page=modulo1" id="link-modulo1">01. Módulo 1</a></li>
+                    <li><a href="index.html?page=modulo2" id="link-modulo2">02. Módulo 2</a></li>
+                    <li><a href="index.html?page=modulo3" id="link-modulo3">03. Módulo 3</a></li>
+                    <li><a href="index.html?page=modulo4" id="link-modulo4">04. Módulo 4</a></li>
+                    <li><a href="index.html?page=modulo5" id="link-modulo5">05. Módulo 5</a></li>
+                    <li><a href="index.html?page=modulo6" id="link-modulo6">06. Módulo 6</a></li>
+                    <li><a href="index.html?page=leapspace" id="link-leapspace">07. LeapSpace</a></li>
                 </ul>
             </div>
 
@@ -88,100 +91,13 @@
     <!-- Script de Tema Global -->
     <script src="../script.js"></script>
 
-    <!-- Script de Carregamento Garantido -->
+    <!-- Script de Carregamento dos Módulos da pasta latex/ -->
     <script>
-        // Conteúdos das lições integrados diretamente para evitar páginas em branco
-        const defaultLessons = {
-            'instalacao': `
-                <span class="badge badge-green">MÓDULO 00 • PRIMEIROS PASSOS</span>
-                <h1>Editoração Científica em LaTeX</h1>
-                <p>O <strong>LaTeX</strong> é um sistema de preparação de documentos amplamente utilizado pela comunidade científica para a publicação de artigos, dissertações e teses com alta qualidade tipográfica.</p>
-                
-                <h2>Por que utilizar o Overleaf?</h2>
-                <p>O Overleaf é um editor de LaTeX em nuvem que permite a escrita colaborativa em tempo real sem a necessidade de instalação de pacotes locais (como MikTeX ou TeX Live).</p>
-                
-                <ul>
-                    <li>Compilação automática em PDF na própria página.</li>
-                    <li>Histórico de versões e comentários para colaboração em equipe.</li>
-                    <li>Modelos prontos para periódicos e conferências acadêmicas.</li>
-                </ul>
-
-                <h2>Estrutura Básica de um Documento (.tex)</h2>
-                <pre><code>\\documentclass{article}
-\\usepackage[utf8]{utf8}
-\\usepackage{amsmath}
-
-\\title{Meu Primeiro Artigo em LaTeX}
-\\author{Dra. Iara da Silva}
-\\date{\\today}
-
-\\begin{document}
-\\maketitle
-
-\\section{Introdução}
-Este é o texto da introdução do meu documento acadêmico.
-
-\\end{document}</code></pre>
-
-                <div class="callout callout-tip">
-                    💡 <strong>Acesso Rápido:</strong> Crie uma conta gratuita em <a href="https://www.overleaf.com" target="_blank">overleaf.com</a> para acompanhar os exercícios práticos da trilha.
-                </div>
-            `,
-            'lesson1': `
-                <span class="badge badge-green">MÓDULO 01 • ESTRUTURA</span>
-                <h1>01. Estrutura do Documento em LaTeX</h1>
-                <p>Aprenda a organizar um documento acadêmico utilizando seções, subseções e parágrafos de forma automatizada.</p>
-                <h2>Divisão de Seções</h2>
-                <pre><code>\\section{Introdução}
-Texto da introdução aqui...
-
-\\subsection{Contextualização}
-Subseção detalhando o contexto...
-
-\\section{Metodologia}
-Descrição dos procedimentos metodológicos...</code></pre>
-            `,
-            'lesson2': `
-                <span class="badge badge-green">MÓDULO 02 • MATEMÁTICA</span>
-                <h1>02. Fórmulas e Equações Matemáticas</h1>
-                <p>O LaTeX é a ferramenta padrão no mundo para renderização de fórmulas matemáticas complexas.</p>
-                <h2>Modo Inline vs Modo Bloco</h2>
-                <p>Para equações no meio do texto use <code>$ E = mc^2 $</code>. Para destacá-las em um bloco numerado:</p>
-                <pre><code>\\begin{equation}
-    f(x) = \\int_{a}^{b} x^2 \\, dx
-\\end{equation}</code></pre>
-            `,
-            'lesson3': `
-                <span class="badge badge-green">MÓDULO 03 • ELEMENTOS VISUAIS</span>
-                <h1>03. Tabelas e Imagens</h1>
-                <p>Como inserir figuras com legendas e formatar tabelas acadêmicas no padrão de revistas científicas.</p>
-                <h2>Inserindo uma Imagem</h2>
-                <pre><code>\\begin{figure}[htbp]
-    \\centering
-    \\includegraphics[width=0.8\\textwidth]{figura.png}
-    \\caption{Legenda explicativa da imagem.}
-    \\label{fig:exemplo}
-\\end{figure}</code></pre>
-            `,
-            'lesson4': `
-                <span class="badge badge-green">MÓDULO 04 • REFERÊNCIAS</span>
-                <h1>04. Gestão de Bibliografia com BibTeX</h1>
-                <p>Automatize a citação e a geração da lista de referências bibliográficas sem se preocupar com a formatação manual.</p>
-                <h2>Arquivo de Referências (.bib)</h2>
-                <pre><code>@article{silva2024,
-  author = {Silva, Iara da},
-  title = {Estudos Epidemiológicos e Clima},
-  journal = {Revista Científica},
-  year = {2024}
-}</code></pre>
-            `
-        };
-
         async function loadLesson() {
             const urlParams = new URLSearchParams(window.location.search);
-            const page = urlParams.get('page') || 'instalacao';
+            const page = urlParams.get('page') || 'overleaf';
 
-            // Destacar o item ativo na sidebar
+            // Destacar item selecionado na sidebar
             document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
             const activeLink = document.getElementById(`link-${page}`);
             if (activeLink) activeLink.classList.add('active');
@@ -189,21 +105,19 @@ Descrição dos procedimentos metodológicos...</code></pre>
             const contentDiv = document.getElementById('lesson-content');
 
             try {
-                // Tenta buscar o ficheiro HTML na pasta lessons
-                const response = await fetch(`./lessons/${page}.html`);
+                // Procura os ficheiros HTML diretamente na pasta /latex/
+                const response = await fetch(`./${page}.html`);
                 if (response.ok) {
                     contentDiv.innerHTML = await response.text();
-                    return;
+                } else {
+                    contentDiv.innerHTML = `
+                        <span class="badge badge-green">EM BREVE</span>
+                        <h1>⚠️ Módulo Não Encontrado</h1>
+                        <p>O ficheiro <code>latex/${page}.html</code> não foi encontrado no repositório.</p>
+                    `;
                 }
             } catch (err) {
-                console.log('Carregando conteúdo integrado nativo.');
-            }
-
-            // Fallback: Se o ficheiro na pasta lessons não existir, usa o conteúdo padrão
-            if (defaultLessons[page]) {
-                contentDiv.innerHTML = defaultLessons[page];
-            } else {
-                contentDiv.innerHTML = defaultLessons['instalacao'];
+                console.log('Erro ao carregar o módulo.');
             }
         }
 
