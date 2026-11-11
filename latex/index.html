@@ -79,7 +79,7 @@
         <!-- Área Principal -->
         <main class="content-area">
             <div class="card-container" id="lesson-content">
-                <!-- Conteúdo Base / Backup de LaTeX -->
+                <!-- Conteúdo Base Preservado -->
                 <span class="badge badge-green">MÓDULO 00 • PRIMEIROS PASSOS</span>
                 <h1>Editoração Científica em LaTeX</h1>
                 <p>O <strong>LaTeX</strong> é um sistema de preparação de documentos amplamente utilizado pela comunidade científica para a publicação de artigos, dissertações e teses com alta qualidade tipográfica.</p>
@@ -93,6 +93,23 @@
                     <li>Modelos prontos para periódicos e conferências acadêmicas.</li>
                 </ul>
 
+                <h2>Estrutura Básica de um Documento (.tex)</h2>
+                <pre><code>\documentclass{article}
+\usepackage[utf8]{utf8}
+\usepackage{amsmath}
+
+\title{Meu Primeiro Artigo em LaTeX}
+\author{Dra. Iara da Silva}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introdução}
+Este é o texto da introdução do meu documento acadêmico.
+
+\end{document}</code></pre>
+
                 <div class="callout callout-tip">
                     💡 <strong>Acesso Rápido:</strong> Crie uma conta gratuita em <a href="https://www.overleaf.com" target="_blank">overleaf.com</a> para acompanhar os exercícios práticos da trilha.
                 </div>
@@ -104,12 +121,13 @@
     <!-- Script de Tema Global -->
     <script src="../script.js"></script>
 
-    <!-- Script de Carregamento Dinâmico -->
+    <!-- Script de Carregamento Seguro -->
     <script>
         async function loadLesson() {
             const urlParams = new URLSearchParams(window.location.search);
             const page = urlParams.get('page');
             
+            // Se não houver parâmetro ou for a instalação inicial, mantém o conteúdo base
             if (!page || page === 'instalacao') {
                 const linkInstalacao = document.getElementById('link-instalacao');
                 if (linkInstalacao) linkInstalacao.classList.add('active');
@@ -126,15 +144,9 @@
                 const response = await fetch(`./lessons/${page}.html`);
                 if (response.ok) {
                     contentDiv.innerHTML = await response.text();
-                } else {
-                    contentDiv.innerHTML = `
-                        <span class="badge badge-green">EM BREVE</span>
-                        <h1>⚠️ Módulo em Construção</h1>
-                        <p>Esta lição (<code>latex/lessons/${page}.html</code>) está sendo preparada para o material de estudo.</p>
-                    `;
                 }
             } catch (err) {
-                console.log('Exibindo conteúdo base.');
+                console.log('Mantendo o conteúdo principal.');
             }
         }
 
