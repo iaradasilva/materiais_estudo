@@ -6,25 +6,12 @@
     <title>Editoração Científica em LaTeX | Projeto O3 MOVER</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .team-info-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 4px;
-        }
-        .team-avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-green, #10B981);
-            flex-shrink: 0;
-        }
+        .team-info-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+        .team-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-green, #10B981); flex-shrink: 0; }
     </style>
 </head>
 <body>
 
-    <!-- Bar de Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
             <a href="../index.html" class="logo">📄 <span>EDITORAÇÃO CIENTÍFICA EM LATEX</span></a>
@@ -35,32 +22,28 @@
         </div>
     </header>
 
-    <!-- Estrutura Principal -->
     <div class="course-layout">
-        
-        <!-- Sidebar com os ficheiros reais do teu repositório -->
         <aside class="sidebar">
             <div class="sidebar-section">
                 <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html?page=overleaf" id="link-overleaf">00. Introdução ao Overleaf</a></li>
+                    <li><a href="overleaf.html">00. Introdução ao Overleaf</a></li>
                 </ul>
             </div>
 
             <div class="sidebar-section">
                 <div class="sidebar-title">MÓDULOS</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html?page=modulo1" id="link-modulo1">01. Módulo 1</a></li>
-                    <li><a href="index.html?page=modulo2" id="link-modulo2">02. Módulo 2</a></li>
-                    <li><a href="index.html?page=modulo3" id="link-modulo3">03. Módulo 3</a></li>
-                    <li><a href="index.html?page=modulo4" id="link-modulo4">04. Módulo 4</a></li>
-                    <li><a href="index.html?page=modulo5" id="link-modulo5">05. Módulo 5</a></li>
-                    <li><a href="index.html?page=modulo6" id="link-modulo6">06. Módulo 6</a></li>
-                    <li><a href="index.html?page=leapspace" id="link-leapspace">07. LeapSpace</a></li>
+                    <li><a href="modulo1.html">01. Módulo 1</a></li>
+                    <li><a href="modulo2.html">02. Módulo 2</a></li>
+                    <li><a href="modulo3.html">03. Módulo 3</a></li>
+                    <li><a href="modulo4.html">04. Módulo 4</a></li>
+                    <li><a href="modulo5.html">05. Módulo 5</a></li>
+                    <li><a href="modulo6.html">06. Módulo 6</a></li>
+                    <li><a href="leapspace.html">07. LeapSpace</a></li>
                 </ul>
             </div>
 
-            <!-- Equipe do Curso (Padronizado) -->
             <div class="sidebar-section">
                 <div class="sidebar-title">EQUIPE DO CURSO</div>
                 <div class="team-container">
@@ -79,49 +62,15 @@
             </div>
         </aside>
 
-        <!-- Área Principal -->
         <main class="content-area">
-            <div class="card-container" id="lesson-content">
-                <!-- Conteúdo Injetado Dinamicamente -->
+            <div class="card-container">
+                <span class="badge badge-green">MÓDULO 00 • PRIMEIROS PASSOS</span>
+                <h1>Editoração Científica em LaTeX</h1>
+                <p>Escolha um dos módulos no menu lateral para acessar o conteúdo das aulas.</p>
             </div>
         </main>
-
     </div>
 
-    <!-- Script de Tema Global -->
     <script src="../script.js"></script>
-
-    <!-- Script de Carregamento dos Módulos da pasta latex/ -->
-    <script>
-        async function loadLesson() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const page = urlParams.get('page') || 'overleaf';
-
-            // Destacar item selecionado na sidebar
-            document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
-            const activeLink = document.getElementById(`link-${page}`);
-            if (activeLink) activeLink.classList.add('active');
-
-            const contentDiv = document.getElementById('lesson-content');
-
-            try {
-                // Procura os ficheiros HTML diretamente na pasta /latex/
-                const response = await fetch(`./${page}.html`);
-                if (response.ok) {
-                    contentDiv.innerHTML = await response.text();
-                } else {
-                    contentDiv.innerHTML = `
-                        <span class="badge badge-green">EM BREVE</span>
-                        <h1>⚠️ Módulo Não Encontrado</h1>
-                        <p>O ficheiro <code>latex/${page}.html</code> não foi encontrado no repositório.</p>
-                    `;
-                }
-            } catch (err) {
-                console.log('Erro ao carregar o módulo.');
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', loadLesson);
-    </script>
 </body>
 </html>
