@@ -43,7 +43,7 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html?page=instalacao" id="link-instalacao" class="active">00. Introdução ao Overleaf & LaTeX</a></li>
+                    <li><a href="index.html?page=instalacao" id="link-instalacao">00. Introdução ao Overleaf & LaTeX</a></li>
                 </ul>
             </div>
 
@@ -79,7 +79,20 @@
         <!-- Área Principal -->
         <main class="content-area">
             <div class="card-container" id="lesson-content">
-                <!-- Conteúdo Base Preservado -->
+                <!-- Conteúdo Injetado Dinamicamente -->
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Script de Tema Global -->
+    <script src="../script.js"></script>
+
+    <!-- Script de Carregamento Garantido -->
+    <script>
+        // Conteúdos das lições integrados diretamente para evitar páginas em branco
+        const defaultLessons = {
+            'instalacao': `
                 <span class="badge badge-green">MÓDULO 00 • PRIMEIROS PASSOS</span>
                 <h1>Editoração Científica em LaTeX</h1>
                 <p>O <strong>LaTeX</strong> é um sistema de preparação de documentos amplamente utilizado pela comunidade científica para a publicação de artigos, dissertações e teses com alta qualidade tipográfica.</p>
@@ -94,46 +107,81 @@
                 </ul>
 
                 <h2>Estrutura Básica de um Documento (.tex)</h2>
-                <pre><code>\documentclass{article}
-\usepackage[utf8]{utf8}
-\usepackage{amsmath}
+                <pre><code>\\documentclass{article}
+\\usepackage[utf8]{utf8}
+\\usepackage{amsmath}
 
-\title{Meu Primeiro Artigo em LaTeX}
-\author{Dra. Iara da Silva}
-\date{\today}
+\\title{Meu Primeiro Artigo em LaTeX}
+\\author{Dra. Iara da Silva}
+\\date{\\today}
 
-\begin{document}
-\maketitle
+\\begin{document}
+\\maketitle
 
-\section{Introdução}
+\\section{Introdução}
 Este é o texto da introdução do meu documento acadêmico.
 
-\end{document}</code></pre>
+\\end{document}</code></pre>
 
                 <div class="callout callout-tip">
                     💡 <strong>Acesso Rápido:</strong> Crie uma conta gratuita em <a href="https://www.overleaf.com" target="_blank">overleaf.com</a> para acompanhar os exercícios práticos da trilha.
                 </div>
-            </div>
-        </main>
+            `,
+            'lesson1': `
+                <span class="badge badge-green">MÓDULO 01 • ESTRUTURA</span>
+                <h1>01. Estrutura do Documento em LaTeX</h1>
+                <p>Aprenda a organizar um documento acadêmico utilizando seções, subseções e parágrafos de forma automatizada.</p>
+                <h2>Divisão de Seções</h2>
+                <pre><code>\\section{Introdução}
+Texto da introdução aqui...
 
-    </div>
+\\subsection{Contextualização}
+Subseção detalhando o contexto...
 
-    <!-- Script de Tema Global -->
-    <script src="../script.js"></script>
+\\section{Metodologia}
+Descrição dos procedimentos metodológicos...</code></pre>
+            `,
+            'lesson2': `
+                <span class="badge badge-green">MÓDULO 02 • MATEMÁTICA</span>
+                <h1>02. Fórmulas e Equações Matemáticas</h1>
+                <p>O LaTeX é a ferramenta padrão no mundo para renderização de fórmulas matemáticas complexas.</p>
+                <h2>Modo Inline vs Modo Bloco</h2>
+                <p>Para equações no meio do texto use <code>$ E = mc^2 $</code>. Para destacá-las em um bloco numerado:</p>
+                <pre><code>\\begin{equation}
+    f(x) = \\int_{a}^{b} x^2 \\, dx
+\\end{equation}</code></pre>
+            `,
+            'lesson3': `
+                <span class="badge badge-green">MÓDULO 03 • ELEMENTOS VISUAIS</span>
+                <h1>03. Tabelas e Imagens</h1>
+                <p>Como inserir figuras com legendas e formatar tabelas acadêmicas no padrão de revistas científicas.</p>
+                <h2>Inserindo uma Imagem</h2>
+                <pre><code>\\begin{figure}[htbp]
+    \\centering
+    \\includegraphics[width=0.8\\textwidth]{figura.png}
+    \\caption{Legenda explicativa da imagem.}
+    \\label{fig:exemplo}
+\\end{figure}</code></pre>
+            `,
+            'lesson4': `
+                <span class="badge badge-green">MÓDULO 04 • REFERÊNCIAS</span>
+                <h1>04. Gestão de Bibliografia com BibTeX</h1>
+                <p>Automatize a citação e a geração da lista de referências bibliográficas sem se preocupar com a formatação manual.</p>
+                <h2>Arquivo de Referências (.bib)</h2>
+                <pre><code>@article{silva2024,
+  author = {Silva, Iara da},
+  title = {Estudos Epidemiológicos e Clima},
+  journal = {Revista Científica},
+  year = {2024}
+}</code></pre>
+            `
+        };
 
-    <!-- Script de Carregamento Seguro -->
-    <script>
         async function loadLesson() {
             const urlParams = new URLSearchParams(window.location.search);
-            const page = urlParams.get('page');
-            
-            // Se não houver parâmetro ou for a instalação inicial, mantém o conteúdo base
-            if (!page || page === 'instalacao') {
-                const linkInstalacao = document.getElementById('link-instalacao');
-                if (linkInstalacao) linkInstalacao.classList.add('active');
-                return;
-            }
+            const page = urlParams.get('page') || 'instalacao';
 
+            // Destacar o item ativo na sidebar
             document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
             const activeLink = document.getElementById(`link-${page}`);
             if (activeLink) activeLink.classList.add('active');
@@ -141,12 +189,21 @@ Este é o texto da introdução do meu documento acadêmico.
             const contentDiv = document.getElementById('lesson-content');
 
             try {
+                // Tenta buscar o ficheiro HTML na pasta lessons
                 const response = await fetch(`./lessons/${page}.html`);
                 if (response.ok) {
                     contentDiv.innerHTML = await response.text();
+                    return;
                 }
             } catch (err) {
-                console.log('Mantendo o conteúdo principal.');
+                console.log('Carregando conteúdo integrado nativo.');
+            }
+
+            // Fallback: Se o ficheiro na pasta lessons não existir, usa o conteúdo padrão
+            if (defaultLessons[page]) {
+                contentDiv.innerHTML = defaultLessons[page];
+            } else {
+                contentDiv.innerHTML = defaultLessons['instalacao'];
             }
         }
 
