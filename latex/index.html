@@ -6,12 +6,25 @@
     <title>Editoração Científica em LaTeX | Projeto O3 MOVER</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .team-info-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
-        .team-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-green, #10B981); flex-shrink: 0; }
+        .team-info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .team-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-green, #10B981);
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Bar de Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
             <a href="../index.html" class="logo">📄 <span>EDITORAÇÃO CIENTÍFICA EM LATEX</span></a>
@@ -22,7 +35,10 @@
         </div>
     </header>
 
+    <!-- Estrutura Principal -->
     <div class="course-layout">
+        
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-section">
                 <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
@@ -44,6 +60,7 @@
                 </ul>
             </div>
 
+            <!-- Equipe do Curso -->
             <div class="sidebar-section">
                 <div class="sidebar-title">EQUIPE DO CURSO</div>
                 <div class="team-container">
@@ -62,15 +79,25 @@
             </div>
         </aside>
 
+        <!-- Área Principal -->
         <main class="content-area">
             <div class="card-container">
                 <span class="badge badge-green">MÓDULO 00 • PRIMEIROS PASSOS</span>
                 <h1>Editoração Científica em LaTeX</h1>
-                <p>Escolha um dos módulos no menu lateral para acessar o conteúdo das aulas.</p>
+                <p>O <strong>LaTeX</strong> é um sistema de preparação de documentos amplamente utilizado pela comunidade científica para a publicação de artigos, dissertações e teses com alta qualidade tipográfica.</p>
+                
+                <h2>Por que utilizar o Overleaf?</h2>
+                <p>O Overleaf é um editor de LaTeX em nuvem que permite a escrita colaborativa em tempo real sem a necessidade de instalação de pacotes locais.</p>
+
+                <div class="callout callout-tip">
+                    💡 <strong>Como navegar:</strong> Selecione uma das aulas no menu lateral para acessar os módulos de estudo.
+                </div>
             </div>
         </main>
+
     </div>
 
+    <!-- Script de Tema Global -->
     <script src="../script.js"></script>
 </body>
 </html>
