@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VARIÁVEIS DE TEMA (MODO ESCURO COMO PADRÃO)
+   VARIÁVEIS DE TEMA (MODO ESCURO COMO PADRÃO + MODO CLARO)
    ========================================================================== */
 :root {
     --bg-main: #0f172a;
@@ -28,7 +28,7 @@
 }
 
 /* ==========================================================================
-   ESTILOS GERAIS
+   ESTILOS GERAIS DE RESET E TIPOGRAFIA
    ========================================================================== */
 * {
     box-sizing: border-box;
@@ -45,7 +45,7 @@ body {
 }
 
 /* ==========================================================================
-   NAVBAR
+   BARRA DE NAVEGAÇÃO SUPERIOR (NAVBAR)
    ========================================================================== */
 .navbar {
     background-color: var(--navbar-bg);
@@ -98,7 +98,7 @@ body {
 }
 
 /* ==========================================================================
-   LAYOUT DO CURSO (SIDEBAR + CONTEÚDO)
+   LAYOUT DO CURSO (SIDEBAR + ÁREA DE CONTEÚDO)
    ========================================================================== */
 .course-layout {
     display: flex;
@@ -166,7 +166,64 @@ body {
 }
 
 /* ==========================================================================
-   COMPONENTES E TIPOGRAFIA
+   ESTILO DA CAIXINHA DA EQUIPE DO CURSO (CORRIGIDO)
+   ========================================================================== */
+.team-container {
+    margin-top: 0.5rem;
+}
+
+.team-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.team-info-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.team-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-green);
+    flex-shrink: 0;
+}
+
+.team-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.team-role {
+    font-size: 0.82rem;
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.team-institution {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.3;
+}
+
+/* ==========================================================================
+   COMPONENTES DE CONTEÚDO (BADGES, CALLOUTS, CÓDIGO)
    ========================================================================== */
 h1 {
     font-size: 2rem;
@@ -250,40 +307,17 @@ code {
     font-weight: 600;
 }
 
-/* Equipe */
-.team-container {
-    margin-top: 0.5rem;
-}
-
-.team-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.team-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.team-name {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--text-primary);
-}
-
-.team-role, .team-institution {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-/* Responsividade */
+/* ==========================================================================
+   RESPONSIVIDADE (DISPOSITIVOS MÓVEIS)
+   ========================================================================== */
 @media (max-width: 850px) {
     .course-layout {
         flex-direction: column;
     }
     .sidebar {
         width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
     }
     .content-area {
         padding: 1rem;
