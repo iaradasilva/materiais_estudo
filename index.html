@@ -3,45 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materiais de Estudo | Projeto O3 MOVER</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Análise de Dados em Saúde | Projeto O3 MOVER</title>
+    <link rel="stylesheet" href="../styles.css">
     <style>
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        .course-card {
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 12px;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
+        .team-info-header {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 1rem;
+            align-items: center;
+            gap: 10px;
         }
-        .course-card h3 {
-            margin: 0.5rem 0;
-        }
-        .course-card p {
-            text-align: justify;
-            margin: 0;
-        }
-        .course-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-        .course-links a {
-            color: var(--accent-green, #10B981);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .course-links a:hover {
-            text-decoration: underline;
+        .team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-green, #10B981);
         }
     </style>
 </head>
@@ -50,7 +25,7 @@
     <!-- Barra de Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">📊 <span>MATERIAIS DE ESTUDO • PROJETO O3 MOVER</span></a>
+            <a href="../index.html" class="logo">📊 <span>ANÁLISE DE DADOS E MODELAGEM ESTATÍSTICA APLICADA À SAÚDE</span></a>
             <ul class="nav-links">
                 <li><a href="../index.html">Página Inicial</a></li>
                 <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
@@ -58,55 +33,107 @@
         </div>
     </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="content-area" style="max-width: 1120px; margin: 2rem auto;">
-        <div class="card-container">
-            <span class="badge badge-green">PLATAFORMA DE MATERIAIS DE ESTUDO</span>
-            <h1>Cursos Disponíveis</h1>
-            <p style="text-align: justify;">Escolha um dos cursos abaixo para acessar o conteúdo programático, os materiais e as aulas.</p>
+    <!-- Estrutura Principal -->
+    <div class="course-layout">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html?page=cronograma" id="link-cronograma">Cronograma</a></li>
+                    <li><a href="index.html?page=instalacao" id="link-instalacao">O que é o software r</a></li>
+                </ul>
+            </div>
 
-            <div class="courses-grid">
-                <!-- 1. Curso Dados -->
-                <div class="course-card">
-                    <div>
-                        <span class="badge badge-green">DADOS • 3 E 4 DE DEZEMBRO</span>
-                        <h3>Análise de Dados e Modelagem Estatística Aplicada à Saúde</h3>
-                        <p>Cronograma do curso, Plataforma EasySUS, análise exploratória, estatística descritiva, visualização de dados, dados de contagem e modelos de regressão.</p>
-                    </div>
-                    <div class="course-links">
-                        <a href="dados/index.html?page=cronograma">→ Acessar curso e cronograma</a>
-                        <a href="dados/index.html?page=lesson0">→ Módulo 01: Plataforma EasySUS</a>
-                    </div>
-                </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">MÓDULOS</div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html?page=lesson0" id="link-lesson0">01. Plataforma EasySUS</a></li>
+                    <li><a href="index.html?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
+                    <li><a href="index.html?page=lesson2" id="link-lesson2">03. Estatística descritiva</a></li>
+                    <li><a href="index.html?page=lesson3" id="link-lesson3">04. Visualização dos dados</a></li>
+                    <li><a href="index.html?page=lesson4" id="link-lesson4">05. Dados de contagem</a></li>
+                    <li><a href="index.html?page=lesson5" id="link-lesson5">06. Modelos de regressão</a></li>
+                </ul>
+            </div>
 
-                <!-- 2. Curso LaTeX -->
-                <div class="course-card">
-                    <div>
-                        <span class="badge badge-green">LATEX</span>
-                        <h3>Curso de LaTeX</h3>
-                        <p>Materiais, exemplos e conteúdos para escrita científica, formatação de artigos, tabelas, equações e documentos acadêmicos no LaTeX.</p>
-                    </div>
-                    <div class="course-links">
-                        <a href="latex/index.html">→ Acessar curso de LaTeX</a>
-                    </div>
-                </div>
-
-                <!-- 3. Curso R -->
-                <div class="course-card">
-                    <div>
-                        <span class="badge badge-green">LINGUAGEM R</span>
-                        <h3>Curso de R</h3>
-                        <p>Materiais de apoio, scripts e aulas para manipulação de dados, estatística e programação no ambiente R e RStudio.</p>
-                    </div>
-                    <div class="course-links">
-                        <a href="r/index.html">→ Acessar curso de R</a>
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
+                <div class="team-container">
+                    <div class="team-card">
+                        <div class="team-info">
+                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" style="text-decoration: none;" class="team-info-header">
+                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
+                                <span class="team-name">Dra. Iara da Silva</span>
+                            </a>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </aside>
+
+        <!-- Área Principal -->
+        <main class="content-area">
+            <div class="card-container" id="lesson-content">
+                <span class="badge badge-green">PROGRAMAÇÃO • 3 E 4 DE DEZEMBRO</span>
+                <h1>Cronograma do Curso</h1>
+                <p>O curso <strong>Análise de Dados e Modelagem Estatística Aplicada à Saúde</strong> será realizado nos dias <strong>3 e 4 de dezembro, das 9h às 16h</strong>.</p>
+                <h2>Dia 1 — 3 de dezembro (09h às 16h): Ferramentas, Coleta e Exploração</h2>
+                <ul>
+                    <li><strong>09:00 – 10:00 | Abertura e Plataforma EasySUS:</strong> Apresentação da plataforma EasySUS conduzida pelo <a href="http://lattes.cnpq.br/8703832009420710" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green, #10B981); font-weight: 600;">Mestre Jorge Armando Piscoya Santibañez</a>.</li>
+                    <li><strong>10:00 – 10:45 | Módulo 01:</strong> Plataforma EasySUS (<code>lesson0</code>).</li>
+                    <li><strong>10:45 – 11:00 | Intervalo</strong></li>
+                    <li><strong>11:00 – 12:15 | Módulo 02:</strong> Análise exploratória de dados em saúde (<code>lesson1</code>).</li>
+                    <li><strong>12:15 – 13:30 | Almoço</strong></li>
+                    <li><strong>13:30 – 15:00 | Módulo 03:</strong> Estatística descritiva aplicada (<code>lesson2</code>).</li>
+                    <li><strong>15:00 – 15:15 | Intervalo</strong></li>
+                    <li><strong>15:15 – 16:00 | Prática Guiada:</strong> Exercícios de extração, resumo e exploração inicial no R.</li>
+                </ul>
+                <h2>Dia 2 — 4 de dezembro (09h às 16h): Visualização e Modelagem</h2>
+                <ul>
+                    <li><strong>09:00 – 10:45 | Módulo 04:</strong> Visualização de dados em saúde (<code>lesson3</code>).</li>
+                    <li><strong>10:45 – 11:00 | Intervalo</strong></li>
+                    <li><strong>11:00 – 12:15 | Módulo 05:</strong> Análise de dados de contagem (<code>lesson4</code>).</li>
+                    <li><strong>12:15 – 13:30 | Almoço</strong></li>
+                    <li><strong>13:30 – 15:00 | Módulo 06:</strong> Modelos de regressão aplicados à saúde (<code>lesson5</code>).</li>
+                    <li><strong>15:00 – 15:15 | Intervalo</strong></li>
+                    <li><strong>15:15 – 16:00 | Fechamento Prático:</strong> Estudo de caso integrado, dúvidas e encerramento.</li>
+                </ul>
+            </div>
+        </main>
+    </div>
 
     <!-- Script do Tema Global -->
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
+
+    <!-- Script de Carregamento Dinâmico -->
+    <script>
+        async function loadLesson() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page') || 'cronograma';
+            
+            // Destacar item selecionado na sidebar
+            document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById(`link-${page}`);
+            if (activeLink) activeLink.classList.add('active');
+
+            const contentDiv = document.getElementById('lesson-content');
+
+            try {
+                const cacheBuster = Date.now();
+                const response = await fetch(`./lessons/${page}.html?v=${cacheBuster}`, { cache: 'no-store' });
+                if (response.ok) {
+                    const htmlText = await response.text();
+                    contentDiv.innerHTML = htmlText;
+                }
+            } catch (err) {
+                console.log('Carregamento via fetch falhou. Exibindo conteúdo base.');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadLesson);
+    </script>
 </body>
 </html>
