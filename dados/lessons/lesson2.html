@@ -1,40 +1,130 @@
-<span class="badge badge-green">Módulo 01 • Análise exploratória</span>
+<span class="badge badge-green">MÓDULO 03 • ESTATÍSTICA DESCRITIVA</span>
 
-<h1>Análise Exploratória de Dados</h1>
+<h1>Estatística Descritiva Aplicada à Saúde</h1>
 
-<p>A <strong>Análise Exploratória de Dados</strong> é a primeira etapa crítica de qualquer projeto de Ciência de Dados. Seu objetivo principal é entender a estrutura dos dados, identificar padrões e detectar anomalias antes de aplicar qualquer modelo estatístico.</p>
+<p style="text-align: justify;">A <strong>Estatística Descritiva</strong> resume e organiza um conjunto de dados por meio de medidas numéricas e tabelas, permitindo comunicar de forma objetiva o comportamento de uma amostra ou população antes de testar hipóteses ou ajustar modelos.</p>
 
-<div class="callout callout-tip">
-    💡 <strong>Dica de Estudo:</strong> Você pode acompanhar o código desta lição executando o notebook diretamente no Google Colab.
+<p style="text-align: justify;">Na área da saúde, resumir corretamente variáveis contínuas (como idade, pressão arterial, tempo de internação ou gastos hospitalares) e variáveis categóricas (como sexo, desfecho ou grupo de diagnóstico) é essencial para interpretar cenários clínicos e epidemiológicos sem distorções.</p>
+
+<div class="callout callout-tip" style="text-align: justify;">
+    💡 <strong>Dica de Estudo:</strong> Sempre reporte mais de uma medida de resumo — por exemplo, <strong>média e desvio padrão</strong> quando a distribuição for aproximadamente simétrica, e <strong>mediana e intervalo interquartil (IIQ)</strong> quando houver assimetria ou valores extremos.
 </div>
 
-<h2>O que vamos aprender?</h2>
+<h2>Medidas de Tendência Central e Posição</h2>
 
-<ul>
-    <li>Entender as medidas de tendência central: <code>Média</code>, <code>Mediana</code> e <code>Moda</code>.</li>
-    <li>Calcular dispersão usando <code>Variância</code> e <code>Desvio Padrão</code>.</li>
-    <li>Visualizar distribuições de frequência com Histogramas e Boxplots.</li>
+<ul style="text-align: justify;">
+    <li><strong>Média aritmética:</strong> soma de todos os valores dividida pelo número de observações. É sensível a valores muito altos ou muito baixos (<em>outliers</em>).</li>
+    <li><strong>Mediana:</strong> valor central que separa a metade inferior da metade superior dos dados ordenados (50º percentil). É robusta frente a assimetrias e valores extremos.</li>
+    <li><strong>Moda:</strong> valor ou categoria que ocorre com maior frequência no conjunto de dados — muito útil para variáveis categóricas ou discretas.</li>
+    <li><strong>Quartis e percentis:</strong> dividem os dados ordenados em partes (por exemplo, $Q_1$ = 25%, $Q_2$ = mediana/50%, $Q_3$ = 75%).</li>
 </ul>
 
-<h2>Exemplo Prático em r</h2>
+<h2>Medidas de Dispersão (Variabilidade)</h2>
 
-<p>Abaixo está o código base para carregar um conjunto de dados e gerar um resumo estatístico rápido:</p>
+<ul style="text-align: justify;">
+    <li><strong>Amplitude total:</strong> diferença entre o valor máximo e o valor mínimo (<code>max - min</code>). Simples, mas sensível a extremos.</li>
+    <li><strong>Variância e Desvio Padrão (DP):</strong> medem o quanto os valores se afastam, em média, da média aritmética. O desvio padrão volta para a mesma unidade da variável original (ex.: anos, dias, mg/dL).</li>
+    <li><strong>Intervalo Interquartil ($\text{IIQ} = Q_3 - Q_1$):</strong> mede a dispersão dos 50% centrais dos dados; acompanha naturalmente a mediana em distribuições assimétricas.</li>
+    <li><strong>Coeficiente de Variação ($\text{CV} = \frac{\text{DP}}{\text{Média}} \times 100\%$):</strong> útil para comparar a variabilidade relativa entre variáveis com escalas ou unidades diferentes.</li>
+</ul>
 
-<pre><code>import pandas as pd
-import numpy as np
+<h2>Simetria vs. Assimetria: Quando Média e Mediana se Afastam?</h2>
 
-# Carregar conjunto de dados
-df = pd.read_csv("datasets/vendas.csv")
+<p style="text-align: justify;">Quando uma distribuição é simétrica, média e mediana ficam próximas. Quando há <strong>assimetria à direita</strong> (cauda longa para valores altos, muito comum em tempo de internação e custos em saúde), a média é puxada para cima em relação à mediana.</p>
 
-# Resumo estatístico completo
-print(df.describe())
+<div style="margin: 1.5rem 0; padding: 1rem; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.25); background: rgba(15, 23, 42, 0.03); overflow-x: auto;">
+    <svg viewBox="0 0 760 215" width="100%" style="max-width: 760px; display: block; margin: 0 auto;" role="img" aria-label="Comparação entre distribuição simétrica e distribuição assimétrica à direita mostrando média e mediana">
+        <!-- Lado Esquerdo: Distribuição Simétrica -->
+        <text x="190" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">Distribuição Simétrica</text>
+        <line x1="50" y1="165" x2="330" y2="165" stroke="#64748B" stroke-width="2" />
+        <path d="M 65 165 C 110 163, 145 55, 190 55 C 235 55, 270 163, 315 165" fill="#10B981" fill-opacity="0.18" stroke="#10B981" stroke-width="2.5" />
+        <line x1="190" y1="55" x2="190" y2="165" stroke="#059669" stroke-width="2.5" stroke-dasharray="4,3" />
+        <text x="190" y="43" text-anchor="middle" font-size="11.5" font-weight="700" fill="#059669">Média ≈ Mediana</text>
+        <text x="190" y="192" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Média e DP descrevem bem o centro e a dispersão</text>
+
+        <!-- Lado Direito: Assimetria à Direita -->
+        <text x="560" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">Assimetria à Direita (Cauda à Direita)</text>
+        <line x1="420" y1="165" x2="710" y2="165" stroke="#64748B" stroke-width="2" />
+        <path d="M 435 165 C 455 162, 472 60, 505 60 C 540 60, 575 152, 695 164" fill="#3B82F6" fill-opacity="0.18" stroke="#2563EB" stroke-width="2.5" />
+        <!-- Mediana -->
+        <line x1="522" y1="68" x2="522" y2="165" stroke="#059669" stroke-width="2.5" />
+        <text x="515" y="52" text-anchor="end" font-size="11.5" font-weight="700" fill="#059669">Mediana</text>
+        <!-- Média -->
+        <line x1="562" y1="102" x2="562" y2="165" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="4,3" />
+        <text x="572" y="92" text-anchor="start" font-size="11.5" font-weight="700" fill="#EF4444">Média</text>
+        <text x="565" y="192" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Mediana e IIQ são mais indicados</text>
+    </svg>
+</div>
+
+<h2>Exemplo Prático em R (Dados Simulados — Copiar e Colar)</h2>
+
+<p style="text-align: justify;">Copie e cole o código abaixo no <strong>RStudio</strong> para calcular medidas de tendência central, dispersão e resumos por grupo em uma base simulada de saúde:</p>
+
+<pre><code># ==============================================================================
+# 1. BASE DE DADOS SIMULADA EM SAÚDE (PRONTO PARA RODAR)
+# ==============================================================================
+set.seed(123)
+n &lt;- 250
+
+dados_clinicos &lt;- data.frame(
+  id = 1:n,
+  sexo = factor(sample(c("Feminino", "Masculino"), n, replace = TRUE)),
+  risco = factor(
+    sample(c("Baixo", "Moderado", "Alto"), n, replace = TRUE, prob = c(0.5, 0.3, 0.2)),
+    levels = c("Baixo", "Moderado", "Alto")
+  ),
+  idade = round(rnorm(n, mean = 52, sd = 14)),
+  tempo_internacao = round(rlnorm(n, meanlog = log(3.5), sdlog = 0.7))
+)
+
+# ==============================================================================
+# 2. MEDIDAS DE POSIÇÃO E DISPERSÃO (VARIÁVEL CONTÍNUA)
+# ==============================================================================
+x &lt;- dados_clinicos$tempo_internacao
+
+media_x &lt;- mean(x)
+mediana_x &lt;- median(x)
+dp_x &lt;- sd(x)
+var_x &lt;- var(x)
+iiq_x &lt;- IQR(x)
+quantis_x &lt;- quantile(x, probs = c(0, 0.25, 0.5, 0.75, 1))
+cv_x &lt;- (dp_x / media_x) * 100
+
+cat("Média:", round(media_x, 2), "\n")
+cat("Mediana:", mediana_x, "\n")
+cat("Desvio Padrão:", round(dp_x, 2), "\n")
+cat("Variância:", round(var_x, 2), "\n")
+cat("IIQ (Q3 - Q1):", iiq_x, "\n")
+cat("Coeficiente de Variação (%):", round(cv_x, 1), "%\n")
+print(quantis_x)
+
+# ==============================================================================
+# 3. FREQUÊNCIAS E RESUMO POR GRUPO
+# ==============================================================================
+# Frequência absoluta e relativa da variável categórica 'risco'
+tab_risco &lt;- table(dados_clinicos$risco)
+prop_risco &lt;- round(prop.table(tab_risco) * 100, 1)
+cbind(Frequencia = tab_risco, Percentual = prop_risco)
+
+# Estatísticas descritivas por nível de risco usando aggregate()
+aggregate(
+  tempo_internacao ~ risco,
+  data = dados_clinicos,
+  FUN = function(v) c(
+    n = length(v),
+    media = round(mean(v), 2),
+    dp = round(sd(v), 2),
+    mediana = median(v),
+    iiq = IQR(v)
+  )
+)
 </code></pre>
 
-<div class="callout callout-warning">
-    ⚠️ <strong>Atenção com Outliers:</strong> A Média é altamente sensível a valores extremos. Quando seu dataset tiver discrepâncias grandes, prefira utilizar a <strong>Mediana</strong>.
+<div class="callout callout-warning" style="text-align: justify;">
+    ⚠️ <strong>Atenção ao Interpretar Médias e Desvios Padrão:</strong> Um desvio padrão muito grande em relação à média (ou uma média bem acima da mediana) indica forte dispersão ou assimetria. Nesses casos, apresentar apenas a média pode esconder o comportamento típico da maioria dos pacientes.
 </div>
 
 <div class="lesson-footer">
-    <a href="course.html?page=instalacao">← Anterior: Instalação</a>
-    <a href="course.html?page=lesson2">Próximo: Medidas de Dispersão →</a>
+    <a href="index.html?page=lesson1">← Anterior: 02. Análise exploratória</a>
+    <a href="index.html?page=lesson3">Próximo: 04. Visualização dos dados →</a>
 </div>
