@@ -23,45 +23,53 @@
 
 <p style="text-align: justify;">Tanto no R base quanto no pacote <code>ggplot2</code>, é útil pensar o gráfico como uma soma de camadas: primeiro os <strong>dados</strong> e o mapeamento estético (quais variáveis vão nos eixos <code>x</code> e <code>y</code>, cor ou preenchimento), depois a <strong>camada geométrica</strong> (pontos, barras, linhas, caixas) e, por fim, <strong>rótulos, escalas e tema</strong>.</p>
 
-<div style="margin: 1.5rem 0; padding: 1rem; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.25); background: rgba(15, 23, 42, 0.03); overflow-x: auto;">
-    <svg viewBox="0 0 780 155" width="100%" style="max-width: 780px; display: block; margin: 0 auto;" role="img" aria-label="Esquema em camadas de construção de um gráfico: Dados e Mapeamento, Geometria, Escalas e Rótulos, Tema">
+<div style="margin: 1.5rem 0; padding: 1.1rem; border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.35); background: #F8FAFC; overflow-x: auto;">
+    <svg viewBox="0 0 820 165" width="100%" style="max-width: 820px; display: block; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif;" role="img" aria-label="Esquema em camadas de construção de um gráfico: Dados e Eixos, Geometria, Títulos e Escalas, Acabamento">
         <!-- Camada 1 -->
-        <rect x="20" y="25" width="165" height="95" rx="8" fill="#10B981" fill-opacity="0.14" stroke="#10B981" stroke-width="2" />
-        <text x="102" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">1. Dados &amp; Eixos</text>
-        <text x="102" y="73" text-anchor="middle" font-size="11" fill="#334155">Base de dados</text>
-        <text x="102" y="90" text-anchor="middle" font-size="11" fill="#334155">Variáveis X, Y e grupos</text>
+        <rect x="18" y="22" width="175" height="105" rx="8" fill="#ECFDF5" stroke="#10B981" stroke-width="2" />
+        <rect x="18" y="22" width="175" height="28" rx="8" fill="#A7F3D0" />
+        <text x="105" y="41" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">1. Dados &amp; Eixos</text>
+        <text x="105" y="72" text-anchor="middle" font-size="11" fill="#000000">Base de dados</text>
+        <text x="105" y="92" text-anchor="middle" font-size="11" fill="#000000">Variáveis X, Y e grupos</text>
+        <text x="105" y="112" text-anchor="middle" font-size="10.5" fill="#000000">aes(x, y, color, fill)</text>
 
         <!-- Seta 1 -->
-        <line x1="185" y1="72" x2="212" y2="72" stroke="#64748B" stroke-width="2" />
-        <polygon points="212,67 222,72 212,77" fill="#64748B" />
+        <line x1="195" y1="74" x2="223" y2="74" stroke="#000000" stroke-width="2" />
+        <polygon points="223,69 233,74 223,79" fill="#000000" />
 
         <!-- Camada 2 -->
-        <rect x="222" y="25" width="165" height="95" rx="8" fill="#3B82F6" fill-opacity="0.14" stroke="#2563EB" stroke-width="2" />
-        <text x="304" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#1D4ED8">2. Geometria</text>
-        <text x="304" y="73" text-anchor="middle" font-size="11" fill="#334155">Barras, linhas, pontos,</text>
-        <text x="304" y="90" text-anchor="middle" font-size="11" fill="#334155">boxplots ou histogramas</text>
+        <rect x="233" y="22" width="175" height="105" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+        <rect x="233" y="22" width="175" height="28" rx="8" fill="#BFDBFE" />
+        <text x="320" y="41" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">2. Geometria</text>
+        <text x="320" y="72" text-anchor="middle" font-size="11" fill="#000000">Barras, linhas, pontos,</text>
+        <text x="320" y="92" text-anchor="middle" font-size="11" fill="#000000">boxplots ou histogramas</text>
+        <text x="320" y="112" text-anchor="middle" font-size="10.5" fill="#000000">geom_line(), geom_boxplot()</text>
 
         <!-- Seta 2 -->
-        <line x1="387" y1="72" x2="414" y2="72" stroke="#64748B" stroke-width="2" />
-        <polygon points="414,67 424,72 414,77" fill="#64748B" />
+        <line x1="410" y1="74" x2="438" y2="74" stroke="#000000" stroke-width="2" />
+        <polygon points="438,69 448,74 438,79" fill="#000000" />
 
         <!-- Camada 3 -->
-        <rect x="424" y="25" width="165" height="95" rx="8" fill="#F59E0B" fill-opacity="0.16" stroke="#D97706" stroke-width="2" />
-        <text x="506" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#B45309">3. Títulos &amp; Escalas</text>
-        <text x="506" y="73" text-anchor="middle" font-size="11" fill="#334155">Título, subtítulo,</text>
-        <text x="506" y="90" text-anchor="middle" font-size="11" fill="#334155">unidades e legenda</text>
+        <rect x="448" y="22" width="175" height="105" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="2" />
+        <rect x="448" y="22" width="175" height="28" rx="8" fill="#FDE68A" />
+        <text x="535" y="41" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">3. Títulos &amp; Escalas</text>
+        <text x="535" y="72" text-anchor="middle" font-size="11" fill="#000000">Título, subtítulo,</text>
+        <text x="535" y="92" text-anchor="middle" font-size="11" fill="#000000">unidades e legenda</text>
+        <text x="535" y="112" text-anchor="middle" font-size="10.5" fill="#000000">labs(), scale_*()</text>
 
         <!-- Seta 3 -->
-        <line x1="589" y1="72" x2="616" y2="72" stroke="#64748B" stroke-width="2" />
-        <polygon points="616,67 626,72 616,77" fill="#64748B" />
+        <line x1="625" y1="74" x2="653" y2="74" stroke="#000000" stroke-width="2" />
+        <polygon points="653,69 663,74 653,79" fill="#000000" />
 
         <!-- Camada 4 -->
-        <rect x="626" y="25" width="134" height="95" rx="8" fill="#8B5CF6" fill-opacity="0.14" stroke="#7C3AED" stroke-width="2" />
-        <text x="693" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#6D28D9">4. Acabamento</text>
-        <text x="693" y="73" text-anchor="middle" font-size="11" fill="#334155">Tema limpo,</text>
-        <text x="693" y="90" text-anchor="middle" font-size="11" fill="#334155">grade e exportação</text>
+        <rect x="663" y="22" width="139" height="105" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+        <rect x="663" y="22" width="139" height="28" rx="8" fill="#DDD6FE" />
+        <text x="732" y="41" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">4. Acabamento</text>
+        <text x="732" y="72" text-anchor="middle" font-size="11" fill="#000000">Tema limpo,</text>
+        <text x="732" y="92" text-anchor="middle" font-size="11" fill="#000000">grade e exportação</text>
+        <text x="732" y="112" text-anchor="middle" font-size="10.5" fill="#000000">theme_minimal()</text>
 
-        <text x="390" y="142" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Fluxo estruturado para gráficos reprodutíveis e claros</text>
+        <text x="410" y="148" text-anchor="middle" font-size="11" font-weight="600" fill="#000000">Fluxo estruturado para gráficos reprodutíveis e claros</text>
     </svg>
 </div>
 
