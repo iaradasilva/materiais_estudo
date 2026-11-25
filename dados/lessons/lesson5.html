@@ -2,60 +2,119 @@
 
 <h1>Modelos de Regressão: do GLM ao GAM</h1>
 
-<p style="text-align: justify;"><strong>Modelos de regressão</strong> permitem modelar a relação entre uma variável resposta (desfecho em saúde) e uma ou mais variáveis explicativas (preditoras ou covariáveis), controlando possíveis fatores de confusão e quantificando associações, riscos ou taxas.</p>
+<p style="text-align: justify;"><strong>Modelos de regressão</strong> permitem investigar e quantificar a relação entre uma variável resposta (desfecho em saúde, como número de internações, óbitos, custo ou tempo de permanência) e um conjunto de variáveis explicativas (covariáveis como tempo, temperatura, faixa etária, sexo ou políticas públicas), controlando fatores de confusão.</p>
 
-<p style="text-align: justify;">Enquanto a regressão linear clássica assume erro normal e relação linear na escala original, dados reais de saúde frequentemente envolvem <strong>contagens</strong>, <strong>taxas</strong>, <strong>proporções</strong> ou <strong>efeitos não lineares</strong> (como sazonalidade ao longo do ano ou curvas de risco por idade). É aí que entram os <strong>Modelos Lineares Generalizados (GLM)</strong> e os <strong>Modelos Aditivos Generalizados (GAM)</strong>.</p>
+<p style="text-align: justify;">Enquanto a regressão linear clássica exige resposta contínua com erros normais e relação estritamente linear, dados reais da área da saúde costumam apresentar <strong>contagens discretas</strong>, <strong>assimetria acentuada</strong>, <strong>sobredispersão</strong> e <strong>efeitos não lineares</strong> (como ciclos sazonais ou curvas de risco por idade e temperatura). Para lidar com cada um desses cenários, evoluímos dos <strong>Modelos Lineares (LM)</strong> para os <strong>Modelos Lineares Generalizados (GLM)</strong> e, em seguida, para os <strong>Modelos Aditivos Generalizados (GAM)</strong>.</p>
 
 <div class="callout callout-tip" style="text-align: justify;">
-    💡 <strong>Dica de Estudo:</strong> Comece pelo modelo mais simples e interpretável adequado ao tipo de desfecho (ex.: GLM de Poisson ou Binomial Negativa para contagens) e avance para o <strong>GAM</strong> quando houver evidência de não linearidade ou padrão temporal/sazonal suave.
+    💡 <strong>Dica de Estudo:</strong> Comece sempre pelo modelo mais simples e interpretável adequado ao tipo de desfecho (por exemplo, GLM de Poisson ou Binomial Negativa para contagens) e avance para o <strong>GAM</strong> quando houver evidência visual ou estatística de não linearidade ou padrão temporal/sazonal suave.
 </div>
 
-<h2>Do Modelo Linear ao GLM e ao GAM</h2>
+<h2>1. A Estrutura Teórica: do LM ao GLM e ao GAM</h2>
 
 <ul style="text-align: justify;">
-    <li><strong>Regressão Linear Clássica (LM):</strong> modela a média condicional $\mathbb{E}[Y \mid X] = \beta_0 + \beta_1 X_1 + \dots$ com erros aproximadamente normais e variância constante.</li>
-    <li><strong>Modelos Lineares Generalizados (GLM):</strong> estendem a regressão linear por meio de uma <em>função de ligação</em> $g(\mu_i)$ e uma distribuição da família exponencial (ex.: <strong>Poisson</strong> ou <strong>Binomial Negativa</strong> com ligação logarítmica para contagens, incluindo <code>offset(log(pop))</code> para modelar taxas).</li>
-    <li><strong>Modelos Aditivos Generalizados (GAM):</strong> substituem ou complementam termos lineares por <em>funções suaves (splines)</em> $s(X_j)$, permitindo capturar curvas não lineares (como ciclos sazonais ou efeitos não lineares de idade/temperatura) sem impor uma forma paramétrica rígida.</li>
+    <li><strong>Regressão Linear Clássica (LM):</strong> modela diretamente a média condicional $\mathbb{E}[Y_i \mid X_i] = \mu_i = \beta_0 + \beta_1 X_{i1} + \dots + \beta_p X_{ip}$, assumindo que os resíduos seguem distribuição Normal com variância constante ($\sigma^2$). Se aplicada a contagens pequenas, pode prever valores negativos e violar a homocedasticidade.</li>
+    <li><strong>Modelos Lineares Generalizados (GLM):</strong> compostos por três elementos fundamentais:
+        <ol style="text-align: justify; margin-top: 0.4rem;">
+            <li><em>Componente aleatório:</em> distribuição de probabilidade da resposta $Y_i$ pertencente à família exponencial (Normal, Binomial, Poisson, Gama, etc., além da extensão Binomial Negativa).</li>
+            <li><em>Componente sistemático (preditor linear):</em> combinação linear dos parâmetros $\eta_i = \beta_0 + \beta_1 X_{i1} + \dots + \beta_p X_{ip} + \text{offset}_i$.</li>
+            <li><em>Função de ligação $g(\cdot)$:</em> conecta a média $\mu_i = \mathbb{E}[Y_i]$ ao preditor linear por meio de $g(\mu_i) = \eta_i$. Em dados de contagem, usa-se a <strong>ligação logarítmica</strong> ($\ln(\mu_i) = \eta_i$), garantindo previsões sempre positivas ($\mu_i = e^{\eta_i}$).</li>
+        </ol>
+    </li>
+    <li><strong>Modelos Aditivos Generalizados (GAM):</strong> preservam a distribuição de probabilidade e a função de ligação dos GLMs, mas substituem efeitos lineares rígidos por <strong>funções suaves não paramétricas (splines)</strong> estimadas a partir dos próprios dados:
+        $$g(\mu_i) = \beta_0 + \sum_{j} \beta_j X_{ij} + \sum_{k} f_k(Z_{ik}) + \text{offset}_i$$
+        Isso permite modelar curvas complexas (como sazonalidade anual, tendências de longo prazo ou resposta não linear à idade/poluição) sem precisar adivinhar antecipadamente se a curva é quadrática, cúbica ou senoidal.</li>
 </ul>
 
-<div style="margin: 1.5rem 0; padding: 1rem; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.25); background: rgba(15, 23, 42, 0.03); overflow-x: auto;">
-    <svg viewBox="0 0 780 165" width="100%" style="max-width: 780px; display: block; margin: 0 auto;" role="img" aria-label="Evolução dos modelos de regressão: Regressão Linear para GLM e para GAM com termos suaves não lineares">
-        <!-- Etapa 1: Linear -->
-        <rect x="20" y="25" width="215" height="105" rx="8" fill="#10B981" fill-opacity="0.14" stroke="#10B981" stroke-width="2" />
-        <text x="127" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="#059669">1. Regressão Linear</text>
-        <text x="127" y="72" text-anchor="middle" font-size="11" fill="#334155">Resposta contínua / normal</text>
-        <text x="127" y="90" text-anchor="middle" font-size="11" fill="#334155">Efeito linear direto (β·X)</text>
-        <text x="127" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748B">lm(y ~ x1 + x2)</text>
+<div style="margin: 1.5rem 0; padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.35); background: #F8FAFC; overflow-x: auto;">
+    <svg viewBox="0 0 860 285" width="100%" style="max-width: 860px; display: block; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif;" role="img" aria-label="Diagrama detalhado comparando Regressão Linear Clássica, GLM e GAM com textos em preto">
+        <!-- Título do diagrama -->
+        <text x="430" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">Evolução da Modelagem Estatística em Saúde: LM → GLM → GAM</text>
 
-        <!-- Seta 1 -->
-        <line x1="235" y1="77" x2="265" y2="77" stroke="#64748B" stroke-width="2" />
-        <polygon points="265,72 275,77 265,82" fill="#64748B" />
+        <!-- CAIXA 1: LM -->
+        <rect x="16" y="42" width="250" height="205" rx="10" fill="#ECFDF5" stroke="#10B981" stroke-width="2.2" />
+        <rect x="16" y="42" width="250" height="32" rx="10" fill="#A7F3D0" />
+        <text x="141" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#000000">1. Regressão Linear (LM)</text>
 
-        <!-- Etapa 2: GLM -->
-        <rect x="275" y="25" width="225" height="105" rx="8" fill="#3B82F6" fill-opacity="0.14" stroke="#2563EB" stroke-width="2" />
-        <text x="387" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1D4ED8">2. GLM (Poisson / NegBin)</text>
-        <text x="387" y="72" text-anchor="middle" font-size="11" fill="#334155">Contagens e taxas com ligação log</text>
-        <text x="387" y="90" text-anchor="middle" font-size="11" fill="#334155">Suporta offset e sobredispersão</text>
-        <text x="387" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748B">glm(..., family = poisson())</text>
+        <text x="28" y="92" font-size="11.5" font-weight="700" fill="#000000">• Resposta (Y):</text>
+        <text x="36" y="108" font-size="11" fill="#000000">Contínua, simétrica (ex.: IMC, pressão)</text>
 
-        <!-- Seta 2 -->
-        <line x1="500" y1="77" x2="530" y2="77" stroke="#64748B" stroke-width="2" />
-        <polygon points="530,72 540,77 530,82" fill="#64748B" />
+        <text x="28" y="128" font-size="11.5" font-weight="700" fill="#000000">• Estrutura:</text>
+        <text x="36" y="144" font-size="11" fill="#000000">μ = β₀ + β₁X₁ + β₂X₂ (ligação identidade)</text>
 
-        <!-- Etapa 3: GAM -->
-        <rect x="540" y="25" width="220" height="105" rx="8" fill="#8B5CF6" fill-opacity="0.14" stroke="#7C3AED" stroke-width="2" />
-        <text x="650" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6D28D9">3. GAM (Funções Suaves)</text>
-        <text x="650" y="72" text-anchor="middle" font-size="11" fill="#334155">Relações não lineares s(x)</text>
-        <text x="650" y="90" text-anchor="middle" font-size="11" fill="#334155">Sazonalidade e curvas flexíveis</text>
-        <text x="650" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748B">gam(y ~ s(tempo) + x)</text>
+        <text x="28" y="164" font-size="11.5" font-weight="700" fill="#000000">• Suposições:</text>
+        <text x="36" y="180" font-size="11" fill="#000000">Erros normais, variância constante,</text>
+        <text x="36" y="194" font-size="11" fill="#000000">relação estritamente linear nos preditores</text>
 
-        <text x="390" y="150" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Flexibilidade crescente conforme a natureza dos dados de saúde</text>
+        <rect x="28" y="208" width="226" height="26" rx="5" fill="#FFFFFF" stroke="#10B981" stroke-width="1" />
+        <text x="141" y="225" text-anchor="middle" font-size="11" font-weight="700" fill="#000000">R: lm(y ~ x1 + x2, data = df)</text>
+
+        <!-- Seta 1 -> 2 -->
+        <line x1="268" y1="145" x2="298" y2="145" stroke="#0F172A" stroke-width="2.2" />
+        <polygon points="298,139 308,145 298,151" fill="#0F172A" />
+
+        <!-- CAIXA 2: GLM -->
+        <rect x="308" y="42" width="252" height="205" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.2" />
+        <rect x="308" y="42" width="252" height="32" rx="10" fill="#BFDBFE" />
+        <text x="434" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#000000">2. GLM (Poisson / NegBin)</text>
+
+        <text x="320" y="92" font-size="11.5" font-weight="700" fill="#000000">• Resposta (Y):</text>
+        <text x="328" y="108" font-size="11" fill="#000000">Contagens, taxas, proporções/binária</text>
+
+        <text x="320" y="128" font-size="11.5" font-weight="700" fill="#000000">• Estrutura:</text>
+        <text x="328" y="144" font-size="11" fill="#000000">log(μ) = β₀ + β₁X₁ + offset(log(pop))</text>
+
+        <text x="320" y="164" font-size="11.5" font-weight="700" fill="#000000">• Vantagens:</text>
+        <text x="328" y="180" font-size="11" fill="#000000">Respeita valores ≥ 0, estima IRR = exp(β)</text>
+        <text x="328" y="194" font-size="11" fill="#000000">e trata sobredispersão (Bin. Negativa)</text>
+
+        <rect x="320" y="208" width="228" height="26" rx="5" fill="#FFFFFF" stroke="#2563EB" stroke-width="1" />
+        <text x="434" y="225" text-anchor="middle" font-size="11" font-weight="700" fill="#000000">R: glm(y ~ x1, family = poisson())</text>
+
+        <!-- Seta 2 -> 3 -->
+        <line x1="562" y1="145" x2="592" y2="145" stroke="#0F172A" stroke-width="2.2" />
+        <polygon points="592,139 602,145 592,151" fill="#0F172A" />
+
+        <!-- CAIXA 3: GAM -->
+        <rect x="602" y="42" width="242" height="205" rx="10" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2.2" />
+        <rect x="602" y="42" width="242" height="32" rx="10" fill="#DDD6FE" />
+        <text x="723" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#000000">3. GAM (Aditivo Generalizado)</text>
+
+        <text x="614" y="92" font-size="11.5" font-weight="700" fill="#000000">• Resposta (Y):</text>
+        <text x="622" y="108" font-size="11" fill="#000000">Mesmas famílias do GLM (Poisson, NB...)</text>
+
+        <text x="614" y="128" font-size="11.5" font-weight="700" fill="#000000">• Estrutura:</text>
+        <text x="622" y="144" font-size="11" fill="#000000">log(μ) = β₀ + β₁X₁ + s(tempo) + s(idade)</text>
+
+        <text x="614" y="164" font-size="11.5" font-weight="700" fill="#000000">• Vantagens:</text>
+        <text x="622" y="180" font-size="11" fill="#000000">Captura curvas não lineares e ciclos</text>
+        <text x="622" y="194" font-size="11" fill="#000000">sazonais com suavização penalizada</text>
+
+        <rect x="614" y="208" width="218" height="26" rx="5" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1" />
+        <text x="723" y="225" text-anchor="middle" font-size="11" font-weight="700" fill="#000000">R: gam(y ~ x1 + s(t), family = nb())</text>
+
+        <!-- Rodapé explicativo -->
+        <text x="430" y="270" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0F172A">Generalização progressiva: primeiro ajustamos a distribuição da resposta (GLM), depois flexibilizamos a forma funcional (GAM).</text>
     </svg>
 </div>
 
-<h2>Exemplo Prático em R: GLM (Poisson / Binomial Negativa) e GAM</h2>
+<h2>2. Como Escolher e Interpretar Cada Modelo na Prática</h2>
 
-<p style="text-align: justify;">Copie e cole o código abaixo no <strong>RStudio</strong>. Ele simula uma série temporal de 36 meses de internações com <strong>sazonalidade</strong> e <strong>sobredispersão</strong>, ajusta um GLM de Poisson, verifica a dispersão, ajusta um GLM Binomial Negativo (via <code>MASS::glm.nb</code>, se disponível) e ajusta um <strong>GAM</strong> (via <code>mgcv::gam</code>, se disponível):</p>
+<ul style="text-align: justify;">
+    <li><strong>Interpretação dos coeficientes no GLM e GAM (ligação log):</strong> como $\ln(\mu) = \beta_0 + \beta_1 X_1$, exponenciar o coeficiente ($\text{IRR} = e^{\beta_1}$) fornece a <strong>Razão de Taxas de Incidência (Incidence Rate Ratio)</strong>. Por exemplo, se $e^{\beta_1} = 0{,}80$, o grupo exposto apresenta uma redução de $20\%$ na taxa esperada de eventos em relação ao grupo de referência, mantendo as demais variáveis constantes.</li>
+    <li><strong>Uso obrigatório do <code>offset(log(pop))</code> em taxas:</strong> ao escrever $\ln(\mu_i) = \eta_i + \ln(\text{pop}_i)$, isso equivale matematicamente a modelar $\ln(\mu_i / \text{pop}_i) = \eta_i$ — ou seja, modelamos diretamente a <strong>taxa por habitante</strong>, mantendo a resposta $Y_i$ como contagem inteira exigida pelas distribuições de Poisson e Binomial Negativa.</li>
+    <li><strong>Poisson vs. Binomial Negativa:</strong> ajuste primeiro o modelo de Poisson e verifique a <em>razão de dispersão</em> ($\hat{\phi} = \text{Qui-quadrado de Pearson} / \text{graus de liberdade residuais}$). Se $\hat{\phi} \approx 1$, a Poisson é adequada; se $\hat{\phi} > 1{,}5$ (sobredispersão), os erros padrão da Poisson ficam subestimados (gerando valores-$p$ artificialmente pequenos) e recomenda-se migrar para a <strong>Binomial Negativa</strong>.</li>
+    <li><strong>Entendendo os termos suaves $s(x)$ no GAM:</strong> no pacote <code>mgcv</code>, cada termo suave reporta os <strong>graus de liberdade efetivos (<code>edf</code>)</strong>:
+        <ul style="text-align: justify; margin-top: 0.35rem;">
+            <li><code>edf ≈ 1</code> indica que o efeito estimado é praticamente linear;</li>
+            <li><code>edf &gt; 2</code> indica curvatura não linear relevante (como ondas sazonais ao longo dos meses ou curvas em "U" de risco por temperatura/idade).</li>
+        </ul>
+    </li>
+</ul>
+
+<h2>3. Exemplo Prático em R: Comparando GLM Poisson, Binomial Negativa e GAM</h2>
+
+<p style="text-align: justify;">Copie e cole o código abaixo no <strong>RStudio</strong>. Ele simula 36 meses de internações com <strong>sazonalidade</strong> e <strong>sobredispersão</strong>, ajusta os três modelos em sequência e compara o ajuste pelo <strong>AIC</strong> (quanto menor o AIC, melhor o equilíbrio entre qualidade de ajuste e parcimônia):</p>
 
 <pre><code># ==============================================================================
 # 1. SIMULAR SÉRIE MENSAL DE CONTAGENS COM SAZONALIDADE (PRONTO PARA RODAR)
@@ -64,7 +123,7 @@ set.seed(2026)
 n_meses &lt;- 36
 t_idx &lt;- 1:n_meses
 
-# População de referência e indicador de intervenção/melhora de cobertura
+# População de referência e indicador de intervenção/ampliação de cobertura
 pop &lt;- round(seq(80000, 92000, length.out = n_meses))
 intervencao &lt;- ifelse(t_idx &gt;= 19, 1, 0)
 
@@ -97,16 +156,17 @@ mod_pois &lt;- glm(
 
 summary(mod_pois)
 
-# Razão de taxas (IRR = Incidence Rate Ratio) e checagem de dispersão
+# Razão de taxas (IRR = Incidence Rate Ratio) e checagem de sobredispersão
 irr_pois &lt;- exp(coef(mod_pois))
 disp_ratio &lt;- sum(residuals(mod_pois, type = "pearson")^2) / df.residual(mod_pois)
 
 cat("IRR estimados (GLM Poisson):\n")
 print(round(irr_pois, 3))
-cat("Razão de dispersão de Pearson:", round(disp_ratio, 2), "\n\n")
+cat("Razão de dispersão de Pearson:", round(disp_ratio, 2), "\n")
+cat("AIC GLM Poisson:", round(AIC(mod_pois), 2), "\n\n")
 
 # ==============================================================================
-# 3. GLM BINOMIAL NEGATIVA (SE O PACOTE MASS ESTIVER INSTALADO)
+# 3. GLM BINOMIAL NEGATIVA (TRATANDO SOBREDISPERSÃO)
 # ==============================================================================
 if (requireNamespace("MASS", quietly = TRUE)) {
   mod_nb &lt;- MASS::glm.nb(
@@ -115,12 +175,13 @@ if (requireNamespace("MASS", quietly = TRUE)) {
   )
   cat("--- Resumo GLM Binomial Negativa ---\n")
   print(summary(mod_nb))
-  cat("IRR (Binomial Negativa):\n")
-  print(round(exp(coef(mod_nb)), 3))
+  cat("IRR (Binomial Negativa) e IC 95%:\n")
+  print(round(exp(cbind(IRR = coef(mod_nb), confint(mod_nb))), 3))
+  cat("AIC GLM Binomial Negativa:", round(AIC(mod_nb), 2), "\n\n")
 }
 
 # ==============================================================================
-# 4. GAM COM TERMO SUAVE PARA SAZONALIDADE/TEMPO (SE MGCV ESTIVER INSTALADO)
+# 4. GAM COM TERMO SUAVE PARA SAZONALIDADE/TEMPO (PACOTE MGCV)
 # ==============================================================================
 if (requireNamespace("mgcv", quietly = TRUE)) {
   library(mgcv)
@@ -135,6 +196,12 @@ if (requireNamespace("mgcv", quietly = TRUE)) {
 
   cat("--- Resumo GAM (mgcv) ---\n")
   print(summary(mod_gam))
+  cat("AIC GAM (Binomial Negativa):", round(AIC(mod_gam), 2), "\n\n")
+
+  # Diagnóstico dos resíduos e adequação do número de bases k
+  par(mfrow = c(2, 2))
+  gam.check(mod_gam)
+  par(mfrow = c(1, 1))
 
   # Visualizar ajuste observado vs. estimado pelo GAM
   pred_taxa_10k &lt;- (predict(mod_gam, type = "response") / dados_reg$pop) * 10000
@@ -156,7 +223,7 @@ if (requireNamespace("mgcv", quietly = TRUE)) {
 </code></pre>
 
 <div class="callout callout-warning" style="text-align: justify;">
-    ⚠️ <strong>Atenção ao Overfitting e à Interpretação:</strong> Em modelos <strong>GAM</strong>, aumentar demais o número de funções base (<code>k</code>) pode gerar curvas excessivamente flexíveis ("ruído" em vez de padrão real). Sempre inspecione o diagnóstico do modelo (como <code>gam.check()</code> no <code>mgcv</code>) e avalie se a complexidade extra faz sentido epidemiológico.
+    ⚠️ <strong>Atenção ao Overfitting e Diagnóstico de Resíduos:</strong> Em modelos <strong>GAM</strong>, aumentar demais a dimensão da base (<code>k</code>) pode fazer a curva acompanhar ruídos aleatórios em vez do padrão epidemiológico real. Sempre verifique o valor de <code>k-index</code> no <code>gam.check()</code>, compare o <strong>AIC</strong> entre os modelos candidatos e analise a autocorrelação dos resíduos em séries temporais.
 </div>
 
 <div class="lesson-footer">
