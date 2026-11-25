@@ -12,19 +12,21 @@
 
 <h2>1. A Estrutura Teórica: do LM ao GLM e ao GAM</h2>
 
+<p style="text-align: justify;"><strong>Regressão Linear Clássica (LM):</strong> modela diretamente a média condicional $\mathbb{E}[Y_i \mid X_i] = \mu_i = \beta_0 + \beta_1 X_{i1} + \dots + \beta_p X_{ip}$, assumindo que os resíduos seguem distribuição Normal com variância constante ($\sigma^2$). Se aplicada a contagens pequenas, pode prever valores negativos e violar a homocedasticidade.</p>
+
+<p style="text-align: justify;"><strong>Modelos Lineares Generalizados (GLM):</strong> generalizam a regressão linear para respostas não normais e relações não lineares por meio de três componentes bem definidos:</p>
+
 <ul style="text-align: justify;">
-    <li><strong>Regressão Linear Clássica (LM):</strong> modela diretamente a média condicional $\mathbb{E}[Y_i \mid X_i] = \mu_i = \beta_0 + \beta_1 X_{i1} + \dots + \beta_p X_{ip}$, assumindo que os resíduos seguem distribuição Normal com variância constante ($\sigma^2$). Se aplicada a contagens pequenas, pode prever valores negativos e violar a homocedasticidade.</li>
-    <li><strong>Modelos Lineares Generalizados (GLM):</strong> compostos por três elementos fundamentais:
-        <ol style="text-align: justify; margin-top: 0.4rem;">
-            <li><em>Componente aleatório:</em> distribuição de probabilidade da resposta $Y_i$ pertencente à família exponencial (Normal, Binomial, Poisson, Gama, etc., além da extensão Binomial Negativa).</li>
-            <li><em>Componente sistemático (preditor linear):</em> combinação linear dos parâmetros $\eta_i = \beta_0 + \beta_1 X_{i1} + \dots + \beta_p X_{ip} + \text{offset}_i$.</li>
-            <li><em>Função de ligação $g(\cdot)$:</em> conecta a média $\mu_i = \mathbb{E}[Y_i]$ ao preditor linear por meio de $g(\mu_i) = \eta_i$. Em dados de contagem, usa-se a <strong>ligação logarítmica</strong> ($\ln(\mu_i) = \eta_i$), garantindo previsões sempre positivas ($\mu_i = e^{\eta_i}$).</li>
-        </ol>
-    </li>
-    <li><strong>Modelos Aditivos Generalizados (GAM):</strong> preservam a distribuição de probabilidade e a função de ligação dos GLMs, mas substituem efeitos lineares rígidos por <strong>funções suaves não paramétricas (splines)</strong> estimadas a partir dos próprios dados:
-        $$g(\mu_i) = \beta_0 + \sum_{j} \beta_j X_{ij} + \sum_{k} f_k(Z_{ik}) + \text{offset}_i$$
-        Isso permite modelar curvas complexas (como sazonalidade anual, tendências de longo prazo ou resposta não linear à idade/poluição) sem precisar adivinhar antecipadamente se a curva é quadrática, cúbica ou senoidal.</li>
+    <li><strong>Componente aleatório:</strong> define a distribuição de probabilidade da variável resposta $Y_i$ na família exponencial (Normal, Binomial, Poisson, Gama, entre outras, além da extensão Binomial Negativa para contagens com sobredispersão), determinando como a variância se relaciona com a média.</li>
+    <li><strong>Componente sistemático (preditor linear):</strong> combina linearmente os parâmetros e covariáveis em $\eta_i = \beta_0 + \beta_1 X_{i1} + \dots + \beta_p X_{ip} + \text{offset}_i$, onde o termo de <em>offset</em> (como $\ln(\text{população}_i)$) ajusta o tempo ou população de exposição.</li>
+    <li><strong>Função de ligação $g(\cdot)$:</strong> conecta a média esperada $\mu_i = \mathbb{E}[Y_i]$ ao preditor linear por meio de $g(\mu_i) = \eta_i$. Em dados de contagem, utiliza-se a <strong>ligação logarítmica</strong> ($\ln(\mu_i) = \eta_i$), o que garante valores preditos sempre positivos ($\mu_i = e^{\eta_i}$) e efeitos multiplicativos na escala original.</li>
 </ul>
+
+<p style="text-align: justify;"><strong>Modelos Aditivos Generalizados (GAM):</strong> preservam a distribuição de probabilidade e a função de ligação dos GLMs, mas substituem ou complementam efeitos lineares rígidos por <strong>funções suaves não paramétricas (splines)</strong> estimadas a partir dos dados:</p>
+
+$$g(\mu_i) = \beta_0 + \sum_{j} \beta_j X_{ij} + \sum_{k} f_k(Z_{ik}) + \text{offset}_i$$
+
+<p style="text-align: justify;">Na prática, cada função suave $f_k(Z_{ik})$ é construída a partir de bases de funções (<em>splines</em>) com penalização de curvatura, permitindo modelar curvas complexas — como sazonalidade anual, tendências de longo prazo ou resposta não linear à idade e à temperatura — sem impor previamente uma forma paramétrica rígida (linear, quadrática ou cúbica).</p>
 
 <div style="margin: 1.5rem 0; padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.35); background: #F8FAFC; overflow-x: auto;">
     <svg viewBox="0 0 860 285" width="100%" style="max-width: 860px; display: block; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif;" role="img" aria-label="Diagrama detalhado comparando Regressão Linear Clássica, GLM e GAM com textos em preto">
@@ -104,12 +106,7 @@
     <li><strong>Interpretação dos coeficientes no GLM e GAM (ligação log):</strong> como $\ln(\mu) = \beta_0 + \beta_1 X_1$, exponenciar o coeficiente ($\text{IRR} = e^{\beta_1}$) fornece a <strong>Razão de Taxas de Incidência (Incidence Rate Ratio)</strong>. Por exemplo, se $e^{\beta_1} = 0{,}80$, o grupo exposto apresenta uma redução de $20\%$ na taxa esperada de eventos em relação ao grupo de referência, mantendo as demais variáveis constantes.</li>
     <li><strong>Uso obrigatório do <code>offset(log(pop))</code> em taxas:</strong> ao escrever $\ln(\mu_i) = \eta_i + \ln(\text{pop}_i)$, isso equivale matematicamente a modelar $\ln(\mu_i / \text{pop}_i) = \eta_i$ — ou seja, modelamos diretamente a <strong>taxa por habitante</strong>, mantendo a resposta $Y_i$ como contagem inteira exigida pelas distribuições de Poisson e Binomial Negativa.</li>
     <li><strong>Poisson vs. Binomial Negativa:</strong> ajuste primeiro o modelo de Poisson e verifique a <em>razão de dispersão</em> ($\hat{\phi} = \text{Qui-quadrado de Pearson} / \text{graus de liberdade residuais}$). Se $\hat{\phi} \approx 1$, a Poisson é adequada; se $\hat{\phi} > 1{,}5$ (sobredispersão), os erros padrão da Poisson ficam subestimados (gerando valores-$p$ artificialmente pequenos) e recomenda-se migrar para a <strong>Binomial Negativa</strong>.</li>
-    <li><strong>Entendendo os termos suaves $s(x)$ no GAM:</strong> no pacote <code>mgcv</code>, cada termo suave reporta os <strong>graus de liberdade efetivos (<code>edf</code>)</strong>:
-        <ul style="text-align: justify; margin-top: 0.35rem;">
-            <li><code>edf ≈ 1</code> indica que o efeito estimado é praticamente linear;</li>
-            <li><code>edf &gt; 2</code> indica curvatura não linear relevante (como ondas sazonais ao longo dos meses ou curvas em "U" de risco por temperatura/idade).</li>
-        </ul>
-    </li>
+    <li><strong>Entendendo os termos suaves $s(x)$ no GAM:</strong> no pacote <code>mgcv</code>, cada termo suave reporta os <strong>graus de liberdade efetivos (<code>edf</code>)</strong>: <code>edf ≈ 1</code> indica efeito praticamente linear, enquanto <code>edf &gt; 2</code> indica curvatura não linear relevante (como ondas sazonais ao longo dos meses ou curvas em "U" de risco por temperatura/idade).</li>
 </ul>
 
 <h2>3. Exemplo Prático em R: Comparando GLM Poisson, Binomial Negativa e GAM</h2>
