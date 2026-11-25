@@ -1,0 +1,141 @@
+<span class="badge badge-green">MÓDULO 05 • DADOS DE CONTAGEM</span>
+
+<h1>Análise de Dados de Contagem em Saúde</h1>
+
+<p style="text-align: justify;"><strong>Dados de contagem</strong> representam o número de ocorrências de um evento em um período de tempo, espaço ou unidade observacional — como número de internações hospitalares por dia, casos notificados por município, atendimentos de emergência por semana ou consultas por paciente.</p>
+
+<p style="text-align: justify;">Diferente de variáveis contínuas (que podem assumir qualquer valor real, inclusive fracionado), contagens são <strong>números inteiros não negativos</strong> ($0, 1, 2, 3, \dots$) e costumam apresentar assimetria à direita, especialmente quando o evento é raro ou concentrado em determinados períodos ou regiões.</p>
+
+<div class="callout callout-tip" style="text-align: justify;">
+    💡 <strong>Dica de Estudo:</strong> Ao analisar contagens em saúde, verifique sempre se a variância é semelhante à média (<strong>equidispersão</strong>) ou bem maior que ela (<strong>sobredispersão</strong>) — isso orienta a escolha entre modelos de Poisson, Binomial Negativa e o uso de <em>offset</em> (exposição/população).
+</div>
+
+<h2>Características Principais e Armadilhas Comuns</h2>
+
+<ul style="text-align: justify;">
+    <li><strong>Valores inteiros e não negativos:</strong> não existem contagens negativas nem "1,7 internações" em um registro individual (embora médias ou taxas possam ser decimais).</li>
+    <li><strong>Excesso de zeros:</strong> em bases de saúde (como contagens de internações por CID-10 em municípios pequenos ou períodos curtos), é comum encontrar muitos zeros estruturais ou aleatórios.</li>
+    <li><strong>Sobredispersão:</strong> ocorre quando a variância observada supera a média esperada (muito frequente em dados epidemiológicos e hospitalares devido à heterogeneidade entre unidades, populações ou fatores não observados).</li>
+    <li><strong>Tempo ou população de exposição (<em>offset</em>):</strong> contar 50 internações em um município de 20 mil habitantes tem significado diferente de contar 50 internações em um município de 500 mil habitantes.</li>
+</ul>
+
+<h2>Equidispersão vs. Sobredispersão e Papel da Exposição</h2>
+
+<p style="text-align: justify;">Na distribuição de <strong>Poisson</strong>, a média e a variância são iguais ($\mathbb{E}[Y] = \text{Var}(Y) = \lambda$). Quando há variabilidade extra além do esperado pela Poisson, dizemos que há <strong>sobredispersão</strong> ($\text{Var}(Y) > \mathbb{E}[Y]$), cenário em que a <strong>Binomial Negativa</strong> costuma oferecer ajuste mais realista.</p>
+
+<div style="margin: 1.5rem 0; padding: 1rem; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.25); background: rgba(15, 23, 42, 0.03); overflow-x: auto;">
+    <svg viewBox="0 0 780 185" width="100%" style="max-width: 780px; display: block; margin: 0 auto;" role="img" aria-label="Comparação entre distribuição de contagem com equidispersão e com sobredispersão e cauda mais longa">
+        <!-- Painel Esquerdo: Equidispersão -->
+        <text x="195" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">Equidispersão (Média ≈ Variância)</text>
+        <line x1="55" y1="145" x2="335" y2="145" stroke="#64748B" stroke-width="2" />
+        <rect x="85" y="120" width="22" height="25" rx="2" fill="#10B981" fill-opacity="0.75" />
+        <rect x="115" y="92" width="22" height="53" rx="2" fill="#10B981" fill-opacity="0.75" />
+        <rect x="145" y="62" width="22" height="83" rx="2" fill="#10B981" fill-opacity="0.85" />
+        <rect x="175" y="55" width="22" height="90" rx="2" fill="#10B981" fill-opacity="0.9" />
+        <rect x="205" y="72" width="22" height="73" rx="2" fill="#10B981" fill-opacity="0.85" />
+        <rect x="235" y="102" width="22" height="43" rx="2" fill="#10B981" fill-opacity="0.75" />
+        <rect x="265" y="128" width="22" height="17" rx="2" fill="#10B981" fill-opacity="0.75" />
+        <text x="195" y="168" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Dispersão moderada ao redor do centro</text>
+
+        <!-- Painel Direito: Sobredispersão -->
+        <text x="565" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#2563EB">Sobredispersão (Variância &gt; Média)</text>
+        <line x1="415" y1="145" x2="725" y2="145" stroke="#64748B" stroke-width="2" />
+        <rect x="435" y="88" width="22" height="57" rx="2" fill="#3B82F6" fill-opacity="0.75" />
+        <rect x="465" y="76" width="22" height="69" rx="2" fill="#3B82F6" fill-opacity="0.8" />
+        <rect x="495" y="84" width="22" height="61" rx="2" fill="#3B82F6" fill-opacity="0.8" />
+        <rect x="525" y="96" width="22" height="49" rx="2" fill="#3B82F6" fill-opacity="0.75" />
+        <rect x="555" y="108" width="22" height="37" rx="2" fill="#3B82F6" fill-opacity="0.7" />
+        <rect x="585" y="116" width="22" height="29" rx="2" fill="#3B82F6" fill-opacity="0.7" />
+        <rect x="615" y="124" width="22" height="21" rx="2" fill="#3B82F6" fill-opacity="0.65" />
+        <rect x="645" y="131" width="22" height="14" rx="2" fill="#3B82F6" fill-opacity="0.65" />
+        <circle cx="692" cy="138" r="5" fill="#EF4444" />
+        <text x="570" y="168" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Maior espalhamento e cauda longa à direita</text>
+    </svg>
+</div>
+
+<h2>Exemplo Prático em R (Dados Simulados — Copiar e Colar)</h2>
+
+<p style="text-align: justify;">Copie e cole o código abaixo no <strong>RStudio</strong> para simular contagens de internações em diferentes municípios/períodos, comparar média e variância, calcular taxas por 10 mil habitantes e visualizar a distribuição das contagens:</p>
+
+<pre><code># ==============================================================================
+# 1. SIMULAR BASE DE DADOS DE CONTAGEM EM SAÚDE (PRONTO PARA RODAR)
+# ==============================================================================
+set.seed(101)
+m &lt;- 180
+
+# População de referência (em habitantes) para cada registro (município/período)
+populacao &lt;- sample(seq(15000, 120000, by = 5000), size = m, replace = TRUE)
+
+# Indicador de campanha preventiva ou melhora de cobertura (0 = não, 1 = sim)
+cobertura_alta &lt;- rbinom(m, size = 1, prob = 0.45)
+
+# Taxa esperada de internações por 10.000 habitantes (com efeito da cobertura)
+taxa_por_10k &lt;- ifelse(cobertura_alta == 1, 14, 22)
+
+# Contagem com sobredispersão via Gamma-Poisson (Binomial Negativa)
+efeito_aleatorio &lt;- rgamma(m, shape = 6, rate = 6)
+lambda_esperado &lt;- (populacao / 10000) * taxa_por_10k * efeito_aleatorio
+internacoes &lt;- rpois(m, lambda = lambda_esperado)
+
+dados_contagem &lt;- data.frame(
+  id = 1:m,
+  populacao = populacao,
+  cobertura_alta = factor(cobertura_alta, labels = c("Baixa/Média", "Alta")),
+  internacoes = internacoes,
+  taxa_10k = round((internacoes / populacao) * 10000, 2)
+)
+
+# ==============================================================================
+# 2. EXPLORAR CONTAGENS: MÉDIA, VARIÂNCIA E TAXAS
+# ==============================================================================
+media_cont &lt;- mean(dados_contagem$internacoes)
+var_cont &lt;- var(dados_contagem$internacoes)
+
+cat("Média de internações:", round(media_cont, 2), "\n")
+cat("Variância de internações:", round(var_cont, 2), "\n")
+cat("Razão Variância / Média:", round(var_cont / media_cont, 2), "\n\n")
+
+# Comparar contagem bruta e taxa por 10 mil hab. entre grupos de cobertura
+aggregate(
+  cbind(internacoes, taxa_10k) ~ cobertura_alta,
+  data = dados_contagem,
+  FUN = function(v) round(median(v), 2)
+)
+
+# ==============================================================================
+# 3. GRÁFICOS PARA DADOS DE CONTAGEM
+# ==============================================================================
+par(mfrow = c(1, 2))
+
+# Distribuição das contagens brutas
+barplot(
+  table(cut(dados_contagem$internacoes, breaks = 10)),
+  main = "Distribuição das Contagens",
+  xlab = "Faixas de internações",
+  ylab = "Frequência",
+  col = "#10B981",
+  las = 2,
+  cex.names = 0.8
+)
+
+# Taxa por 10 mil habitantes por nível de cobertura
+boxplot(
+  taxa_10k ~ cobertura_alta,
+  data = dados_contagem,
+  main = "Taxa por 10 mil hab. vs. Cobertura",
+  xlab = "Cobertura",
+  ylab = "Taxa por 10.000 hab.",
+  col = c("#FDE68A", "#A7F3D0")
+)
+
+par(mfrow = c(1, 1))
+</code></pre>
+
+<div class="callout callout-warning" style="text-align: justify;">
+    ⚠️ <strong>Atenção à Exposição (População ou Tempo):</strong> Comparar apenas o número absoluto de casos ou internações sem considerar o tamanho da população ou o período de observação pode levar a conclusões equivocadas. Sempre avalie taxas ou inclua o termo de exposição (<em>offset</em>) ao avançar para modelos de contagem.
+</div>
+
+<div class="lesson-footer">
+    <a href="index.html?page=lesson3">← Anterior: 04. Visualização dos dados</a>
+    <a href="index.html?page=lesson5">Próximo: 06. Modelos de regressão →</a>
+</div>
