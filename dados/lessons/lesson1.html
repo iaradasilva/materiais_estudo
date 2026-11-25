@@ -18,13 +18,72 @@
     <li><strong>Distribuição e valores atípicos:</strong> identificação visual e numérica de assimetrias e <em>outliers</em> antes de avançar para gráficos e modelos.</li>
 </ul>
 
+<h2>Como Ler e Interpretar um Boxplot</h2>
+
+<p style="text-align: justify;">O <strong>boxplot</strong> (ou diagrama de caixa) resume a distribuição de uma variável numérica em cinco elementos principais, facilitando comparar grupos (como sexos, faixas etárias ou tipos de atendimento) e enxergar assimetrias e valores discrepantes de forma rápida.</p>
+
+<div style="margin: 1.5rem 0; padding: 1rem; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.25); background: rgba(15, 23, 42, 0.03); overflow-x: auto;">
+    <svg viewBox="0 0 760 250" width="100%" style="max-width: 760px; display: block; margin: 0 auto;" role="img" aria-label="Diagrama explicativo de um boxplot com Q1, mediana, Q3, limites inferior e superior e outliers">
+        <!-- Linha horizontal de referência (eixo de valores) -->
+        <line x1="60" y1="125" x2="700" y2="125" stroke="#64748B" stroke-width="2" stroke-dasharray="5,4" />
+
+        <!-- Limite inferior (whisker mínimo) -->
+        <line x1="150" y1="95" x2="150" y2="155" stroke="#334155" stroke-width="2.5" />
+        <line x1="150" y1="125" x2="240" y2="125" stroke="#334155" stroke-width="2.5" />
+
+        <!-- Caixa (Q1 a Q3) -->
+        <rect x="240" y="80" width="240" height="90" rx="6" fill="#10B981" fill-opacity="0.18" stroke="#10B981" stroke-width="2.5" />
+
+        <!-- Linha da Mediana (Q2) -->
+        <line x1="340" y1="80" x2="340" y2="170" stroke="#059669" stroke-width="3.5" />
+
+        <!-- Limite superior (whisker máximo) -->
+        <line x1="480" y1="125" x2="570" y2="125" stroke="#334155" stroke-width="2.5" />
+        <line x1="570" y1="95" x2="570" y2="155" stroke="#334155" stroke-width="2.5" />
+
+        <!-- Outliers -->
+        <circle cx="630" cy="125" r="6" fill="#EF4444" />
+        <circle cx="670" cy="125" r="6" fill="#EF4444" />
+
+        <!-- Rótulos superiores -->
+        <text x="150" y="55" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Limite</text>
+        <text x="150" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Inferior</text>
+
+        <text x="240" y="55" text-anchor="middle" font-size="12" font-weight="600" fill="#059669">Q1 (25%)</text>
+
+        <text x="340" y="35" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">Mediana (50%)</text>
+
+        <text x="480" y="55" text-anchor="middle" font-size="12" font-weight="600" fill="#059669">Q3 (75%)</text>
+
+        <text x="570" y="55" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Limite</text>
+        <text x="570" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Superior</text>
+
+        <text x="650" y="95" text-anchor="middle" font-size="12" font-weight="700" fill="#EF4444">Outliers</text>
+
+        <!-- Chave / indicação do IIQ na parte inferior -->
+        <line x1="240" y1="192" x2="480" y2="192" stroke="#10B981" stroke-width="2" />
+        <line x1="240" y1="186" x2="240" y2="198" stroke="#10B981" stroke-width="2" />
+        <line x1="480" y1="186" x2="480" y2="198" stroke="#10B981" stroke-width="2" />
+        <text x="360" y="216" text-anchor="middle" font-size="12.5" font-weight="700" fill="#059669">IIQ = Q3 − Q1 (50% centrais dos dados)</text>
+    </svg>
+</div>
+
+<ul style="text-align: justify;">
+    <li><strong>Mediana (linha central dentro da caixa):</strong> divide os dados ordenados ao meio (50% abaixo e 50% acima). É excelente para dados assimétricos, como tempo de permanência hospitalar.</li>
+    <li><strong>Caixa (Q1 a Q3) e IIQ:</strong> a base da caixa é o <strong>1º quartil (Q1, 25%)</strong> e o topo é o <strong>3º quartil (Q3, 75%)</strong>. A largura/altura da caixa representa o <strong>Intervalo Interquartil ($\text{IIQ} = Q_3 - Q_1$)</strong>, onde ficam os 50% centrais das observações.</li>
+    <li><strong>Hastes (whiskers):</strong> indicam a extensão dos dados dentro dos limites usuais (geralmente até $1,5 \times \text{IIQ}$ a partir de Q1 e Q3, sem ultrapassar os valores observados mais extremos dentro desse intervalo).</li>
+    <li><strong>Outliers (pontos isolados além das hastes):</strong> valores muito distantes do restante da amostra. Em saúde, podem indicar casos clínicos atípicos, internações prolongadas ou erros de digitação/codificação que merecem investigação.</li>
+    <li><strong>Assimetria na leitura:</strong> se a mediana estiver mais próxima de Q1 e houver mais pontos extremos para cima, há <strong>assimetria à direita</strong> (muito comum em custos e tempo de internação).</li>
+</ul>
+
 <h2>Exemplo Prático em R</h2>
 
-<p style="text-align: justify;">Abaixo está um exemplo base em <strong>R</strong> para inspecionar a estrutura de uma base de dados e obter um resumo rápido das variáveis:</p>
+<p style="text-align: justify;">Abaixo está um exemplo em <strong>R</strong> para inspecionar a base, calcular estatísticas resumidas e gerar um boxplot:</p>
 
-<pre><code># 1. Carregar pacotes úteis para exploração inicial (se instalados)
-# install.packages(c("dplyr", "skimr"))
+<pre><code># 1. Carregar pacotes úteis para exploração e visualização
+# install.packages(c("dplyr", "ggplot2"))
 library(dplyr)
+library(ggplot2)
 
 # 2. Carregar conjunto de dados (ajuste o caminho conforme seu arquivo)
 dados &lt;- read.csv("data/dados_saude.csv", stringsAsFactors = FALSE)
@@ -36,10 +95,28 @@ summary(dados)
 
 # 4. Verificar quantidade de valores ausentes (NA) por coluna
 colSums(is.na(dados))
+
+# 5. Boxplot simples no R base (ex.: variável numerica 'tempo_internacao')
+boxplot(
+  dados$tempo_internacao,
+  main = "Distribuição do Tempo de Internação",
+  ylab = "Dias",
+  col = "#10B981"
+)
+
+# 6. Boxplot comparando grupos com ggplot2 (ex.: por sexo ou categoria)
+ggplot(dados, aes(x = sexo, y = tempo_internacao, fill = sexo)) +
+  geom_boxplot(alpha = 0.7, outlier.color = "#EF4444") +
+  labs(
+    title = "Tempo de Internação por Grupo",
+    x = "Grupo",
+    y = "Tempo de internação (dias)"
+  ) +
+  theme_minimal()
 </code></pre>
 
 <div class="callout callout-warning" style="text-align: justify;">
-    ⚠️ <strong>Atenção com Outliers e Dados Assimétricos:</strong> Em variáveis da saúde — como tempo de internação, custos hospitalares ou contagens — é comum haver valores extremos. A <strong>Média</strong> é sensível a esses valores; nesses casos, avalie também a <strong>Mediana</strong> e a amplitude interquartil.
+    ⚠️ <strong>Atenção com Outliers e Dados Assimétricos:</strong> Em variáveis da saúde — como tempo de internação, custos hospitalares ou contagens — é comum haver valores extremos. A <strong>Média</strong> é sensível a esses valores; nesses casos, avalie também a <strong>Mediana</strong> e a amplitude interquartil. Nunca exclua um <em>outlier</em> automaticamente sem antes verificar se ele é um registro válido ou um erro de dado.
 </div>
 
 <div class="lesson-footer">
