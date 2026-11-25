@@ -1,0 +1,165 @@
+<span class="badge badge-green">MÓDULO 06 • MODELOS DE REGRESSÃO</span>
+
+<h1>Modelos de Regressão: do GLM ao GAM</h1>
+
+<p style="text-align: justify;"><strong>Modelos de regressão</strong> permitem modelar a relação entre uma variável resposta (desfecho em saúde) e uma ou mais variáveis explicativas (preditoras ou covariáveis), controlando possíveis fatores de confusão e quantificando associações, riscos ou taxas.</p>
+
+<p style="text-align: justify;">Enquanto a regressão linear clássica assume erro normal e relação linear na escala original, dados reais de saúde frequentemente envolvem <strong>contagens</strong>, <strong>taxas</strong>, <strong>proporções</strong> ou <strong>efeitos não lineares</strong> (como sazonalidade ao longo do ano ou curvas de risco por idade). É aí que entram os <strong>Modelos Lineares Generalizados (GLM)</strong> e os <strong>Modelos Aditivos Generalizados (GAM)</strong>.</p>
+
+<div class="callout callout-tip" style="text-align: justify;">
+    💡 <strong>Dica de Estudo:</strong> Comece pelo modelo mais simples e interpretável adequado ao tipo de desfecho (ex.: GLM de Poisson ou Binomial Negativa para contagens) e avance para o <strong>GAM</strong> quando houver evidência de não linearidade ou padrão temporal/sazonal suave.
+</div>
+
+<h2>Do Modelo Linear ao GLM e ao GAM</h2>
+
+<ul style="text-align: justify;">
+    <li><strong>Regressão Linear Clássica (LM):</strong> modela a média condicional $\mathbb{E}[Y \mid X] = \beta_0 + \beta_1 X_1 + \dots$ com erros aproximadamente normais e variância constante.</li>
+    <li><strong>Modelos Lineares Generalizados (GLM):</strong> estendem a regressão linear por meio de uma <em>função de ligação</em> $g(\mu_i)$ e uma distribuição da família exponencial (ex.: <strong>Poisson</strong> ou <strong>Binomial Negativa</strong> com ligação logarítmica para contagens, incluindo <code>offset(log(pop))</code> para modelar taxas).</li>
+    <li><strong>Modelos Aditivos Generalizados (GAM):</strong> substituem ou complementam termos lineares por <em>funções suaves (splines)</em> $s(X_j)$, permitindo capturar curvas não lineares (como ciclos sazonais ou efeitos não lineares de idade/temperatura) sem impor uma forma paramétrica rígida.</li>
+</ul>
+
+<div style="margin: 1.5rem 0; padding: 1rem; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.25); background: rgba(15, 23, 42, 0.03); overflow-x: auto;">
+    <svg viewBox="0 0 780 165" width="100%" style="max-width: 780px; display: block; margin: 0 auto;" role="img" aria-label="Evolução dos modelos de regressão: Regressão Linear para GLM e para GAM com termos suaves não lineares">
+        <!-- Etapa 1: Linear -->
+        <rect x="20" y="25" width="215" height="105" rx="8" fill="#10B981" fill-opacity="0.14" stroke="#10B981" stroke-width="2" />
+        <text x="127" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="#059669">1. Regressão Linear</text>
+        <text x="127" y="72" text-anchor="middle" font-size="11" fill="#334155">Resposta contínua / normal</text>
+        <text x="127" y="90" text-anchor="middle" font-size="11" fill="#334155">Efeito linear direto (β·X)</text>
+        <text x="127" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748B">lm(y ~ x1 + x2)</text>
+
+        <!-- Seta 1 -->
+        <line x1="235" y1="77" x2="265" y2="77" stroke="#64748B" stroke-width="2" />
+        <polygon points="265,72 275,77 265,82" fill="#64748B" />
+
+        <!-- Etapa 2: GLM -->
+        <rect x="275" y="25" width="225" height="105" rx="8" fill="#3B82F6" fill-opacity="0.14" stroke="#2563EB" stroke-width="2" />
+        <text x="387" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1D4ED8">2. GLM (Poisson / NegBin)</text>
+        <text x="387" y="72" text-anchor="middle" font-size="11" fill="#334155">Contagens e taxas com ligação log</text>
+        <text x="387" y="90" text-anchor="middle" font-size="11" fill="#334155">Suporta offset e sobredispersão</text>
+        <text x="387" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748B">glm(..., family = poisson())</text>
+
+        <!-- Seta 2 -->
+        <line x1="500" y1="77" x2="530" y2="77" stroke="#64748B" stroke-width="2" />
+        <polygon points="530,72 540,77 530,82" fill="#64748B" />
+
+        <!-- Etapa 3: GAM -->
+        <rect x="540" y="25" width="220" height="105" rx="8" fill="#8B5CF6" fill-opacity="0.14" stroke="#7C3AED" stroke-width="2" />
+        <text x="650" y="50" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6D28D9">3. GAM (Funções Suaves)</text>
+        <text x="650" y="72" text-anchor="middle" font-size="11" fill="#334155">Relações não lineares s(x)</text>
+        <text x="650" y="90" text-anchor="middle" font-size="11" fill="#334155">Sazonalidade e curvas flexíveis</text>
+        <text x="650" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="#64748B">gam(y ~ s(tempo) + x)</text>
+
+        <text x="390" y="150" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Flexibilidade crescente conforme a natureza dos dados de saúde</text>
+    </svg>
+</div>
+
+<h2>Exemplo Prático em R: GLM (Poisson / Binomial Negativa) e GAM</h2>
+
+<p style="text-align: justify;">Copie e cole o código abaixo no <strong>RStudio</strong>. Ele simula uma série temporal de 36 meses de internações com <strong>sazonalidade</strong> e <strong>sobredispersão</strong>, ajusta um GLM de Poisson, verifica a dispersão, ajusta um GLM Binomial Negativo (via <code>MASS::glm.nb</code>, se disponível) e ajusta um <strong>GAM</strong> (via <code>mgcv::gam</code>, se disponível):</p>
+
+<pre><code># ==============================================================================
+# 1. SIMULAR SÉRIE MENSAL DE CONTAGENS COM SAZONALIDADE (PRONTO PARA RODAR)
+# ==============================================================================
+set.seed(2026)
+n_meses &lt;- 36
+t_idx &lt;- 1:n_meses
+
+# População de referência e indicador de intervenção/melhora de cobertura
+pop &lt;- round(seq(80000, 92000, length.out = n_meses))
+intervencao &lt;- ifelse(t_idx &gt;= 19, 1, 0)
+
+# Efeito sazonal suave + tendência + intervenção (na escala log da taxa)
+sazonalidade &lt;- 0.28 * sin(2 * pi * t_idx / 12)
+log_taxa &lt;- log(18 / 10000) + 0.004 * t_idx - 0.22 * intervencao + sazonalidade
+
+# Sobredispersão via efeito gama
+mult_disp &lt;- rgamma(n_meses, shape = 12, rate = 12)
+mu_casos &lt;- pop * exp(log_taxa) * mult_disp
+casos &lt;- rpois(n_meses, lambda = mu_casos)
+
+dados_reg &lt;- data.frame(
+  mes = seq.Date(from = as.Date("2023-01-01"), by = "month", length.out = n_meses),
+  tempo = t_idx,
+  pop = pop,
+  intervencao = factor(intervencao, labels = c("Pré", "Pós")),
+  casos = casos,
+  taxa_10k = (casos / pop) * 10000
+)
+
+# ==============================================================================
+# 2. GLM DE POISSON COM OFFSET DE POPULAÇÃO
+# ==============================================================================
+mod_pois &lt;- glm(
+  casos ~ tempo + intervencao + offset(log(pop)),
+  family = poisson(link = "log"),
+  data = dados_reg
+)
+
+summary(mod_pois)
+
+# Razão de taxas (IRR = Incidence Rate Ratio) e checagem de dispersão
+irr_pois &lt;- exp(coef(mod_pois))
+disp_ratio &lt;- sum(residuals(mod_pois, type = "pearson")^2) / df.residual(mod_pois)
+
+cat("IRR estimados (GLM Poisson):\n")
+print(round(irr_pois, 3))
+cat("Razão de dispersão de Pearson:", round(disp_ratio, 2), "\n\n")
+
+# ==============================================================================
+# 3. GLM BINOMIAL NEGATIVA (SE O PACOTE MASS ESTIVER INSTALADO)
+# ==============================================================================
+if (requireNamespace("MASS", quietly = TRUE)) {
+  mod_nb &lt;- MASS::glm.nb(
+    casos ~ tempo + intervencao + offset(log(pop)),
+    data = dados_reg
+  )
+  cat("--- Resumo GLM Binomial Negativa ---\n")
+  print(summary(mod_nb))
+  cat("IRR (Binomial Negativa):\n")
+  print(round(exp(coef(mod_nb)), 3))
+}
+
+# ==============================================================================
+# 4. GAM COM TERMO SUAVE PARA SAZONALIDADE/TEMPO (SE MGCV ESTIVER INSTALADO)
+# ==============================================================================
+if (requireNamespace("mgcv", quietly = TRUE)) {
+  library(mgcv)
+
+  # s(tempo, k = 12, bs = "cr") captura curvas não lineares/sazonais suaves
+  mod_gam &lt;- gam(
+    casos ~ intervencao + s(tempo, k = 12, bs = "cr") + offset(log(pop)),
+    family = nb(),
+    data = dados_reg,
+    method = "REML"
+  )
+
+  cat("--- Resumo GAM (mgcv) ---\n")
+  print(summary(mod_gam))
+
+  # Visualizar ajuste observado vs. estimado pelo GAM
+  pred_taxa_10k &lt;- (predict(mod_gam, type = "response") / dados_reg$pop) * 10000
+
+  plot(
+    dados_reg$mes, dados_reg$taxa_10k,
+    type = "o", pch = 19, col = "#64748B",
+    main = "Taxa Observada vs. Ajuste GAM (por 10 mil hab.)",
+    xlab = "Mês", ylab = "Taxa por 10.000 hab."
+  )
+  lines(dados_reg$mes, pred_taxa_10k, col = "#10B981", lwd = 2.5)
+  legend(
+    "topleft",
+    legend = c("Observado", "Ajuste GAM"),
+    col = c("#64748B", "#10B981"),
+    pch = c(19, NA), lty = c(1, 1), lwd = c(1, 2.5)
+  )
+}
+</code></pre>
+
+<div class="callout callout-warning" style="text-align: justify;">
+    ⚠️ <strong>Atenção ao Overfitting e à Interpretação:</strong> Em modelos <strong>GAM</strong>, aumentar demais o número de funções base (<code>k</code>) pode gerar curvas excessivamente flexíveis ("ruído" em vez de padrão real). Sempre inspecione o diagnóstico do modelo (como <code>gam.check()</code> no <code>mgcv</code>) e avalie se a complexidade extra faz sentido epidemiológico.
+</div>
+
+<div class="lesson-footer">
+    <a href="index.html?page=lesson4">← Anterior: 05. Dados de contagem</a>
+    <a href="index.html?page=cronograma">Voltar ao Cronograma →</a>
+</div>
