@@ -77,7 +77,6 @@
         <!-- Área Principal -->
         <main class="content-area">
             <div class="card-container" id="lesson-content">
-                <!-- Conteúdo Embutido de Backup (Carrega imediatamente se fetch falhar ou antes da resposta) -->
                 <span class="badge badge-green">PROGRAMAÇÃO • 3 E 4 DE DEZEMBRO</span>
                 <h1>Cronograma do Curso</h1>
                 <p>O curso <strong>Análise de Dados e Modelagem Estatística Aplicada à Saúde</strong> será realizado nos dias <strong>3 e 4 de dezembro, das 9h às 16h</strong>.</p>
@@ -123,7 +122,8 @@
             const contentDiv = document.getElementById('lesson-content');
 
             try {
-                const response = await fetch(`./lessons/${page}.html`);
+                // O ?v=2 evita que o navegador carregue a versão antiga do cache
+                const response = await fetch(`./lessons/${page}.html?v=2`);
                 if (response.ok) {
                     const htmlText = await response.text();
                     contentDiv.innerHTML = htmlText;
