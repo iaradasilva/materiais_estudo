@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Material de Estudo - Capacitação Acadêmica</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Análise de Dados em Saúde | Projeto O3 MOVER</title>
+    <link rel="stylesheet" href="../styles.css">
     <style>
         .team-info-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 6px;
         }
         .team-avatar {
             width: 36px;
@@ -19,79 +18,16 @@
             object-fit: cover;
             border: 2px solid var(--accent-green, #10B981);
         }
-
-        .portal-grid-courses {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 25px;
-        }
-
-        .portal-card-item {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent-green);
-            border-radius: 8px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .portal-card-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .portal-card-item h3 {
-            margin: 10px 0 8px 0;
-            font-size: 1.1rem;
-            line-height: 1.3;
-        }
-
-        .portal-card-item p {
-            font-size: 0.88rem;
-            line-height: 1.45;
-            margin-bottom: 15px;
-            color: var(--text-secondary);
-        }
-
-        .btn-card-access {
-            display: inline-block;
-            text-align: center;
-            background-color: var(--accent-green);
-            color: #ffffff !important;
-            font-weight: 700;
-            font-size: 0.85rem;
-            padding: 8px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .btn-card-access:hover {
-            opacity: 0.9;
-        }
-
-        @media (max-width: 900px) {
-            .portal-grid-courses {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 600px) {
-            .portal-grid-courses {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Bar de Navegação Superior -->
+    <!-- Barra de Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">📚 <span>Material de Estudo</span></a>
+            <a href="../index.html" class="logo">📊 <span>ANÁLISE DE DADOS E MODELAGEM ESTATÍSTICA APLICADA À SAÚDE</span></a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Página Inicial</a></li>
+                <li><a href="../index.html">Página Inicial</a></li>
                 <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
             </ul>
         </div>
@@ -103,15 +39,27 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-section">
-                <div class="sidebar-title">PORTAL</div>
+                <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="index.html?page=cronograma" id="link-cronograma">Cronograma</a></li>
+                    <li><a href="index.html?page=instalacao" id="link-instalacao">O que é o software r</a></li>
                 </ul>
             </div>
 
-            <!-- Equipe do Curso (FORMATADO PADRÃO) -->
             <div class="sidebar-section">
-                <div class="sidebar-title">EQUIPE DO CURSO</div>
+                <div class="sidebar-title">MÓDULOS</div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html?page=lesson0" id="link-lesson0">01. Plataforma EasySUS</a></li>
+                    <li><a href="index.html?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
+                    <li><a href="index.html?page=lesson2" id="link-lesson2">03. Estatística descritiva</a></li>
+                    <li><a href="index.html?page=lesson3" id="link-lesson3">04. Visualização dos dados</a></li>
+                    <li><a href="index.html?page=lesson4" id="link-lesson4">05. Dados de contagem</a></li>
+                    <li><a href="index.html?page=lesson5" id="link-lesson5">06. Modelos de regressão</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
                 <div class="team-container">
                     <div class="team-card">
                         <div class="team-info">
@@ -119,9 +67,7 @@
                                 <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
                                 <span class="team-name">Dra. Iara da Silva</span>
                             </a>
-                            <span class="team-role">Pesquisadora de Pós-doc</span>
-                            <span class="team-institution">Projeto O3 - MOVER</span>
-                            <span class="team-institution">INCT - Klimapólis</span>
+                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
                         </div>
                     </div>
                 </div>
@@ -130,57 +76,64 @@
 
         <!-- Área Principal -->
         <main class="content-area">
-            <div class="card-container">
-                <span class="badge badge-green">REPOSITÓRIO • MATERIAL DE APOIO ACADÊMICO</span>
-                <h1>Plataforma de Materiais de Estudo</h1>
-                <p>Boas-vindas! Este portal reúne guias práticos, tutoriais e materiais abertos desenvolvidos para apoiar estudantes e pesquisadores na escrita científica, análise estatística e ferramentas computacionais.</p>
-                
-                <div class="callout callout-tip">
-                    💡 <strong>Como utilizar:</strong> Escolha abaixo a trilha de estudo desejada para acessar os módulos explicativos, códigos-fonte, exemplos e orientações passo a passo.
-                </div>
-
-                <h2>Trilhas de Aprendizado</h2>
-
-                <div class="portal-grid-courses">
-                    
-                    <!-- CARTÃO 1: LATEX -->
-                    <div class="portal-card-item">
-                        <div>
-                            <span class="badge badge-green">DISPONÍVEL</span>
-                            <h3>📄 Editoração Científica em LaTeX</h3>
-                            <p>Guia completo para estruturação de artigos, fórmulas matemáticas, tabelas e bibliografias no Overleaf.</p>
-                        </div>
-                        <a href="latex/index.html" class="btn-card-access">Acessar Guia &rarr;</a>
-                    </div>
-
-                    <!-- CARTÃO 2: ANÁLISE DE DADOS EM SAÚDE -->
-                    <div class="portal-card-item">
-                        <div>
-                            <span class="badge badge-green">DISPONÍVEL</span>
-                            <h3>🏥 Análise de Dados em Saúde</h3>
-                            <p>Material sobre processamento de dados epidemiológicos, indicadores de saúde e relatórios biomédicos.</p>
-                        </div>
-                        <a href="dados/index.html" class="btn-card-access">Acessar Guia &rarr;</a>
-                    </div>
-
-                    <!-- CARTÃO 3: INTRODUÇÃO AO R -->
-                    <div class="portal-card-item">
-                        <div>
-                            <span class="badge badge-green">DISPONÍVEL</span>
-                            <h3>📊 Introdução ao R</h3>
-                            <p>Introdução à linguagem R para análise estatística descritiva, manipulação de dados e gráficos com ggplot2.</p>
-                        </div>
-                        <a href="r/index.html" class="btn-card-access">Acessar Guia &rarr;</a>
-                    </div>
-
-                </div>
-
+            <div class="card-container" id="lesson-content">
+                <span class="badge badge-green">PROGRAMAÇÃO • 3 E 4 DE DEZEMBRO</span>
+                <h1>Cronograma do Curso</h1>
+                <p>O curso <strong>Análise de Dados e Modelagem Estatística Aplicada à Saúde</strong> será realizado nos dias <strong>3 e 4 de dezembro, das 9h às 16h</strong>.</p>
+                <h2>Dia 1 — 3 de dezembro (09h às 16h): Ferramentas, Coleta e Exploração</h2>
+                <ul>
+                    <li><strong>09:00 – 10:00 | Abertura e Plataforma EasySUS:</strong> Apresentação da plataforma EasySUS conduzida pelo <a href="http://lattes.cnpq.br/8703832009420710" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green, #10B981); font-weight: 600;">Mestre Jorge Armando Piscoya Santibañez</a>.</li>
+                    <li><strong>10:00 – 10:45 | Módulo 01:</strong> Plataforma EasySUS (<code>lesson0</code>).</li>
+                    <li><strong>10:45 – 11:00 | Intervalo</strong></li>
+                    <li><strong>11:00 – 12:15 | Módulo 02:</strong> Análise exploratória de dados em saúde (<code>lesson1</code>).</li>
+                    <li><strong>12:15 – 13:30 | Almoço</strong></li>
+                    <li><strong>13:30 – 15:00 | Módulo 03:</strong> Estatística descritiva aplicada (<code>lesson2</code>).</li>
+                    <li><strong>15:00 – 15:15 | Intervalo</strong></li>
+                    <li><strong>15:15 – 16:00 | Prática Guiada:</strong> Exercícios de extração, resumo e exploração inicial no R.</li>
+                </ul>
+                <h2>Dia 2 — 4 de dezembro (09h às 16h): Visualização e Modelagem</h2>
+                <ul>
+                    <li><strong>09:00 – 10:45 | Módulo 04:</strong> Visualização de dados em saúde (<code>lesson3</code>).</li>
+                    <li><strong>10:45 – 11:00 | Intervalo</strong></li>
+                    <li><strong>11:00 – 12:15 | Módulo 05:</strong> Análise de dados de contagem (<code>lesson4</code>).</li>
+                    <li><strong>12:15 – 13:30 | Almoço</strong></li>
+                    <li><strong>13:30 – 15:00 | Módulo 06:</strong> Modelos de regressão aplicados à saúde (<code>lesson5</code>).</li>
+                    <li><strong>15:00 – 15:15 | Intervalo</strong></li>
+                    <li><strong>15:15 – 16:00 | Fechamento Prático:</strong> Estudo de caso integrado, dúvidas e encerramento.</li>
+                </ul>
             </div>
         </main>
-
     </div>
 
-    <!-- Script de Tema Global -->
-    <script src="script.js"></script>
+    <!-- Script do Tema Global -->
+    <script src="../script.js"></script>
+
+    <!-- Script de Carregamento Dinâmico -->
+    <script>
+        async function loadLesson() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page') || 'cronograma';
+            
+            // Destacar item selecionado na sidebar
+            document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById(`link-${page}`);
+            if (activeLink) activeLink.classList.add('active');
+
+            const contentDiv = document.getElementById('lesson-content');
+
+            try {
+                const cacheBuster = Date.now();
+                const response = await fetch(`./lessons/${page}.html?v=${cacheBuster}`, { cache: 'no-store' });
+                if (response.ok) {
+                    const htmlText = await response.text();
+                    contentDiv.innerHTML = htmlText;
+                }
+            } catch (err) {
+                console.log('Carregamento via fetch falhou. Exibindo conteúdo base.');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadLesson);
+    </script>
 </body>
 </html>
