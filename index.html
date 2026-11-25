@@ -8,7 +8,7 @@
     <style>
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
@@ -33,7 +33,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
         }
         .course-links a {
             color: var(--accent-green, #10B981);
@@ -59,39 +59,49 @@
     </header>
 
     <!-- Conteúdo Principal -->
-    <main class="content-area" style="max-width: 1100px; margin: 2rem auto;">
+    <main class="content-area" style="max-width: 1120px; margin: 2rem auto;">
         <div class="card-container">
             <span class="badge badge-green">PLATAFORMA DE MATERIAIS DE ESTUDO</span>
-            <h1>Todos os Cursos</h1>
-            <p style="text-align: justify;">Selecione abaixo o curso desejado para acessar a programação, os módulos de aula e os materiais complementares.</p>
+            <h1>Cursos Disponíveis</h1>
+            <p style="text-align: justify;">Escolha um dos cursos abaixo para acessar o conteúdo programático, os materiais e as aulas.</p>
 
             <div class="courses-grid">
-                <!-- Curso 1: Análise de Dados e Modelagem Estatística Aplicada à Saúde -->
+                <!-- 1. Curso Dados -->
                 <div class="course-card">
                     <div>
-                        <span class="badge badge-green">3 E 4 DE DEZEMBRO • 9H ÀS 16H</span>
+                        <span class="badge badge-green">DADOS • 3 E 4 DE DEZEMBRO</span>
                         <h3>Análise de Dados e Modelagem Estatística Aplicada à Saúde</h3>
-                        <p>Cronograma do curso, apresentação da Plataforma EasySUS, análise exploratória, estatística descritiva, visualização de dados, dados de contagem e modelos de regressão.</p>
+                        <p>Cronograma do curso, Plataforma EasySUS, análise exploratória, estatística descritiva, visualização de dados, dados de contagem e modelos de regressão.</p>
                     </div>
                     <div class="course-links">
-                        <a href="dados/index.html?page=cronograma">→ Abrir curso e cronograma</a>
+                        <a href="dados/index.html?page=cronograma">→ Acessar curso e cronograma</a>
                         <a href="dados/index.html?page=lesson0">→ Módulo 01: Plataforma EasySUS</a>
                     </div>
                 </div>
 
-                <!-- Adicione aqui os demais cursos da pasta materiais_estudo/ -->
-                <!-- Exemplo:
+                <!-- 2. Curso LaTeX -->
                 <div class="course-card">
                     <div>
-                        <span class="badge badge-green">CURSO</span>
-                        <h3>Nome do Outro Curso</h3>
-                        <p>Breve descrição do curso e dos materiais disponíveis.</p>
+                        <span class="badge badge-green">LATEX</span>
+                        <h3>Curso de LaTeX</h3>
+                        <p>Materiais, exemplos e conteúdos para escrita científica, formatação de artigos, tabelas, equações e documentos acadêmicos no LaTeX.</p>
                     </div>
                     <div class="course-links">
-                        <a href="nome_da_pasta/index.html">→ Acessar curso</a>
+                        <a href="latex/index.html">→ Acessar curso de LaTeX</a>
                     </div>
                 </div>
-                -->
+
+                <!-- 3. Curso R -->
+                <div class="course-card">
+                    <div>
+                        <span class="badge badge-green">LINGUAGEM R</span>
+                        <h3>Curso de R</h3>
+                        <p>Materiais de apoio, scripts e aulas para manipulação de dados, estatística e programação no ambiente R e RStudio.</p>
+                    </div>
+                    <div class="course-links">
+                        <a href="r/index.html">→ Acessar curso de R</a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
