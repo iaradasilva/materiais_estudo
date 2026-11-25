@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <!-- Bar de Navegação Superior -->
+    <!-- Barra de Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
             <a href="../index.html" class="logo">📊 <span>ANÁLISE DE DADOS E MODELAGEM ESTATÍSTICA APLICADA À SAÚDE</span></a>
@@ -41,6 +41,7 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">VISÃO GERAL DO CURSO</div>
                 <ul class="sidebar-menu">
+                    <li><a href="index.html?page=cronograma" id="link-cronograma">Cronograma</a></li>
                     <li><a href="index.html?page=instalacao" id="link-instalacao">O que é o software r</a></li>
                 </ul>
             </div>
@@ -57,7 +58,7 @@
                 </ul>
             </div>
 
-<div class="sidebar-section">
+            <div class="sidebar-section">
                 <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
                 <div class="team-container">
                     <div class="team-card">
@@ -76,18 +77,31 @@
         <!-- Área Principal -->
         <main class="content-area">
             <div class="card-container" id="lesson-content">
-                <!-- Conteúdo Embutido de Backup (Carrega imediatamente) -->
-                <span class="badge badge-green">APÊNDIX • BAIXAR DADOS DO DATASUS</span>
-                <h1>Plataforma iSUS</h1>
-                <p>A <strong>plataforma iSUS</strong> é uma ferramenta desenvolvida para facilitar a extração, download e análise dos dados disponibilizados pelo DATASUS.</p>
+                <!-- Conteúdo Embutido de Backup (Carrega imediatamente se fetch falhar ou antes da resposta) -->
+                <span class="badge badge-green">PROGRAMAÇÃO • 3 E 4 DE DEZEMBRO</span>
+                <h1>Cronograma do Curso</h1>
+                <p>O curso <strong>Análise de Dados e Modelagem Estatística Aplicada à Saúde</strong> será realizado nos dias <strong>3 e 4 de dezembro, das 9h às 16h</strong>.</p>
+                <h2>Dia 1 — 3 de dezembro (09h às 16h): Fundamentos e Exploração</h2>
                 <ul>
-                    <li>Acesso direto às bases de dados de saúde pública.</li>
-                    <li>Download simplificado de microdados para análise.</li>
-                    <li>Integração rápida com rotinas no R e Python.</li>
+                    <li><strong>09:00 – 09:45 | Visão Geral e Ambiente:</strong> Apresentação do curso e introdução ao software R (<code>O que é o software R</code>).</li>
+                    <li><strong>09:45 – 10:45 | Módulo 01:</strong> Download e preparação de dados do DATASUS (<code>lesson0</code>).</li>
+                    <li><strong>10:45 – 11:00 | Intervalo</strong></li>
+                    <li><strong>11:00 – 12:15 | Módulo 02:</strong> Análise exploratória de dados em saúde (<code>lesson1</code>).</li>
+                    <li><strong>12:15 – 13:30 | Almoço</strong></li>
+                    <li><strong>13:30 – 15:00 | Módulo 03:</strong> Estatística descritiva aplicada (<code>lesson2</code>).</li>
+                    <li><strong>15:00 – 15:15 | Intervalo</strong></li>
+                    <li><strong>15:15 – 16:00 | Prática Guiada:</strong> Exercícios de extração, resumo e exploração inicial no R.</li>
                 </ul>
-                <div class="callout callout-info">
-                    💡 Utilize os filtros de busca da plataforma para extrair arquivos no formato <code>.dbc</code> ou <code>.csv</code>.
-                </div>
+                <h2>Dia 2 — 4 de dezembro (09h às 16h): Visualização e Modelagem</h2>
+                <ul>
+                    <li><strong>09:00 – 10:45 | Módulo 04:</strong> Visualização de dados em saúde (<code>lesson3</code>).</li>
+                    <li><strong>10:45 – 11:00 | Intervalo</strong></li>
+                    <li><strong>11:00 – 12:15 | Módulo 05:</strong> Análise de dados de contagem (<code>lesson4</code>).</li>
+                    <li><strong>12:15 – 13:30 | Almoço</strong></li>
+                    <li><strong>13:30 – 15:00 | Módulo 06:</strong> Modelos de regressão aplicados à saúde (<code>lesson5</code>).</li>
+                    <li><strong>15:00 – 15:15 | Intervalo</strong></li>
+                    <li><strong>15:15 – 16:00 | Fechamento Prático:</strong> Estudo de caso integrado, dúvidas e encerramento.</li>
+                </ul>
             </div>
         </main>
     </div>
@@ -99,7 +113,7 @@
     <script>
         async function loadLesson() {
             const urlParams = new URLSearchParams(window.location.search);
-            const page = urlParams.get('page') || 'lesson0';
+            const page = urlParams.get('page') || 'cronograma';
             
             // Destacar item selecionado na sidebar
             document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
