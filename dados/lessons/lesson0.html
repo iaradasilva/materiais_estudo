@@ -2,13 +2,13 @@
 
 <h1>Plataforma EasySUS</h1>
 
-<p>O <strong>EasySUS</strong> é um software de pesquisa desenvolvido pelo <a href="http://lattes.cnpq.br/8703832009420710" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green, #10B981); font-weight: 600;">Mestre Jorge Armando Piscoya Santibañez</a> para facilitar a recuperação, o processamento e a análise exploratória de dados administrativos hospitalares provenientes do Sistema Único de Saúde (SUS) do Brasil.</p>
+<p style="text-align: justify;">O <strong>EasySUS</strong> é um software de pesquisa desenvolvido pelo <a href="http://lattes.cnpq.br/8703832009420710" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green, #10B981); font-weight: 600;">Mestre Jorge Armando Piscoya Santibañez</a> sob orientação do <a href="http://lattes.cnpq.br/4378847535126616" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green, #10B981); font-weight: 600;">Dr. Marco Aurélio de Menezes Franco</a> para facilitar a recuperação, o processamento e a análise exploratória de dados administrativos hospitalares provenientes do Sistema Único de Saúde (SUS) do Brasil.</p>
 
-<p>Ele oferece uma interface web multilíngue pela qual pesquisadores e profissionais de saúde pública podem identificar conjuntos de dados oficiais do Sistema de Informação Hospitalar (SIH/SUS) disponibilizados pelo DATASUS, baixar arquivos <code>.dbc</code>, convertê-los em arquivos <code>.csv</code> prontos para análise, aplicar filtros baseados em municípios e códigos CID-10 (ICD-10), além de gerar resumos e visualizações interativas.</p>
+<p style="text-align: justify;">Ele oferece uma interface web multilíngue pela qual pesquisadores e profissionais de saúde pública podem identificar conjuntos de dados oficiais do Sistema de Informação Hospitalar (SIH/SUS) disponibilizados pelo DATASUS, baixar arquivos <code>.dbc</code>, convertê-los em arquivos <code>.csv</code> prontos para análise, aplicar filtros baseados em municípios e códigos CID-10 (ICD-10), além de gerar resumos e visualizações interativas.</p>
 
-<p>Ao integrar a aquisição, conversão, filtragem e exploração de dados em um único fluxo de trabalho, o <strong>EasySUS</strong> reduz barreiras técnicas ao uso de dados de saúde pública brasileira, mantendo ao mesmo tempo a rastreabilidade até a fonte oficial dos dados.</p>
+<p style="text-align: justify;">Ao integrar a aquisição, conversão, filtragem e exploração de dados em um único fluxo de trabalho, o <strong>EasySUS</strong> reduz barreiras técnicas ao uso de dados de saúde pública brasileira, mantendo ao mesmo tempo a rastreabilidade até a fonte oficial dos dados.</p>
 
-<ul>
+<ul style="text-align: justify;">
     <li>Identificação e download direto de arquivos oficiais (<code>.dbc</code>) do SIH/SUS (DATASUS).</li>
     <li>Conversão automatizada para arquivos <code>.csv</code> prontos para análise.</li>
     <li>Filtragem por municípios e códigos CID-10 (ICD-10) com resumos e visualizações interativas.</li>
@@ -19,38 +19,6 @@
     🔗 <strong>Acesso ao Software e Documentação (Zenodo):</strong><br>
     Acesse o registro oficial e os arquivos do EasySUS em:
     <a href="https://zenodo.org/records/22919968" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green, #10B981); font-weight: 600;">https://zenodo.org/records/22919968</a>
-</div>
-
-<h2>Como Baixar os Dados no R com o Pacote microdatasus</h2>
-
-<p>Caso queira automatizar o download de microdados do DATASUS diretamente via script no R (como SIM, SINASC, SIH e SIA), utilize o pacote <code>microdatasus</code>:</p>
-
-<pre><code># 1. Instalar o pacote microdatasus do GitHub (caso não tenha)
-if (!require("devtools")) install.packages("devtools")
-devtools::install_github("rsuassuna/microdatasus")
-
-# 2. Carregar o pacote
-library(microdatasus)
-
-# 3. Exemplo: Baixar dados do Sistema de Informações sobre Mortalidade (SIM)
-dados_sim &lt;- fetch_datasus(
-  year = 2022, 
-  uf = "SP", 
-  information_system = "SIM-DO"
-)
-
-# 4. Processar e limpar os dados
-dados_sim_limpos &lt;- process_sim(dados_sim)
-
-# 5. Salvar localmente em TXT/CSV
-write.csv(dados_sim_limpos, "data/dados_datasus_sim.txt", row.names = FALSE)
-cat("Dados do DATASUS baixados com sucesso!")
-</code></pre>
-
-<div class="callout callout-tip">
-    📂 <strong>Acesso Direto ao Arquivo TXT:</strong><br>
-    Você também pode ler um arquivo pré-processado diretamente do repositório utilizando:
-    <pre style="margin-top: 0.5rem; background: transparent; border: none; padding: 0;"><code>dados &lt;- read.csv("https://raw.githubusercontent.com/iaradasilva/curso_dados/main/data/pacientes.txt")</code></pre>
 </div>
 
 <div class="lesson-footer">
