@@ -49,7 +49,7 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">MÓDULOS</div>
                 <ul class="sidebar-menu">
-                    <li><a href="index.html?page=lesson0" id="link-lesson0">01. Download dados datasus</a></li>
+                    <li><a href="index.html?page=lesson0" id="link-lesson0">01. Plataforma EasySUS</a></li>
                     <li><a href="index.html?page=lesson1" id="link-lesson1">02. Análise exploratória</a></li>
                     <li><a href="index.html?page=lesson2" id="link-lesson2">03. Estatística descritiva</a></li>
                     <li><a href="index.html?page=lesson3" id="link-lesson3">04. Visualização dos dados</a></li>
@@ -82,8 +82,8 @@
                 <p>O curso <strong>Análise de Dados e Modelagem Estatística Aplicada à Saúde</strong> será realizado nos dias <strong>3 e 4 de dezembro, das 9h às 16h</strong>.</p>
                 <h2>Dia 1 — 3 de dezembro (09h às 16h): Ferramentas, Coleta e Exploração</h2>
                 <ul>
-                    <li><strong>09:00 – 10:00 | Abertura e Ferramenta EasySUS:</strong> Apresentação da ferramenta EasySUS conduzida pelo <a href="http://lattes.cnpq.br/8703832009420710" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green, #10B981); font-weight: 600;">Mestre Jorge Armando Piscoya Santibañez</a>.</li>
-                    <li><strong>10:00 – 10:45 | Módulo 01:</strong> Download e preparação de dados do DATASUS (<code>lesson0</code>).</li>
+                    <li><strong>09:00 – 10:00 | Abertura e Plataforma EasySUS:</strong> Apresentação da plataforma EasySUS conduzida pelo <a href="http://lattes.cnpq.br/8703832009420710" target="_blank" rel="noopener noreferrer" style="color: var(--accent-green, #10B981); font-weight: 600;">Mestre Jorge Armando Piscoya Santibañez</a>.</li>
+                    <li><strong>10:00 – 10:45 | Módulo 01:</strong> Plataforma EasySUS e download de dados do DATASUS (<code>lesson0</code>).</li>
                     <li><strong>10:45 – 11:00 | Intervalo</strong></li>
                     <li><strong>11:00 – 12:15 | Módulo 02:</strong> Análise exploratória de dados em saúde (<code>lesson1</code>).</li>
                     <li><strong>12:15 – 13:30 | Almoço</strong></li>
@@ -122,8 +122,7 @@
             const contentDiv = document.getElementById('lesson-content');
 
             try {
-                // O ?v=2 evita que o navegador carregue a versão antiga do cache
-                const response = await fetch(`./lessons/${page}.html?v=2`);
+                const response = await fetch(`./lessons/${page}.html?v=4`);
                 if (response.ok) {
                     const htmlText = await response.text();
                     contentDiv.innerHTML = htmlText;
