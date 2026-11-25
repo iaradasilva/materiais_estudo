@@ -6,17 +6,42 @@
     <title>Materiais de Estudo | Projeto O3 MOVER</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .team-info-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
-        .team-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-green, #10B981);
+        .course-card {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .course-card h3 {
+            margin: 0.5rem 0;
+        }
+        .course-card p {
+            text-align: justify;
+            margin: 0;
+        }
+        .course-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .course-links a {
+            color: var(--accent-green, #10B981);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .course-links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -25,7 +50,7 @@
     <!-- Barra de Navegação Superior -->
     <header class="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">📊 <span>ANÁLISE DE DADOS E MODELAGEM ESTATÍSTICA APLICADA À SAÚDE</span></a>
+            <a href="../index.html" class="logo">📊 <span>MATERIAIS DE ESTUDO • PROJETO O3 MOVER</span></a>
             <ul class="nav-links">
                 <li><a href="../index.html">Página Inicial</a></li>
                 <li><button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">☀️ Modo Claro</button></li>
@@ -33,56 +58,43 @@
         </div>
     </header>
 
-    <!-- Estrutura Principal -->
-    <div class="course-layout">
-        
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <div class="sidebar-title">NAVEGAÇÃO</div>
-                <ul class="sidebar-menu">
-                    <li><a href="index.html" class="active">Materiais de Estudo</a></li>
-                    <li><a href="dados/index.html?page=cronograma">Cronograma</a></li>
-                    <li><a href="dados/index.html?page=lesson0">01. Plataforma EasySUS</a></li>
-                </ul>
-            </div>
+    <!-- Conteúdo Principal -->
+    <main class="content-area" style="max-width: 1100px; margin: 2rem auto;">
+        <div class="card-container">
+            <span class="badge badge-green">PLATAFORMA DE MATERIAIS DE ESTUDO</span>
+            <h1>Todos os Cursos</h1>
+            <p style="text-align: justify;">Selecione abaixo o curso desejado para acessar a programação, os módulos de aula e os materiais complementares.</p>
 
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">EQUIPE DO CURSO</h3>
-                <div class="team-container">
-                    <div class="team-card">
-                        <div class="team-info">
-                            <a href="http://lattes.cnpq.br/3243591335541060" target="_blank" rel="noopener noreferrer" style="text-decoration: none;" class="team-info-header">
-                                <img src="https://github.com/iaradasilva.png" alt="Dra. Iara da Silva" class="team-avatar">
-                                <span class="team-name">Dra. Iara da Silva</span>
-                            </a>
-                            <span class="team-role">Pós-doc Projeto O3 - MOVER</span>
-                        </div>
+            <div class="courses-grid">
+                <!-- Curso 1: Análise de Dados e Modelagem Estatística Aplicada à Saúde -->
+                <div class="course-card">
+                    <div>
+                        <span class="badge badge-green">3 E 4 DE DEZEMBRO • 9H ÀS 16H</span>
+                        <h3>Análise de Dados e Modelagem Estatística Aplicada à Saúde</h3>
+                        <p>Cronograma do curso, apresentação da Plataforma EasySUS, análise exploratória, estatística descritiva, visualização de dados, dados de contagem e modelos de regressão.</p>
+                    </div>
+                    <div class="course-links">
+                        <a href="dados/index.html?page=cronograma">→ Abrir curso e cronograma</a>
+                        <a href="dados/index.html?page=lesson0">→ Módulo 01: Plataforma EasySUS</a>
                     </div>
                 </div>
-            </div>
-        </aside>
 
-        <!-- Área Principal -->
-        <main class="content-area">
-            <div class="card-container">
-                <span class="badge badge-green">MATERIAIS DE ESTUDO • 3 E 4 DE DEZEMBRO</span>
-                <h1>Análise de Dados e Modelagem Estatística Aplicada à Saúde</h1>
-                <p style="text-align: justify;">Bem-vindo à área de materiais de estudo do curso, que será realizado nos dias <strong>3 e 4 de dezembro, das 9h às 16h</strong>. Aqui você encontra o acesso direto à programação e aos conteúdos do curso.</p>
-
-                <h2>Acesso Rápido</h2>
-                <ul>
-                    <li><a href="dados/index.html?page=cronograma" style="color: var(--accent-green, #10B981); font-weight: 600;">Cronograma Completo (3 e 4 de dezembro)</a> — horários, módulos e apresentação da ferramenta EasySUS.</li>
-                    <li><a href="dados/index.html?page=lesson0" style="color: var(--accent-green, #10B981); font-weight: 600;">01. Plataforma EasySUS</a> — recuperação, conversão e exploração de dados do SIH/SUS.</li>
-                    <li><a href="dados/index.html" style="color: var(--accent-green, #10B981); font-weight: 600;">Ambiente do Curso (Aulas e Módulos)</a> — acesso a todas as aulas e módulos.</li>
-                </ul>
-
-                <div class="callout callout-tip">
-                    💡 <strong>Dica:</strong> Consulte o cronograma antes do início das aulas para acompanhar a ordem dos módulos e os horários de intervalo e almoço.
+                <!-- Adicione aqui os demais cursos da pasta materiais_estudo/ -->
+                <!-- Exemplo:
+                <div class="course-card">
+                    <div>
+                        <span class="badge badge-green">CURSO</span>
+                        <h3>Nome do Outro Curso</h3>
+                        <p>Breve descrição do curso e dos materiais disponíveis.</p>
+                    </div>
+                    <div class="course-links">
+                        <a href="nome_da_pasta/index.html">→ Acessar curso</a>
+                    </div>
                 </div>
+                -->
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 
     <!-- Script do Tema Global -->
     <script src="script.js"></script>
