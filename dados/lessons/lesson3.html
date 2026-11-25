@@ -1,1 +1,160 @@
-teste
+<span class="badge badge-green">MÓDULO 04 • VISUALIZAÇÃO DOS DADOS</span>
+
+<h1>Visualização de Dados Aplicada à Saúde</h1>
+
+<p style="text-align: justify;">A <strong>Visualização de Dados</strong> transforma números e tabelas em representações gráficas claras, facilitando a comunicação de achados epidemiológicos, padrões temporais, diferenças entre grupos e associações entre variáveis para equipes técnicas, gestores e leitores de artigos científicos.</p>
+
+<p style="text-align: justify;">Um bom gráfico em saúde não serve apenas para "enfeitar" o relatório: ele deve responder a uma pergunta objetiva, respeitar as escalas dos dados, evitar distorções visuais e destacar a informação principal sem excesso de ruído.</p>
+
+<div class="callout callout-tip" style="text-align: justify;">
+    💡 <strong>Dica de Estudo:</strong> Antes de escolher cores ou temas elaborados, pergunte-se: <em>"Qual comparação ou padrão quero que o leitor enxergue em 3 segundos?"</em> Escolha o tipo de gráfico a partir dessa pergunta.
+</div>
+
+<h2>Boas Práticas na Construção de Gráficos</h2>
+
+<ul style="text-align: justify;">
+    <li><strong>Escolha adequada ao tipo de variável:</strong> use barras ou colunas para categorias/contagens, linhas para séries temporais ou tendências ordenadas, boxplots/violinos para comparar distribuições entre grupos e dispersão para relação entre duas variáveis numéricas.</li>
+    <li><strong>Cuidado com o eixo y e distorções:</strong> em gráficos de barras que representam contagens ou magnitudes a partir do zero, truncar o eixo y pode exagerar diferenças pequenas; já em boxplots ou séries temporais, o ajuste de escala deve ser informado claramente.</li>
+    <li><strong>Cores com propósito:</strong> use cores distintas para separar categorias ou destacar um grupo de interesse, evitando paletas confusas e garantindo contraste legível.</li>
+    <li><strong>Títulos, subtítulos, unidades e fonte:</strong> sempre inclua unidades de medida (ex.: <em>dias</em>, <em>anos</em>, <em>casos por 100 mil hab.</em>, <em>R$</em>) e indique a origem dos dados (ex.: <em>SIH/SUS via EasySUS</em> ou <em>Dados simulados</em>).</li>
+</ul>
+
+<h2>Como um Gráfico é Construído em Camadas</h2>
+
+<p style="text-align: justify;">Tanto no R base quanto no pacote <code>ggplot2</code>, é útil pensar o gráfico como uma soma de camadas: primeiro os <strong>dados</strong> e o mapeamento estético (quais variáveis vão nos eixos <code>x</code> e <code>y</code>, cor ou preenchimento), depois a <strong>camada geométrica</strong> (pontos, barras, linhas, caixas) e, por fim, <strong>rótulos, escalas e tema</strong>.</p>
+
+<div style="margin: 1.5rem 0; padding: 1rem; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.25); background: rgba(15, 23, 42, 0.03); overflow-x: auto;">
+    <svg viewBox="0 0 780 155" width="100%" style="max-width: 780px; display: block; margin: 0 auto;" role="img" aria-label="Esquema em camadas de construção de um gráfico: Dados e Mapeamento, Geometria, Escalas e Rótulos, Tema">
+        <!-- Camada 1 -->
+        <rect x="20" y="25" width="165" height="95" rx="8" fill="#10B981" fill-opacity="0.14" stroke="#10B981" stroke-width="2" />
+        <text x="102" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">1. Dados &amp; Eixos</text>
+        <text x="102" y="73" text-anchor="middle" font-size="11" fill="#334155">Base de dados</text>
+        <text x="102" y="90" text-anchor="middle" font-size="11" fill="#334155">Variáveis X, Y e grupos</text>
+
+        <!-- Seta 1 -->
+        <line x1="185" y1="72" x2="212" y2="72" stroke="#64748B" stroke-width="2" />
+        <polygon points="212,67 222,72 212,77" fill="#64748B" />
+
+        <!-- Camada 2 -->
+        <rect x="222" y="25" width="165" height="95" rx="8" fill="#3B82F6" fill-opacity="0.14" stroke="#2563EB" stroke-width="2" />
+        <text x="304" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#1D4ED8">2. Geometria</text>
+        <text x="304" y="73" text-anchor="middle" font-size="11" fill="#334155">Barras, linhas, pontos,</text>
+        <text x="304" y="90" text-anchor="middle" font-size="11" fill="#334155">boxplots ou histogramas</text>
+
+        <!-- Seta 2 -->
+        <line x1="387" y1="72" x2="414" y2="72" stroke="#64748B" stroke-width="2" />
+        <polygon points="414,67 424,72 414,77" fill="#64748B" />
+
+        <!-- Camada 3 -->
+        <rect x="424" y="25" width="165" height="95" rx="8" fill="#F59E0B" fill-opacity="0.16" stroke="#D97706" stroke-width="2" />
+        <text x="506" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#B45309">3. Títulos &amp; Escalas</text>
+        <text x="506" y="73" text-anchor="middle" font-size="11" fill="#334155">Título, subtítulo,</text>
+        <text x="506" y="90" text-anchor="middle" font-size="11" fill="#334155">unidades e legenda</text>
+
+        <!-- Seta 3 -->
+        <line x1="589" y1="72" x2="616" y2="72" stroke="#64748B" stroke-width="2" />
+        <polygon points="616,67 626,72 616,77" fill="#64748B" />
+
+        <!-- Camada 4 -->
+        <rect x="626" y="25" width="134" height="95" rx="8" fill="#8B5CF6" fill-opacity="0.14" stroke="#7C3AED" stroke-width="2" />
+        <text x="693" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#6D28D9">4. Acabamento</text>
+        <text x="693" y="73" text-anchor="middle" font-size="11" fill="#334155">Tema limpo,</text>
+        <text x="693" y="90" text-anchor="middle" font-size="11" fill="#334155">grade e exportação</text>
+
+        <text x="390" y="142" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B">Fluxo estruturado para gráficos reprodutíveis e claros</text>
+    </svg>
+</div>
+
+<h2>Exemplo Prático em R (Dados Simulados — Copiar e Colar)</h2>
+
+<p style="text-align: justify;">Copie e cole o código abaixo no <strong>RStudio</strong>. Ele gera uma série mensal simulada de atendimentos/internações em saúde e produz gráficos de tendência temporal, comparação entre grupos e relação entre variáveis (usando <code>ggplot2</code> se estiver instalado, com alternativa em R base):</p>
+
+<pre><code># ==============================================================================
+# 1. GERAR BASE SIMULADA MENSAL DE SAÚDE (PRONTO PARA RODAR)
+# ==============================================================================
+set.seed(2026)
+
+meses &lt;- seq.Date(from = as.Date("2024-01-01"), by = "month", length.out = 24)
+
+dados_mensais &lt;- data.frame(
+  mes = rep(meses, times = 2),
+  regiao = rep(c("Região Norte", "Região Sul"), each = length(meses)),
+  internacoes = c(
+    round(180 + seq_along(meses) * 2.2 + 25 * sin(seq_along(meses) * pi / 6) + rnorm(24, 0, 12)),
+    round(240 + seq_along(meses) * 1.5 + 30 * sin(seq_along(meses) * pi / 6 + 1) + rnorm(24, 0, 14))
+  ),
+  tempo_medio_dias = round(c(
+    runif(24, 3.8, 6.5),
+    runif(24, 3.2, 5.8)
+  ), 1)
+)
+
+# ==============================================================================
+# 2. VISUALIZAÇÃO COM GGPLOT2 (SE INSTALADO) OU R BASE
+# ==============================================================================
+if (requireNamespace("ggplot2", quietly = TRUE)) {
+  library(ggplot2)
+
+  # (A) Série temporal comparando duas regiões
+  g_linha &lt;- ggplot(dados_mensais, aes(x = mes, y = internacoes, color = regiao)) +
+    geom_line(linewidth = 1.1) +
+    geom_point(size = 2) +
+    labs(
+      title = "Evolução Mensal de Internações por Região",
+      subtitle = "Dados simulados para fins didáticos (24 meses)",
+      x = "Mês de referência",
+      y = "Número de internações",
+      color = "Região"
+    ) +
+    theme_minimal()
+  print(g_linha)
+
+  # (B) Boxplot do tempo médio de internação por região
+  g_box &lt;- ggplot(dados_mensais, aes(x = regiao, y = tempo_medio_dias, fill = regiao)) +
+    geom_boxplot(alpha = 0.75, show.legend = FALSE) +
+    labs(
+      title = "Tempo Médio de Internação por Região",
+      x = "Região",
+      y = "Tempo médio (dias)"
+    ) +
+    theme_minimal()
+  print(g_box)
+
+  # (C) Dispersão: tempo médio de internação vs. volume de internações
+  g_disp &lt;- ggplot(dados_mensais, aes(x = tempo_medio_dias, y = internacoes, color = regiao)) +
+    geom_point(size = 2.5, alpha = 0.85) +
+    geom_smooth(method = "lm", se = FALSE, linetype = "dashed") +
+    labs(
+      title = "Relação entre Tempo Médio e Volume de Internações",
+      x = "Tempo médio de internação (dias)",
+      y = "Número de internações",
+      color = "Região"
+    ) +
+    theme_minimal()
+  print(g_disp)
+
+} else {
+  # Alternativa direta em R base (não exige pacotes extras)
+  sul &lt;- subset(dados_mensais, regiao == "Região Sul")
+  norte &lt;- subset(dados_mensais, regiao == "Região Norte")
+
+  plot(
+    sul$mes, sul$internacoes,
+    type = "o", col = "#10B981", pch = 19,
+    ylim = range(dados_mensais$internacoes),
+    main = "Evolução Mensal de Internações",
+    xlab = "Mês", ylab = "Número de internações"
+  )
+  lines(norte$mes, norte$internacoes, type = "o", col = "#2563EB", pch = 17)
+  legend("topleft", legend = c("Região Sul", "Região Norte"), col = c("#10B981", "#2563EB"), pch = c(19, 17))
+}
+</code></pre>
+
+<div class="callout callout-warning" style="text-align: justify;">
+    ⚠️ <strong>Atenção ao Comparar Populações Diferentes:</strong> Ao comparar regiões, municípios ou hospitais com tamanhos populacionais ou capacidades muito distintas, valores absolutos (como total de internações) podem refletir o tamanho da população/estrutura e não necessariamente maior risco ou gravidade. Quando possível, avalie também taxas ou proporções.
+</div>
+
+<div class="lesson-footer">
+    <a href="index.html?page=lesson2">← Anterior: 03. Estatística descritiva</a>
+    <a href="index.html?page=lesson4">Próximo: 05. Dados de contagem →</a>
+</div>
