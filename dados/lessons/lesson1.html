@@ -1,40 +1,48 @@
-<span class="badge badge-green">Módulo 01 • Análise exploratória</span>
+<span class="badge badge-green">MÓDULO 02 • ANÁLISE EXPLORATÓRIA</span>
 
 <h1>Análise Exploratória de Dados</h1>
 
-<p>A <strong>Análise Exploratória de Dados</strong> é a primeira etapa crítica de qualquer projeto de Ciência de Dados. Seu objetivo principal é entender a estrutura dos dados, identificar padrões e detectar anomalias antes de aplicar qualquer modelo estatístico.</p>
+<p style="text-align: justify;">A <strong>Análise Exploratória de Dados (AED)</strong> é a etapa inicial fundamental para compreender a estrutura de uma base de dados em saúde, verificar tipos de variáveis, identificar valores ausentes (<code>NA</code>), detectar inconsistências ou valores extremos (<em>outliers</em>) e formular hipóteses antes da modelagem estatística.</p>
 
-<div class="callout callout-tip">
-    💡 <strong>Dica de Estudo:</strong> Você pode acompanhar o código desta lição executando o notebook diretamente no Google Colab.
+<p style="text-align: justify;">Quando trabalhamos com dados clínicos, epidemiológicos ou hospitalares (como os obtidos via <strong>EasySUS</strong>), explorar bem os dados evita interpretações distorcidas e garante decisões mais seguras nas etapas seguintes.</p>
+
+<div class="callout callout-tip" style="text-align: justify;">
+    💡 <strong>Dica de Estudo:</strong> Execute os comandos passo a passo no console ou script do <strong>RStudio</strong> e inspecione sempre a estrutura do objeto antes de calcular estatísticas ou gerar gráficos.
 </div>
 
-<h2>O que vamos aprender?</h2>
+<h2>O que vamos explorar?</h2>
 
-<ul>
-    <li>Entender as medidas de tendência central: <code>Média</code>, <code>Mediana</code> e <code>Moda</code>.</li>
-    <li>Calcular dispersão usando <code>Variância</code> e <code>Desvio Padrão</code>.</li>
-    <li>Visualizar distribuições de frequência com Histogramas e Boxplots.</li>
+<ul style="text-align: justify;">
+    <li><strong>Estrutura e qualidade dos dados:</strong> dimensões da base, nomes e tipos de variáveis (numéricas, categóricas/fatores, datas) e ocorrência de valores faltantes (<code>NA</code>).</li>
+    <li><strong>Tendência central e dispersão:</strong> compreensão inicial de <code>Média</code>, <code>Mediana</code>, <code>Moda</code>, <code>Variância</code>, <code>Desvio Padrão</code> e intervalos interquartis.</li>
+    <li><strong>Distribuição e valores atípicos:</strong> identificação visual e numérica de assimetrias e <em>outliers</em> antes de avançar para gráficos e modelos.</li>
 </ul>
 
-<h2>Exemplo Prático em r</h2>
+<h2>Exemplo Prático em R</h2>
 
-<p>Abaixo está o código base para carregar um conjunto de dados e gerar um resumo estatístico rápido:</p>
+<p style="text-align: justify;">Abaixo está um exemplo base em <strong>R</strong> para inspecionar a estrutura de uma base de dados e obter um resumo rápido das variáveis:</p>
 
-<pre><code>import pandas as pd
-import numpy as np
+<pre><code># 1. Carregar pacotes úteis para exploração inicial (se instalados)
+# install.packages(c("dplyr", "skimr"))
+library(dplyr)
 
-# Carregar conjunto de dados
-df = pd.read_csv("datasets/vendas.csv")
+# 2. Carregar conjunto de dados (ajuste o caminho conforme seu arquivo)
+dados &lt;- read.csv("data/dados_saude.csv", stringsAsFactors = FALSE)
 
-# Resumo estatístico completo
-print(df.describe())
+# 3. Inspecionar estrutura, dimensões e primeiras linhas
+glimpse(dados)
+head(dados)
+summary(dados)
+
+# 4. Verificar quantidade de valores ausentes (NA) por coluna
+colSums(is.na(dados))
 </code></pre>
 
-<div class="callout callout-warning">
-    ⚠️ <strong>Atenção com Outliers:</strong> A Média é altamente sensível a valores extremos. Quando seu dataset tiver discrepâncias grandes, prefira utilizar a <strong>Mediana</strong>.
+<div class="callout callout-warning" style="text-align: justify;">
+    ⚠️ <strong>Atenção com Outliers e Dados Assimétricos:</strong> Em variáveis da saúde — como tempo de internação, custos hospitalares ou contagens — é comum haver valores extremos. A <strong>Média</strong> é sensível a esses valores; nesses casos, avalie também a <strong>Mediana</strong> e a amplitude interquartil.
 </div>
 
 <div class="lesson-footer">
-    <a href="course.html?page=instalacao">← Anterior: Instalação</a>
-    <a href="course.html?page=lesson2">Próximo: Medidas de Dispersão →</a>
+    <a href="index.html?page=lesson0">← Anterior: 01. Plataforma EasySUS</a>
+    <a href="index.html?page=lesson2">Próximo: 03. Estatística descritiva →</a>
 </div>
